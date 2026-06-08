@@ -17,6 +17,7 @@ const Model = () => {
 export default function App() {
   return (
     <>
+      hi
       <Canvas>
         <directionalLight position={[10, 10, 5]} intensity={3} />
         <Computa />
