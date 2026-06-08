@@ -12,7 +12,7 @@ type GLTFResult = GLTF & {
 };
 
 export function Computa({ props }: any) {
-  const { nodes, materials } = useGLTF('src/assets/computa.glb') as unknown as GLTFResult;
+  const { nodes, materials } = useGLTF('computa.glb') as unknown as GLTFResult;
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -28,4 +28,4 @@ export function Computa({ props }: any) {
   );
 }
 
-useGLTF.preload('src/assets/computa.glb');
+useGLTF.preload('computa.glb');
