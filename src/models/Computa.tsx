@@ -20,11 +20,13 @@ type GLTFResult = GLTF & {
 export function Computa({ props }: any) {
   const { nodes, materials } = useGLTF('computawithSCREEN.glb') as unknown as GLTFResult;
   const [clicked, setClicked] = useState(false);
+  const [showScreen, setShowScreen] = useState(false);
   const screenRef = useRef<THREE.Mesh>();
   // const vec = new THREE.Vector3();
 
   useFrame((state) => {
     if (clicked) {
+      setShowScreen(true);
       state.camera.position.lerp({ x: -0.5, y: 0.75, z: 2.5 }, 0.1);
       // state.camera.lookAt(0, 0, 0);
       // state.camera.updateProjectionMatrix();
@@ -66,10 +68,12 @@ export function Computa({ props }: any) {
         rotation={[0, 0, -Math.PI / 2]}
         scale={0.704}
       >
-        <Html className="content" rotation={[-Math.PI / 2, 0, Math.PI / 2]} transform>
-          {/* <ComputerScreen /> */}
-          <h1>Hello</h1>
-        </Html>
+        {showScreen && (
+          <Html className="content" rotation={[-Math.PI / 2, 0, Math.PI / 2]} transform>
+            {/* <ComputerScreen /> */}
+            <h1>Hello</h1>
+          </Html>
+        )}
       </mesh>
     </group>
   );
