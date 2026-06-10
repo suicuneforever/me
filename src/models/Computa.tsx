@@ -1,10 +1,16 @@
 import * as THREE from 'three';
-import { useGLTF } from '@react-three/drei';
+import { Html, useGLTF } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
+import { useRef, useState } from 'react';
+import { useFrame } from '@react-three/fiber';
+import '../App.css';
 
 type GLTFResult = GLTF & {
   nodes: {
     Cube: THREE.Mesh;
+    Cube001: THREE.Mesh;
+    Cube002: THREE.Mesh;
+    Plane: THREE.Mesh;
   };
   materials: {
     Material: THREE.MeshStandardMaterial;
@@ -12,20 +18,61 @@ type GLTFResult = GLTF & {
 };
 
 export function Computa({ props }: any) {
-  const { nodes, materials } = useGLTF('computa.glb') as unknown as GLTFResult;
+  const { nodes, materials } = useGLTF('computawithSCREEN.glb') as unknown as GLTFResult;
+  const [clicked, setClicked] = useState(false);
+  const screenRef = useRef<THREE.Mesh>();
+  // const vec = new THREE.Vector3();
+
+  useFrame((state) => {
+    if (clicked) {
+      state.camera.position.lerp({ x: -0.5, y: 0.75, z: 2.5 }, 0.1);
+      // state.camera.lookAt(0, 0, 0);
+      // state.camera.updateProjectionMatrix();
+    }
+  });
+
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} rotation={[0, -Math.PI / 2, 0]} position={[2.5, -1, -1.5]} scale={1.5}>
       <mesh
-        // castShadow
-        // receiveShadow
-        rotation-y={-Math.PI / 2}
+        castShadow
+        receiveShadow
         geometry={nodes.Cube.geometry}
         material={materials.Material}
-        position={[2, -1, -1.5]}
-        scale={1.5}
+        position={[-1.122, 0, 0.342]}
+        scale={1.059}
       />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Cube001.geometry}
+        material={materials.Material}
+        position={[-0.666, 1.196, 0.754]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Cube002.geometry}
+        material={materials.Material}
+        position={[-1.061, 0.378, 4.683]}
+      />
+      <mesh
+        ref={screenRef}
+        onClick={() => setClicked(!clicked)}
+        castShadow
+        receiveShadow
+        geometry={nodes.Plane.geometry}
+        material={nodes.Plane.material}
+        position={[0.296, 1.294, 1.977]}
+        rotation={[0, 0, -Math.PI / 2]}
+        scale={0.704}
+      >
+        <Html className="content" rotation={[-Math.PI / 2, 0, Math.PI / 2]} transform>
+          {/* <ComputerScreen /> */}
+          <h1>Hello</h1>
+        </Html>
+      </mesh>
     </group>
   );
 }
 
-useGLTF.preload('computa.glb');
+useGLTF.preload('computawithSCREEN.glb');
