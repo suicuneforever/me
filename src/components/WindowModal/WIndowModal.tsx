@@ -6,9 +6,10 @@ type WindowModalProps = {
   open: boolean;
   children: React.ReactNode;
   title: string;
+  closeFn: () => void;
 };
 
-function WindowModal({ open, children, title }: WindowModalProps) {
+function WindowModal({ open, children, title, closeFn }: WindowModalProps) {
   if (!open) return null;
   return (
     <div className={`${PARENT_CLASS}__wrapper`}>
@@ -19,13 +20,13 @@ function WindowModal({ open, children, title }: WindowModalProps) {
             <div className={`${PARENT_CLASS}__header__icons`}>
               <button className="min" />
               <button className="max" />
-              <button className="close" />
+              <button className="close" onClick={closeFn} />
             </div>
           </div>
           <div className={`${PARENT_CLASS}__outer-content`}>
             <div className={`${PARENT_CLASS}__inner-content`}>{children}</div>
           </div>
-          <div className={`${PARENT_CLASS}__footer`}>hi</div>
+          <div className={`${PARENT_CLASS}__footer`}>(c) dani jaramillo*~*~</div>
         </div>
       </div>
     </div>

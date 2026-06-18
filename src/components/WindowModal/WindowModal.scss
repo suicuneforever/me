@@ -4,7 +4,7 @@
 $x: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAYAAACALL/6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAATUlEQVQYlZ2RQQ7AIAzD4v3/z+HEVLogwXpC1FZTwLZu6pkHwMDH7vevYJsJVLj2JIkeqU+p8DIhAR2OQoq0FWrmtNMipAXjQ/z+h9MaAucxEWL07JoAAAAASUVORK5CYII=';
 $max: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAYAAACALL/6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAOUlEQVQYld2RMQoAIAzEcuL/vxw3kSKoq5lzbelFJYkcUAPQTmKl1wk71gueN/wQmF+66QIgeuVNBqtLDxPoqi0wAAAAAElFTkSuQmCC';
 $min: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAYAAACALL/6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAKElEQVQYlWP8//8/AymAiSTVI1UDC4zByMiINXz////PSJENjKRGHAAvZgoPiLbuwwAAAABJRU5ErkJggg==';
-
+$ex: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAUElEQVQokZXPqxUAIAxD0ZSREQgGQCBYOSg4/Fuib8QTkvgY3Q9OucB6YMoFAEyHjmPwoh0mDKVhw6+GI741XPGp4YnXBhWPDSbcGsw4Bi8V/BZRwMk/E5EAAAAASUVORK5CYII=';
 .WindowModal {
   &__wrapper {
     font-family: 'MS Sans Serif';
@@ -51,7 +51,7 @@ $min: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAYAAACALL/6AAAACXB
     border-color: $black $gray $gray $black;
     background-color: $white;
     flex: 1 1;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   &__header {
@@ -129,5 +129,17 @@ $min: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAYAAACALL/6AAAACXB
     border-color: $darkGray $white $white $darkGray;
     padding: 2px;
     font-size: 14px;
+    position: relative;
+
+    &:after {
+      content: '';
+      background-image: url($ex);
+      background-repeat: no-repeat;
+      position: absolute;
+      top: 8px;
+      right: -3px;
+      width: 15px;
+      height: 15px;
+    }
   }
 }
