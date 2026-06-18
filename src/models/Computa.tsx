@@ -4,6 +4,7 @@ import { GLTF } from 'three-stdlib';
 import { useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import '../App.css';
+import Desktop from '../components/Desktop';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -69,9 +70,15 @@ export function Computa({ props }: any) {
         scale={0.704}
       >
         {showScreen && (
-          <Html className="content" rotation={[-Math.PI / 2, 0, Math.PI / 2]} transform>
-            {/* <ComputerScreen /> */}
-            <h1>Hello</h1>
+          <Html
+            className="content"
+            rotation={[-Math.PI / 2, 0, Math.PI / 2]}
+            distanceFactor={1.4}
+            position={[-0.04, 0, -0.01]}
+            transform
+          >
+            {/* <iframe src="http://localhost:5173/desktop" /> */}
+            <Desktop />
           </Html>
         )}
       </mesh>

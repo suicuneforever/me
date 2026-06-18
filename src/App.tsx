@@ -1,6 +1,7 @@
 import { Canvas } from '@react-three/fiber';
 import { Computa } from './models/Computa';
 import { Suspense } from 'react';
+import { OrbitControls } from '@react-three/drei';
 
 export default function App() {
   return (

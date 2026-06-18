@@ -1,0 +1,48 @@
+@use '../../constants/colors' as *;
+
+.WindowModal {
+  &__wrapper {
+    display: flex;
+    background-color: $gray;
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    top: 20px;
+    left: 20px;
+  }
+
+  &__outer-container {
+    display: flex;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $gray $black $black $gray;
+    flex: 1 1 0%;
+  }
+
+  &__inner-container {
+    display: flex;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $white $darkGray $darkGray $white;
+    flex: 1 1 0%;
+    padding: 2px;
+  }
+
+  &__outer-content {
+    display: flex;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $darkGray $white $white $darkGray;
+    flex-grow: 1;
+    margin: 8px 0;
+  }
+
+  &__inner-content {
+    display: flex;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $black $gray $gray $black;
+    background-color: $white;
+    flex: 1 1 0%;
+  }
+}
