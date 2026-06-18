@@ -16,7 +16,7 @@ function Desktop() {
         </div>
       </div>
 
-      <WindowModal open={modalOpen}>
+      <WindowModal open={modalOpen} title="My Resume">
         <p>resume</p>
       </WindowModal>
       <div className={`${PARENT_CLASS}__startBar`} />

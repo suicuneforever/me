@@ -28,7 +28,7 @@ export function Computa({ props }: any) {
   useFrame((state) => {
     if (clicked) {
       setShowScreen(true);
-      state.camera.position.lerp({ x: -0.5, y: 0.75, z: 2.5 }, 0.1);
+      state.camera.position.lerp({ x: -0.5, y: 1, z: 1.5 }, 0.1);
       // state.camera.lookAt(0, 0, 0);
       // state.camera.updateProjectionMatrix();
     }

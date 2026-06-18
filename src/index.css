@@ -8,3 +8,9 @@ body,
   height: 100%;
   overflow: hidden;
 }
+
+@font-face {
+  font-family: 'MS Sans Serif';
+  src: url('./assets/fonts/ms-sans-serif-1.otf.woff2') format('woff2');
+  font-weight: normal;
+}
