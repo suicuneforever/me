@@ -10,11 +10,11 @@ type Icon = {
 };
 
 const DESKTOP_ICONS: Icon[] = [
-  { title: 'about me', path: 'src/assets/icons/aboutme.png' },
-  { title: 'resume', path: 'src/assets/icons/resume.png' },
-  { title: 'myspace', path: 'src/assets/icons/myspace.png' },
-  { title: 'contact me', path: 'src/assets/icons/contactme.png' },
-  { title: '???', path: 'src/assets/icons/mystery.png' },
+  { title: 'about me', path: '/icons/aboutme.png' },
+  { title: 'resume', path: '/icons/resume.png' },
+  { title: 'myspace', path: '/icons/myspace.png' },
+  { title: 'contact me', path: '/icons/contactme.png' },
+  { title: '???', path: '/icons/mystery.png' },
 ];
 
 function Desktop() {
