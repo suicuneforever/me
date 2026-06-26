@@ -1,1 +1,1 @@
-export { default } from './WIndowModal';
+export { default } from './WindowModal';

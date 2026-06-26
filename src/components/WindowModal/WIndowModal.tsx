@@ -3,14 +3,12 @@ import './WindowModal.scss';
 const PARENT_CLASS = 'WindowModal';
 
 type WindowModalProps = {
-  open: boolean;
   children: React.ReactNode;
   title: string;
   closeFn: () => void;
 };
 
-function WindowModal({ open, children, title, closeFn }: WindowModalProps) {
-  if (!open) return null;
+function WindowModal({ children, title, closeFn }: WindowModalProps) {
   return (
     <div className={`${PARENT_CLASS}__wrapper`}>
       <div className={`${PARENT_CLASS}__outer-container`}>
