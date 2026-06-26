@@ -1,5 +1,5 @@
 import './Desktop.scss';
-import WindowModal from '../WindowModal';
+import WindowModal from '../WindowModal/WindowModal';
 import { useWindowStore } from '../../store/store';
 import AboutMe from '../AboutMe';
 import Resume from '../Resume';
