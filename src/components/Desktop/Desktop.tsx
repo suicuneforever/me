@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './Desktop.scss';
 import WindowModal from '../WindowModal';
 import { useWindowStore } from '../../store/store';
