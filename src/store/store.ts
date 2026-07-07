@@ -1,26 +1,38 @@
 import { create } from 'zustand';
 
-interface WindowStackItem {
+export interface Window {
   id: string;
-  data?: Record<string, any>;
+  title: string;
 }
 
 interface WindowState {
-  windows: WindowStackItem[];
-  openWindow: (id: string, data?: Record<string, any>) => void;
+  windows: Window[];
+  activeWindowId: string | null;
+  openWindow: (id: string, title: string) => void;
+  setActiveWindow: (id: string) => void;
   closeWindow: (id: string) => void;
   closeAll: () => void;
 }
 
-export const useWindowStore = create<WindowState>()((set) => ({
+export const useWindowStore = create<WindowState>()((set, get) => ({
   windows: [],
-  openWindow: (id, data) =>
+  activeWindowId: null,
+  openWindow: (id, title) =>
     set((state) => ({
-      windows: state.windows.some((window) => window.id === id) ? state.windows : [...state.windows, { id, data }],
+      windows: state.windows.find((w) => w.id === id) ? state.windows : [...state.windows, { id, title }],
+      activeWindowId: id,
     })),
-  closeWindow: (id) =>
-    set((state) => ({
-      windows: state.windows.filter((window) => window.id !== id),
-    })),
-  closeAll: () => set({ windows: [] }),
+  setActiveWindow: (id) => set({ activeWindowId: id }),
+  closeWindow: (id) => {
+    const { windows, activeWindowId } = get();
+    const remainingWindows = windows.filter((w) => w.id !== id);
+
+    let nextActiveId = activeWindowId;
+    if (activeWindowId === id) {
+      nextActiveId = remainingWindows.length > 0 ? remainingWindows[remainingWindows.length - 1].id : null;
+    }
+
+    set({ windows: remainingWindows, activeWindowId: nextActiveId });
+  },
+  closeAll: () => set({ windows: [], activeWindowId: null }),
 }));

@@ -1,4 +1,5 @@
 @use '../../constants/colors' as *;
+@use '../../constants/borders' as *;
 
 $start: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAABTUlEQVQ4jaWS4Y7jIBCDPw/QJpu+/4ueqna7Ad+PSVLttied7pCQSWAY21i2+Z8Rf3NIai71ZEkuunzvaPuPM0ozFU/EE0kMFid7yW+LWY6iETKSg8VyNRVDzgiUNJu846ziUa9Ma3DTvGnNc3U17VagAlS0m6gms8JE8GAG3RiYkXV8DHEn0OaA6rZhLW8lpN6a9CsOxeHFLiNYrBGy+pBLWH3osxSfPaNyTerrkp3KA0ZnOECdyTuDvasW3yMNG6HspsQmH+urkwWSQ2Gk9f0r5KYJO/QrXa94+GyvOl4oPpxZKvFpgIjuU2C3M9g0Q+FCsEAX4gFcXoMkrSZswl4Yh2GEPRHWac6OCtuZC8AKhfvoeolvk6NHmlbX/Bczfnwd39EDoG6RJHG7ORRH2n76AzVNLM3PIKkZddQm/HVPeWO8MPvGMuJ5wb+O313iKFEd0WMgAAAAAElFTkSuQmCC';
 
@@ -47,49 +48,27 @@ $start: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAC
 
   &__start-bar {
     font-family: 'MS Sans Serif';
-    font-weight: bold;
     width: 100%;
     height: 25px;
     background-color: $gray;
-    // display: flex;
     padding: 4px;
     box-shadow:
       -1px -1px $white,
       -2px -2px $gray;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 
-    &.button {
+    .start-button {
+      font-weight: bold;
       display: flex;
       align-items: center;
       width: 40px;
-      height: 17px;
+      height: 100%;
       background-color: $gray;
       position: relative;
       padding-left: 30px;
-      box-shadow:
-        // inner top left
-        -1px -1px $lightGray,
-        -1px 0 $lightGray,
-        0 -1px $lightGray,
-        // outer top left
-        -2px -2px $white,
-        -2px 0 $white,
-        0 -2px $white,
-        // inner bottom right
-        1px 1px $darkGray,
-        0 1px $darkGray,
-        1px 0 $darkGray,
-        // corners
-        1px -1px $lightGray,
-        -1px 1px $darkGray,
-        -2px 1px $white,
-        // outer bottom right
-        -2px 2px $black,
-        2px 2px $black,
-        2px 0 $black,
-        0 2px $black,
-        // corners
-        1px -2px $white,
-        2px -2px $black;
+      box-shadow: $defaultButton;
 
       &:after {
         content: '';
@@ -102,6 +81,71 @@ $start: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAC
         height: 30px;
         background-size: 20px;
       }
+    }
+
+    // TODO refactor
+    .button {
+      display: flex;
+      align-items: center;
+      background-color: $gray;
+      min-width: 200px;
+      height: 25px;
+      cursor: pointer;
+      padding-left: 5px;
+      box-shadow: $defaultButton;
+
+      &--active {
+        display: flex;
+        align-items: center;
+        background-color: $gray;
+        min-width: 200px;
+        height: 25px;
+        box-sizing: border-box;
+        cursor: pointer;
+        box-shadow: $pressedButton;
+
+        .checkerboard {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          height: 100%;
+          padding-left: 5px;
+          background-image: linear-gradient(45deg, white 25%, transparent 25%),
+            linear-gradient(-45deg, white 25%, transparent 25%), linear-gradient(45deg, transparent 75%, white 75%),
+            linear-gradient(-45deg, transparent 75%, white 75%);
+          background-size: 4px 4px;
+          background-position:
+            0px 0px,
+            0px 2px,
+            2px -2px,
+            -2px 0px;
+        }
+
+        img {
+          width: 20px;
+          height: 20px;
+          margin-right: 5px;
+        }
+      }
+
+      img {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+      }
+    }
+
+    .time {
+      border-width: 1px;
+      border-style: solid;
+      border-color: $darkGray $white $white $darkGray;
+      height: 25px;
+      display: flex;
+      align-items: center;
+      font-size: 15px;
+      padding: 0 4px;
+      margin-left: auto;
+      margin-right: 10px;
     }
   }
 }

@@ -1,0 +1,52 @@
+@use './colors' as *;
+
+$defaultButton:  
+  // inner top left
+  -1px -1px $lightGray,
+  -1px 0 $lightGray,
+  0 -1px $lightGray,
+  // outer top left
+  -2px -2px $white,
+  -2px 0 $white,
+  0 -2px $white,
+  // inner bottom right
+  1px 1px $darkGray,
+  0 1px $darkGray,
+  1px 0 $darkGray,
+  // corners
+  1px -1px $lightGray,
+  -1px 1px $darkGray,
+  -2px 1px $white,
+  // outer bottom right
+  -2px 2px $black,
+  2px 2px $black,
+  2px 0 $black,
+  0 2px $black,
+  // corners
+  1px -2px $white,
+  2px -2px $black;
+$pressedButton: 
+  // inner top left
+  -1px -1px $darkGray,
+  -1px 0 $darkGray,
+  0 -1px $darkGray,
+  // outer top left
+  -2px -2px $black,
+  -2px 0 $black,
+  0 -2px $black,
+  // inner bottom right
+  1px 1px $lightGray,
+  0 1px $lightGray,
+  1px 0 $lightGray,
+  // inner corners
+  1px -1px $darkGray,
+  -1px 1px $lightGray,
+  -2px 1px $black,
+  // outer bottom right
+  -2px 2px $white,
+  2px 2px $white,
+  2px 0 $white,
+  0 2px $white,
+  // outer corners
+  1px -2px $black,
+  2px -2px $white;

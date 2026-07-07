@@ -6,6 +6,7 @@ import Resume from '../Resume';
 import MySpace from '../MySpace';
 import ContactMe from '../ContactMe';
 import Mystery from '../Mystery';
+import { useEffect, useState } from 'react';
 
 const PARENT_CLASS = 'Desktop';
 
@@ -32,14 +33,26 @@ const WINDOW_COMPONENTS: Record<string, React.ReactNode> = {
 };
 
 function Desktop() {
-  const { windows, openWindow, closeWindow } = useWindowStore();
+  const [time, setTime] = useState(new Date());
+  const { windows, activeWindowId, openWindow, setActiveWindow, closeWindow } = useWindowStore();
+
+  // TODO refactor?
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timerId);
+  }, []);
+
+  const formattedTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
   return (
     <div className={`${PARENT_CLASS}__container`}>
       <div className={`${PARENT_CLASS}__icons`}>
         {DESKTOP_ICONS.map((desktopIcon) => {
           return (
-            <div className="icon" key={desktopIcon.title} onClick={() => openWindow(desktopIcon.id)}>
+            <div className="icon" key={desktopIcon.title} onClick={() => openWindow(desktopIcon.id, desktopIcon.title)}>
               <img src={desktopIcon.path} />
               <label>{desktopIcon.title}</label>
             </div>
@@ -48,13 +61,29 @@ function Desktop() {
       </div>
 
       {windows.map((window) => (
-        <WindowModal key={window.id} title={window.id} closeFn={() => closeWindow(window.id)}>
+        <WindowModal key={window.id} windowData={window} closeFn={() => closeWindow(window.id)}>
           {WINDOW_COMPONENTS[window.id]}
         </WindowModal>
       ))}
 
       <div className={`${PARENT_CLASS}__start-bar`}>
-        <div className={`${PARENT_CLASS}__start-bar button`}>Start</div>
+        <div className="start-button">Start</div>
+        {windows.map((window) =>
+          window.id === activeWindowId ? (
+            <div className="button--active" key={window.id} onClick={() => setActiveWindow(window.id)}>
+              <div className="checkerboard">
+                <img src={DESKTOP_ICONS.find((w) => w.id === window.id)?.path} />
+                {window.title}
+              </div>
+            </div>
+          ) : (
+            <div className="button" key={window.id} onClick={() => setActiveWindow(window.id)}>
+              <img src={DESKTOP_ICONS.find((w) => w.id === window.id)?.path} />
+              {window.title}
+            </div>
+          ),
+        )}
+        <div className="time">{formattedTime}</div>
       </div>
     </div>
   );

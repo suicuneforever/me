@@ -1,16 +1,20 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import './WindowModal.scss';
+import { useWindowStore, Window } from '../../store/store';
 
 const PARENT_CLASS = 'WindowModal';
 
+const WINDOW_SIZE: { width: number; height: number } = { width: 1000, height: 800 };
+
 type WindowModalProps = {
+  windowData: Window;
   children: React.ReactNode;
-  title: string;
   closeFn: () => void;
 };
 
-function WindowModal({ children, title, closeFn }: WindowModalProps) {
+function WindowModal({ windowData, children, closeFn }: WindowModalProps) {
   const [isDragging, setIsDragging] = useState(false);
+  const { activeWindowId, setActiveWindow } = useWindowStore();
 
   // State to keep track of the popup's position
   const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -22,6 +26,8 @@ function WindowModal({ children, title, closeFn }: WindowModalProps) {
   // Ref to store the popup element
   // This is the element we are moving
   const dragRef = useRef<HTMLDivElement | null>(null);
+
+  const isActive = activeWindowId === windowData.id;
 
   const onMouseMove = useCallback(
     (e: MouseEvent) => {
@@ -42,6 +48,7 @@ function WindowModal({ children, title, closeFn }: WindowModalProps) {
 
   // Function to handle the start of a drag event
   const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    setActiveWindow(windowData.id);
     e.stopPropagation();
     e.preventDefault();
     setIsDragging(true);
@@ -65,7 +72,11 @@ function WindowModal({ children, title, closeFn }: WindowModalProps) {
           className={`${PARENT_CLASS}__drag-box`}
           ref={dragRef}
           onClick={(e) => e.stopPropagation()} // to prevent event delegation to the overlay
-          style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
+          style={{
+            transform: `translate(${position.x}px, ${position.y}px)`,
+            width: WINDOW_SIZE.width,
+            height: WINDOW_SIZE.height,
+          }}
         >
           <div className="hoz-drag checkerboard"></div>
           <div className="vert-drag-container">
@@ -77,12 +88,20 @@ function WindowModal({ children, title, closeFn }: WindowModalProps) {
       ) : null}
       <div
         className={`${PARENT_CLASS}__wrapper`}
-        style={{ transform: `translate(${windowPosition.x}px, ${windowPosition.y}px)` }} //to move out popup
+        style={{
+          transform: `translate(${windowPosition.x}px, ${windowPosition.y}px)`,
+          width: WINDOW_SIZE.width,
+          height: WINDOW_SIZE.height,
+          zIndex: isActive ? 10 : 0,
+        }}
+        onClick={() => setActiveWindow(windowData.id)}
       >
         <div className={`${PARENT_CLASS}__outer-container`}>
           <div className={`${PARENT_CLASS}__inner-container`}>
-            <div className={`${PARENT_CLASS}__header`} onMouseDown={onMouseDown}>
-              {title}
+            <div className={`${PARENT_CLASS}__header`} style={{ backgroundColor: isActive ? '#0000a3' : '#808080' }}>
+              <div className={`${PARENT_CLASS}__header__title`} onMouseDown={onMouseDown}>
+                {windowData.title}
+              </div>
               <div className={`${PARENT_CLASS}__header__icons`}>
                 <button className="min" />
                 <button className="max" />
