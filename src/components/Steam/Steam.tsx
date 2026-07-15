@@ -1,8 +1,19 @@
+import { useQuery } from '@tanstack/react-query';
 import './Steam.scss';
+import { getRecentlyPlayedGames } from '../../api/api';
 
 const PARENT_CLASS = 'Steam';
 
 function Steam() {
+  const { data, status, error } = useQuery({
+    queryKey: ['recentlyPlayedGames'],
+    queryFn: () => getRecentlyPlayedGames(),
+  });
+
+  console.log('status', status);
+  console.log('data', data);
+  console.log('error', error);
+
   return (
     <div className={`${PARENT_CLASS}__container`}>
       <div className={`${PARENT_CLASS}__header`}>
