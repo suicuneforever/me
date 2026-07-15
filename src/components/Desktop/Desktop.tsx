@@ -7,6 +7,7 @@ import MySpace from '../MySpace';
 import ContactMe from '../ContactMe';
 import Mystery from '../Mystery';
 import { useEffect, useState } from 'react';
+import Steam from '../Steam';
 
 const PARENT_CLASS = 'Desktop';
 
@@ -20,6 +21,8 @@ const DESKTOP_ICONS: Icon[] = [
   { title: 'about me', id: 'ABOUT_ME', path: '/icons/aboutme.png' },
   { title: 'resume', id: 'RESUME', path: '/icons/resume.png' },
   { title: 'myspace', id: 'MYSPACE', path: '/icons/myspace.png' },
+  // TODO make icon
+  { title: 'steam', id: 'STEAM', path: '/icons/steam.jpg' },
   { title: 'contact me', id: 'CONTACT_ME', path: '/icons/contactme.png' },
   { title: '???', id: 'MYSTERY', path: '/icons/mystery.png' },
 ];
@@ -28,6 +31,7 @@ const WINDOW_COMPONENTS: Record<string, React.ReactNode> = {
   ABOUT_ME: <AboutMe />,
   RESUME: <Resume />,
   MYSPACE: <MySpace />,
+  STEAM: <Steam />,
   CONTACT_ME: <ContactMe />,
   MYSTERY: <Mystery />,
 };
