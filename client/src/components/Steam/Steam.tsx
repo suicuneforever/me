@@ -51,7 +51,7 @@ function Steam() {
           <div className="left">
             <div className="card activity">
               <div className="header">activity</div>
-              content
+              {data ? data.response.games.map((game: any) => <p key={game.appid}>{game.name}</p>) : null}
             </div>
             <div className="card comments">
               <div className="header">comments</div>
