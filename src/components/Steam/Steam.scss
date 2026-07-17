@@ -6,7 +6,7 @@
     height: 100%;
     background-color: #3a5b87;
     color: #c5c3c0;
-    font-family: 'Verdana';
+    font-family: 'PressStart2P';
     overflow-y: scroll;
   }
 
@@ -60,21 +60,6 @@
         border: none;
       }
     }
-
-    .search-bar {
-      height: 100%;
-      display: flex;
-      align-items: flex-start;
-      margin-left: auto;
-
-      input {
-        border-radius: 0;
-      }
-
-      input:focus {
-        outline: none;
-      }
-    }
   }
 
   &__body {
@@ -86,30 +71,26 @@
     background-color: #243a57;
     padding: 10px;
     gap: 10px;
-
-    .row {
-      display: flex;
-      gap: 10px;
-    }
-
-    .column {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    font-size: 10px;
 
     .heading {
+      font-size: 12px;
+      padding: 5px;
       background-color: #171d25;
-      width: 100%;
+      margin-bottom: 5px;
     }
 
     .about {
-      border: double 3px #171d25;
+      border: 1px solid #171d25;
       width: 100%;
 
       &__content {
         padding: 10px;
         display: flex;
+
+        .profile-pic {
+          width: 150px;
+        }
 
         ul {
           list-style: none;
@@ -117,7 +98,7 @@
           margin: 10px 0 0 10px;
 
           li:first-child {
-            font-size: 25px;
+            font-size: 20px;
             padding-bottom: 5px;
           }
         }
@@ -126,21 +107,48 @@
 
     .content {
       display: flex;
+      gap: 10px;
 
       .card {
-        border: solid 1px #171d25;
-
         .header {
+          font-size: 12px;
+          padding: 5px;
           background-color: #171d25;
+          margin-bottom: 5px;
         }
       }
 
       .left {
-        width: 65%;
+        width: 60%;
       }
 
       .right {
-        width: 35%;
+        width: 40%;
+        border: 1px solid #171d25;
+      }
+
+      .game {
+        display: flex;
+        padding: 10px 5px;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid #171d25;
+        margin: 0 5px 10px 0;
+        box-shadow: 5px 5px #171d25;
+
+        &__text {
+          display: flex;
+          flex-direction: column;
+          width: 1000%;
+          color: #fff;
+
+          span:last-child {
+            display: flex;
+            justify-content: flex-end;
+            color: #c5c3c0;
+            font-size: 9px;
+          }
+        }
       }
     }
   }

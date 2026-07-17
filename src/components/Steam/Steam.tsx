@@ -1,18 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import './Steam.scss';
 import { getRecentlyPlayedGames } from '../../api/api';
+import { GameData } from '../../types/types';
 
 const PARENT_CLASS = 'Steam';
 
 function Steam() {
-  const { data, status, error } = useQuery({
+  const { data } = useQuery({
     queryKey: ['recentlyPlayedGames'],
     queryFn: () => getRecentlyPlayedGames(),
   });
-
-  console.log('status', status);
-  console.log('data', data);
-  console.log('error', error);
 
   return (
     <div className={`${PARENT_CLASS}__container`}>
@@ -27,15 +24,12 @@ function Steam() {
             <li>Support</li>
           </ul>
         </div>
-        <div className="search-bar">
-          <input type="text" />
-        </div>
       </div>
       <div className={`${PARENT_CLASS}__body`}>
         <div className="about">
           <div className="heading">About</div>
           <div className="about__content">
-            <img src="/images/steamprofilepic.jpg" />
+            <img className="profile-pic" src="/images/steamprofilepic.jpg" />
             <ul>
               <li>dani</li>
               <li>
@@ -49,17 +43,28 @@ function Steam() {
         </div>
         <div className="content">
           <div className="left">
-            <div className="card activity">
-              <div className="header">activity</div>
-              {data ? data.response.games.map((game: any) => <p key={game.appid}>{game.name}</p>) : null}
+            <div className="card">
+              <div className="header">recent activity</div>
+
+              {data
+                ? data.map((game: GameData) => (
+                    <div className="game" key={game.name}>
+                      <img src={game.imgUrl} />
+                      <div className="game__text">
+                        <span>{game.name}</span>
+                        <span>{(game.playtimeForever / 60).toFixed(1)} hrs played</span>
+                      </div>
+                    </div>
+                  ))
+                : null}
             </div>
-            <div className="card comments">
+            <div className="card">
               <div className="header">comments</div>
               content
             </div>
           </div>
           <div className="right">
-            <div className="card favorites">
+            <div className="card">
               <div className="header">favorites</div>
               content
             </div>
