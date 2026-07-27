@@ -16,12 +16,6 @@ body,
 }
 
 @font-face {
-  font-family: 'Verdana';
-  src: url('./assets/fonts/Verdana.ttf') format('truetype');
-  font-weight: normal;
-}
-
-@font-face {
   font-family: 'PressStart2P';
   src: url('./assets/fonts/PressStart2P.ttf') format('truetype');
   font-weight: normal;
@@ -36,5 +30,29 @@ body,
 @font-face {
   font-family: 'Pixeled';
   src: url('./assets/fonts/Pixeled.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Panton';
+  src: url('./assets/fonts/Panton-Trial-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Panton-Black';
+  src: url('./assets/fonts/Panton-Trial-Black.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Panton-Bold';
+  src: url('./assets/fonts/Panton-Trial-Bold.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Panton-Thin';
+  src: url('./assets/fonts/Panton-Trial-Thin.ttf') format('truetype');
   font-weight: normal;
 }
