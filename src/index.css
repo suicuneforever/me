@@ -22,37 +22,13 @@ body,
 }
 
 @font-face {
-  font-family: 'pixel';
-  src: url('./assets/fonts/pixel.ttf') format('truetype');
+  font-family: 'PC98';
+  src: url('./assets/fonts/Ac437_SperryPC_8x16.ttf') format('truetype');
   font-weight: normal;
 }
 
 @font-face {
-  font-family: 'Pixeled';
-  src: url('./assets/fonts/Pixeled.ttf') format('truetype');
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: 'Panton';
-  src: url('./assets/fonts/Panton-Trial-Regular.ttf') format('truetype');
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: 'Panton-Black';
-  src: url('./assets/fonts/Panton-Trial-Black.ttf') format('truetype');
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: 'Panton-Bold';
-  src: url('./assets/fonts/Panton-Trial-Bold.ttf') format('truetype');
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: 'Panton-Thin';
-  src: url('./assets/fonts/Panton-Trial-Thin.ttf') format('truetype');
+  font-family: 'Pixel English';
+  src: url('./assets/fonts/PixeledEnglishFont.ttf') format('truetype');
   font-weight: normal;
 }
