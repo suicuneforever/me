@@ -56,7 +56,11 @@ function Desktop() {
       <div className={`${PARENT_CLASS}__icons`}>
         {DESKTOP_ICONS.map((desktopIcon) => {
           return (
-            <div className="icon" key={desktopIcon.title} onClick={() => openWindow(desktopIcon.id, desktopIcon.title)}>
+            <div
+              className={`${PARENT_CLASS}__icon`}
+              key={desktopIcon.title}
+              onClick={() => openWindow(desktopIcon.id, desktopIcon.title)}
+            >
               <img src={desktopIcon.path} />
               <label>{desktopIcon.title}</label>
             </div>
@@ -71,23 +75,27 @@ function Desktop() {
       ))}
 
       <div className={`${PARENT_CLASS}__start-bar`}>
-        <div className="start-button">Start</div>
+        <div className={`${PARENT_CLASS}__start-button`}>Start</div>
         {windows.map((window) =>
           window.id === activeWindowId ? (
-            <div className="button--active" key={window.id} onClick={() => setActiveWindow(window.id)}>
-              <div className="checkerboard">
+            <div
+              className={`${PARENT_CLASS}__button ${PARENT_CLASS}__button--active`}
+              key={window.id}
+              onClick={() => setActiveWindow(window.id)}
+            >
+              <div className={`${PARENT_CLASS}__checkerboard`}>
                 <img src={DESKTOP_ICONS.find((w) => w.id === window.id)?.path} />
                 {window.title}
               </div>
             </div>
           ) : (
-            <div className="button" key={window.id} onClick={() => setActiveWindow(window.id)}>
+            <div className={`${PARENT_CLASS}__button`} key={window.id} onClick={() => setActiveWindow(window.id)}>
               <img src={DESKTOP_ICONS.find((w) => w.id === window.id)?.path} />
               {window.title}
             </div>
           ),
         )}
-        <div className="time">{formattedTime}</div>
+        <div className={`${PARENT_CLASS}__time`}>{formattedTime}</div>
       </div>
     </div>
   );

@@ -71,66 +71,66 @@ $ex: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBI
     &:hover {
       cursor: move;
     }
+  }
 
-    &__title {
-      width: 100%;
+  &__title {
+    width: 100%;
+  }
+
+  &__icons {
+    display: flex;
+    gap: 2px;
+  }
+
+  &__icon-button {
+    background-color: $gray;
+    width: 16px;
+    height: 15px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $white $black $black $white;
+    position: relative;
+
+    &:hover {
+      cursor: pointer;
     }
 
-    &__icons {
-      display: flex;
-      gap: 2px;
-
-      button {
-        background-color: $gray;
-        width: 16px;
+    &--min {
+      &:after {
+        content: '';
+        background-image: url($min);
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 2px;
+        left: 1px;
+        width: 15px;
         height: 15px;
-        border-width: 1px;
-        border-style: solid;
-        border-color: $white $black $black $white;
-        position: relative;
+      }
+    }
 
-        &:hover {
-          cursor: pointer;
-        }
+    &--max {
+      &:after {
+        content: '';
+        background-image: url($max);
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 2px;
+        left: 1px;
+        width: 15px;
+        height: 15px;
+      }
+    }
 
-        &.min {
-          &:after {
-            content: '';
-            background-image: url($min);
-            background-repeat: no-repeat;
-            position: absolute;
-            top: 2px;
-            left: 1px;
-            width: 15px;
-            height: 15px;
-          }
-        }
-
-        &.max {
-          &:after {
-            content: '';
-            background-image: url($max);
-            background-repeat: no-repeat;
-            position: absolute;
-            top: 2px;
-            left: 1px;
-            width: 15px;
-            height: 15px;
-          }
-        }
-
-        &.close {
-          &:after {
-            content: '';
-            background-image: url($x);
-            background-repeat: no-repeat;
-            position: absolute;
-            top: 2px;
-            left: 1px;
-            width: 15px;
-            height: 15px;
-          }
-        }
+    &--close {
+      &:after {
+        content: '';
+        background-image: url($x);
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 2px;
+        left: 1px;
+        width: 15px;
+        height: 15px;
       }
     }
   }
@@ -170,40 +170,40 @@ $ex: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBI
     flex-direction: column;
     cursor: move;
     mix-blend-mode: difference;
+  }
 
-    .hoz-drag {
-      width: 100%;
-      height: 6px;
-      background-color: $white;
-      pointer-events: none;
-    }
+  &__drag-box-horizontal {
+    width: 100%;
+    height: 6px;
+    background-color: $white;
+    pointer-events: none;
+  }
 
-    .vert-drag-container {
-      width: 100%;
-      height: calc(100% - 12px);
-      display: flex;
-      justify-content: space-between;
-      pointer-events: none;
-    }
+  &__drag-box-vertical-container {
+    width: 100%;
+    height: calc(100% - 12px);
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+  }
 
-    .vert-drag {
-      width: 6px;
-      height: 100%;
-      background-color: $white;
-      pointer-events: none;
-    }
+  &__drag-box-vertical {
+    width: 6px;
+    height: 100%;
+    background-color: $white;
+    pointer-events: none;
+  }
 
-    .checkerboard {
-      background-image: linear-gradient(45deg, black 25%, transparent 25%),
-        linear-gradient(-45deg, black 25%, transparent 25%), linear-gradient(45deg, transparent 75%, black 75%),
-        linear-gradient(-45deg, transparent 75%, black 75%);
-      background-size: 4px 4px;
-      background-position:
-        0 0,
-        0 2px,
-        2px -2px,
-        -2px 0px;
-      pointer-events: none;
-    }
+  &__checkerboard {
+    background-image: linear-gradient(45deg, black 25%, transparent 25%),
+      linear-gradient(-45deg, black 25%, transparent 25%), linear-gradient(45deg, transparent 75%, black 75%),
+      linear-gradient(-45deg, transparent 75%, black 75%);
+    background-size: 4px 4px;
+    background-position:
+      0 0,
+      0 2px,
+      2px -2px,
+      -2px 0px;
+    pointer-events: none;
   }
 }

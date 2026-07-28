@@ -78,12 +78,12 @@ function WindowModal({ windowData, children, closeFn }: WindowModalProps) {
             height: WINDOW_SIZE.height,
           }}
         >
-          <div className="hoz-drag checkerboard"></div>
-          <div className="vert-drag-container">
-            <div className="vert-drag checkerboard"></div>
-            <div className="vert-drag checkerboard"></div>
+          <div className={`${PARENT_CLASS}__drag-box-horizontal ${PARENT_CLASS}__checkerboard`}></div>
+          <div className={`${PARENT_CLASS}__drag-box-vertical-container`}>
+            <div className={`${PARENT_CLASS}__drag-box-vertical ${PARENT_CLASS}__checkerboard`}></div>
+            <div className={`${PARENT_CLASS}__drag-box-vertical ${PARENT_CLASS}__checkerboard`}></div>
           </div>
-          <div className="hoz-drag checkerboard"></div>
+          <div className={`${PARENT_CLASS}__drag-box-horizontal ${PARENT_CLASS}__checkerboard`}></div>
         </div>
       ) : null}
       <div
@@ -99,13 +99,16 @@ function WindowModal({ windowData, children, closeFn }: WindowModalProps) {
         <div className={`${PARENT_CLASS}__outer-container`}>
           <div className={`${PARENT_CLASS}__inner-container`}>
             <div className={`${PARENT_CLASS}__header`} style={{ backgroundColor: isActive ? '#0000a3' : '#808080' }}>
-              <div className={`${PARENT_CLASS}__header__title`} onMouseDown={onMouseDown}>
+              <div className={`${PARENT_CLASS}__title`} onMouseDown={onMouseDown}>
                 {windowData.title}
               </div>
-              <div className={`${PARENT_CLASS}__header__icons`}>
-                <button className="min" />
-                <button className="max" />
-                <button className="close" onClick={closeFn} />
+              <div className={`${PARENT_CLASS}__icons`}>
+                <button className={`${PARENT_CLASS}__icon-button ${PARENT_CLASS}__icon-button--min`} />
+                <button className={`${PARENT_CLASS}__icon-button ${PARENT_CLASS}__icon-button--max`} />
+                <button
+                  className={`${PARENT_CLASS}__icon-button ${PARENT_CLASS}__icon-button--close`}
+                  onClick={closeFn}
+                />
               </div>
             </div>
             <div className={`${PARENT_CLASS}__outer-content`}>
