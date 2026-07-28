@@ -79,7 +79,7 @@ function Desktop() {
         {windows.map((window) =>
           window.id === activeWindowId ? (
             <div
-              className={`${PARENT_CLASS}__button ${PARENT_CLASS}__button--active`}
+              className={`${PARENT_CLASS}__window-button ${PARENT_CLASS}__window-button--active`}
               key={window.id}
               onClick={() => setActiveWindow(window.id)}
             >
@@ -89,7 +89,11 @@ function Desktop() {
               </div>
             </div>
           ) : (
-            <div className={`${PARENT_CLASS}__button`} key={window.id} onClick={() => setActiveWindow(window.id)}>
+            <div
+              className={`${PARENT_CLASS}__window-button`}
+              key={window.id}
+              onClick={() => setActiveWindow(window.id)}
+            >
               <img src={DESKTOP_ICONS.find((w) => w.id === window.id)?.path} />
               {window.title}
             </div>
