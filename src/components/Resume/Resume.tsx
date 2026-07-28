@@ -7,14 +7,14 @@ function Resume() {
     <div className={`${PARENT_CLASS}__background`}>
       <div className={`${PARENT_CLASS}__page`}>
         <div className={`${PARENT_CLASS}__heading`}>
-          <div className={`${PARENT_CLASS}__heading__summary`}>
+          <div className={`${PARENT_CLASS}__summary`}>
             <h1>Dani Jaramillo</h1>
             <span>
               Fullstack software engineer with 7+ years of experience building performant, user-facing web applications
               with a focus on web development. Passionate about visuals and the merging of technology and art.
             </span>
           </div>
-          <div className={`${PARENT_CLASS}__heading__info`}>
+          <div className={`${PARENT_CLASS}__info`}>
             <ul>
               <li>New York City, USA</li>
               <li>www.danisroom.com</li>
@@ -25,9 +25,9 @@ function Resume() {
           </div>
         </div>
         <div className={`${PARENT_CLASS}__body`}>
-          <div className={`${PARENT_CLASS}__body__experience`}>
+          <div className={`${PARENT_CLASS}__experience`}>
             <h2>Work Experience</h2>
-            <div className={`${PARENT_CLASS}__body__experience__section`}>
+            <div className={`${PARENT_CLASS}__experience-section`}>
               <h2>Senior Software Engineer</h2>
               <h3>
                 Deloitte<span> · January 2024 - Present</span>
@@ -58,7 +58,7 @@ function Resume() {
                 </li>
               </ul>
             </div>
-            <div className={`${PARENT_CLASS}__body__experience__section`}>
+            <div className={`${PARENT_CLASS}__experience-section`}>
               <h2>Software Engineer</h2>
               <h3>
                 Giant Machines (aquired by Deloitte)<span> · May 2021 - January 2024</span>
@@ -82,7 +82,7 @@ function Resume() {
                 </li>
               </ul>
             </div>
-            <div className={`${PARENT_CLASS}__body__experience__section`}>
+            <div className={`${PARENT_CLASS}__experience-section`}>
               <h2>Software Engineer</h2>
               <h3>
                 AstreaX<span> · May 2017 - June 2019</span>
@@ -102,7 +102,7 @@ function Resume() {
                 </li>
               </ul>
             </div>
-            <div className={`${PARENT_CLASS}__body__experience__section`}>
+            <div className={`${PARENT_CLASS}__experience-section`}>
               <h2>English Teacher</h2>
               <h3>
                 Seoul Metropolitan Office of Education<span> · August 2019 - August 2020</span>
@@ -116,9 +116,9 @@ function Resume() {
               </ul>
             </div>
           </div>
-          <div className={`${PARENT_CLASS}__body__skills`}>
+          <div className={`${PARENT_CLASS}__skills`}>
             <h2>Skills</h2>
-            <div className={`${PARENT_CLASS}__body__skills__section`}>
+            <div className={`${PARENT_CLASS}__skills-section`}>
               <h3>Languages</h3>
               <ul>
                 <li>Typescript</li>
@@ -129,7 +129,7 @@ function Resume() {
                 <li>SQL</li>
               </ul>
             </div>
-            <div className={`${PARENT_CLASS}__body__skills__section`}>
+            <div className={`${PARENT_CLASS}__skills-section`}>
               <h3>Libraries & Tools</h3>
               <ul>
                 <li>React, React Native</li>
@@ -143,7 +143,7 @@ function Resume() {
                 <li>Prisma</li>
               </ul>
             </div>
-            <div className={`${PARENT_CLASS}__body__skills__section`}>
+            <div className={`${PARENT_CLASS}__skills-section`}>
               <h3>Infrastructure & Platforms</h3>
               <ul>
                 <li>AWS</li>
@@ -154,7 +154,7 @@ function Resume() {
               </ul>
             </div>
             <h2>Education</h2>
-            <div className={`${PARENT_CLASS}__body__skills__section`}>
+            <div className={`${PARENT_CLASS}__skills-section`}>
               <h3>Bachelor's of Science in Computer Science</h3>
               <p>University of Arizona</p>
             </div>
@@ -162,8 +162,8 @@ function Resume() {
         </div>
       </div>
       <div className={`${PARENT_CLASS}__clippy`}>
-        <div className={`${PARENT_CLASS}__clippy__bubble`}>
-          <div className={`${PARENT_CLASS}__clippy__bubble__text`}>Want to download my resume? Click below :-)</div>
+        <div className={`${PARENT_CLASS}__bubble`}>
+          <div className={`${PARENT_CLASS}__bubble-text`}>Want to download my resume? Click below :-)</div>
           <a href="/docs/DaniJaramillo_Resume2026.pdf" download="DaniJaramillo_Resume2026.pdf">
             Download Resume
           </a>
