@@ -6,20 +6,34 @@ import './AboutMe.scss';
 const PARENT_CLASS = 'AboutMe';
 const WINDOW_ID = 'ABOUT_ME';
 
+type Status = {
+  question: string;
+  answer: string;
+};
+
+const STATUSES: Status[] = [
+  { question: 'mood', answer: 'motivated' },
+  { question: 'hear', answer: 'wannacry - ninajirachi & porter robinson' },
+  { question: 'read', answer: 'i who have never known men - jacqueline harpman' },
+  { question: 'play', answer: 'monster hunter: wilds' },
+  { question: 'make', answer: 'this website' },
+];
+
 type Section = {
   title: string;
   id: string;
+  isActive: boolean;
 };
 
 const SECTIONS: Section[] = [
-  { title: 'about', id: 'ABOUT' },
-  { title: 'interests', id: 'INTERESTS' },
-  { title: 'music', id: 'MUSIC' },
-  { title: 'art', id: 'ART' },
-  { title: 'updates', id: 'UPDATES' },
-  { title: 'to-do list', id: 'TODO_LIST' },
-  { title: 'guestbook', id: 'GUESTBOOK' },
-  { title: 'credits', id: 'CREDITS' },
+  { title: 'about', id: 'ABOUT', isActive: true },
+  { title: 'interests', id: 'INTERESTS', isActive: false },
+  { title: 'music', id: 'MUSIC', isActive: false },
+  { title: 'art', id: 'ART', isActive: false },
+  { title: 'updates', id: 'UPDATES', isActive: false },
+  { title: 'to-do list', id: 'TODO_LIST', isActive: false },
+  { title: 'guestbook', id: 'GUESTBOOK', isActive: false },
+  { title: 'credits', id: 'CREDITS', isActive: false },
 ];
 
 function AboutMe() {
@@ -37,24 +51,53 @@ function AboutMe() {
     >
       {showSparkles ? <CursorTrail /> : null}
       <div className={`${PARENT_CLASS}__container`}>
-        <div className={`${PARENT_CLASS}__header`}>
-          <div className={`${PARENT_CLASS}__main-title`}>welcome</div>
-        </div>
+        <div className={`${PARENT_CLASS}__header`}></div>
         <div className={`${PARENT_CLASS}__body`}>
           <div className={`${PARENT_CLASS}__sidebar`}>
-            <div className={`${PARENT_CLASS}__sidebar-links`}>
-              <div className={`${PARENT_CLASS}__title`}>menu</div>
-              {SECTIONS.map((section) => (
-                <button key={section.id} onClick={() => setSectionId(section.id)}>
-                  {section.title}
-                </button>
-              ))}
+            <div className={`${PARENT_CLASS}__card`}>
+              <div className={`${PARENT_CLASS}__links`}>
+                <div className={`${PARENT_CLASS}__title`}>menu</div>
+                <div className={`${PARENT_CLASS}__divider`}></div>
+                {SECTIONS.map((section) => (
+                  <button
+                    className={
+                      section.isActive
+                        ? `${PARENT_CLASS}__links-button ${PARENT_CLASS}__links-button--active`
+                        : `${PARENT_CLASS}__links-button ${PARENT_CLASS}__links-button--disabled`
+                    }
+                    disabled={!section.isActive}
+                    key={section.id}
+                    onClick={() => setSectionId(section.id)}
+                  >
+                    {section.title}
+                  </button>
+                ))}
+              </div>
             </div>
             <div className={`${PARENT_CLASS}__card`}>
               <div className={`${PARENT_CLASS}__title`}>status</div>
+              <div className={`${PARENT_CLASS}__divider`}></div>
+              {STATUSES.map((status) => (
+                <div className={`${PARENT_CLASS}__status-text`} key={status.question}>
+                  <span className={`${PARENT_CLASS}__status-text-question`}>{status.question}</span>
+                  <span className={`${PARENT_CLASS}__status-text-answer`}>{status.answer}</span>
+                </div>
+              ))}
             </div>
             <div className={`${PARENT_CLASS}__card`}>
               <div className={`${PARENT_CLASS}__title`}>visitors</div>
+              <div className={`${PARENT_CLASS}__divider`}></div>
+              <div className={`${PARENT_CLASS}__visitor-container`}>
+                <div className={`${PARENT_CLASS}__visitor-counter`}>0001337</div>
+                <div className={`${PARENT_CLASS}__visitor-text`}>
+                  <span className={`${PARENT_CLASS}__visitor-subtext`}>you are visitor</span>
+                  <span>#1,337</span>
+                </div>
+                <div className={`${PARENT_CLASS}__visitor-text`}>
+                  <span className={`${PARENT_CLASS}__visitor-subtext`}>site uptime</span>
+                  <span>870d 13:31:20</span>
+                </div>
+              </div>
             </div>
           </div>
           <div className={`${PARENT_CLASS}__card`}>
@@ -62,7 +105,7 @@ function AboutMe() {
               {sectionId === 'ABOUT' ? (
                 <>
                   <div className={`${PARENT_CLASS}__title`}>about me</div>
-                  <img src="/images/divider.png" />
+                  <div className={`${PARENT_CLASS}__divider`}></div>
                   <div className={`${PARENT_CLASS}__text`}>
                     hi hi, welcome to my page! my name is dani jaramillo. i am a programmer with a focus in web
                     development and a passion for frontend. i love the intersection of tech and art! i started drawing
@@ -75,7 +118,7 @@ function AboutMe() {
               ) : null}
               {sectionId === 'INTERESTS' ? (
                 <>
-                  ◈<div className={`${PARENT_CLASS}__title`}>interests◈</div>
+                  <div className={`${PARENT_CLASS}__title`}>interests</div>
                   <img src="/images/underconstruction.gif" />
                 </>
               ) : null}

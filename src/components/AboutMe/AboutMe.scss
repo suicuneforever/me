@@ -5,7 +5,7 @@
   background-color: #000;
   background-image: url('/images/bluestars.gif');
   width: 100%;
-  height: 100vh;
+  height: 100%;
   overflow: scroll;
   font-family: 'PC98';
   font-size: 1rem;
@@ -20,74 +20,89 @@
 
   &__card {
     background-color: $black;
-    border: 1px solid #4200e8;
+    border: 1px solid #2b2aff;
     width: 100%;
+    padding: 0.5rem;
   }
 
   &__header {
     font-size: 5rem;
   }
-
-  &__main-title {
-    font-size: 5rem;
-    font-family: 'Pixel English';
-  }
-
   &__body {
     display: flex;
     flex-direction: row;
     width: 100%;
     height: 100%;
+    gap: 2rem;
   }
 
   &__section {
-    padding: 0.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
   &__sidebar {
-    width: 15rem;
+    width: 12rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-right: 0.5rem;
   }
 
-  &__sidebar-links {
+  &__links {
     display: flex;
     flex-direction: column;
+  }
+
+  &__links-button {
+    width: 100%;
+    font-family: 'PC98';
+    font-size: 1rem;
+    color: $white;
     background-color: $black;
-    border: 1px solid #4200e8;
+    border: none;
+    text-align: left;
+    transition: background-color 0.25s;
+    display: flex;
     align-items: center;
-    padding-top: 0.5rem;
+    gap: 0.5rem;
+    padding: 0.5rem 0.25rem;
 
-    button {
-      width: 100%;
-      font-family: 'PC98';
-      font-size: 1rem;
-      color: $white;
-      background-color: $black;
-      border: none;
-      text-align: left;
-      transition: background-color 0.25s;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 0.25rem;
-
-      &:before {
-        font-family: 'DotGothic16', monospace;
-        content: '◈';
-        color: #4200e8;
-      }
-
-      &:hover {
-        cursor: pointer;
-        color: #03fafa;
-      }
+    &:before {
+      content: '◈';
+      font-family: 'Courier New', Courier, monospace;
     }
+  }
+
+  &__links-button--active {
+    &:before {
+      color: #2b2aff;
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: #03fafa;
+    }
+  }
+
+  &__links-button--disabled {
+    color: #63638f;
+
+    &:before {
+      color: #1f1f6a;
+    }
+
+    &:after {
+      content: 'soon';
+      color: #3b3a80;
+      font-size: 1rem;
+      display: flex;
+      align-self: start;
+      font-family: 'VT323';
+    }
+  }
+
+  &__status {
   }
 
   &__text {
@@ -99,5 +114,63 @@
     display: flex;
     width: 100%;
     justify-content: center;
+  }
+
+  &__divider {
+    margin-bottom: 0.5rem;
+    &:before {
+      content: '⊹˚₊‧───────────────‧₊˚⊹';
+      color: #2b2aff;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &__status-text {
+    display: flex;
+    font-family: 'VT323';
+  }
+
+  &__status-text-question {
+    color: #2b2aff;
+    margin-right: 0.5rem;
+  }
+
+  &__status-text-answer {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: #000;
+
+    &:hover {
+      overflow: visible;
+      z-index: 5;
+    }
+  }
+
+  &__visitor-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__visitor-counter {
+    border: 1px solid #2b2aff;
+    color: #03fafa;
+    font-family: 'VT323';
+    font-size: 1.5rem;
+    display: flex;
+  }
+
+  &__visitor-text {
+    font-family: 'VT323';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__visitor-subtext {
+    color: #8888bd;
   }
 }
