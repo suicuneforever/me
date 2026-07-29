@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import CursorTrail from '../CursorTrail';
+import { useWindowStore } from '../../store/store';
 import './AboutMe.scss';
 
 const PARENT_CLASS = 'AboutMe';
+const WINDOW_ID = 'ABOUT_ME';
 
 type Section = {
   title: string;
@@ -21,12 +24,21 @@ const SECTIONS: Section[] = [
 
 function AboutMe() {
   const [sectionId, setSectionId] = useState<string>('ABOUT');
+  const [isHovering, setIsHovering] = useState(false);
+  const { activeWindowId } = useWindowStore();
+
+  const showSparkles = isHovering && activeWindowId === WINDOW_ID;
 
   return (
-    <div className={`${PARENT_CLASS}`}>
+    <div
+      className={`${PARENT_CLASS}`}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
+      {showSparkles ? <CursorTrail /> : null}
       <div className={`${PARENT_CLASS}__container`}>
         <div className={`${PARENT_CLASS}__header`}>
-          <div className={`${PARENT_CLASS}__card`}>welcome to my site</div>
+          <div className={`${PARENT_CLASS}__main-title`}>welcome</div>
         </div>
         <div className={`${PARENT_CLASS}__body`}>
           <div className={`${PARENT_CLASS}__sidebar`}>
@@ -34,10 +46,12 @@ function AboutMe() {
               <div className={`${PARENT_CLASS}__title`}>menu</div>
               {SECTIONS.map((section) => (
                 <button key={section.id} onClick={() => setSectionId(section.id)}>
-                  <img src="/images/staricon.gif" />
                   {section.title}
                 </button>
               ))}
+            </div>
+            <div className={`${PARENT_CLASS}__card`}>
+              <div className={`${PARENT_CLASS}__title`}>status</div>
             </div>
             <div className={`${PARENT_CLASS}__card`}>
               <div className={`${PARENT_CLASS}__title`}>visitors</div>
@@ -48,6 +62,7 @@ function AboutMe() {
               {sectionId === 'ABOUT' ? (
                 <>
                   <div className={`${PARENT_CLASS}__title`}>about me</div>
+                  <img src="/images/divider.png" />
                   <div className={`${PARENT_CLASS}__text`}>
                     hi hi, welcome to my page! my name is dani jaramillo. i am a programmer with a focus in web
                     development and a passion for frontend. i love the intersection of tech and art! i started drawing
@@ -60,7 +75,7 @@ function AboutMe() {
               ) : null}
               {sectionId === 'INTERESTS' ? (
                 <>
-                  <div className={`${PARENT_CLASS}__title`}>interests</div>
+                  ◈<div className={`${PARENT_CLASS}__title`}>interests◈</div>
                   <img src="/images/underconstruction.gif" />
                 </>
               ) : null}
@@ -109,8 +124,6 @@ function AboutMe() {
 }
 
 export default AboutMe;
-
-const About = () => {};
 
 //https://int10h.org/oldschool-pc-fonts/
 //https://codepen.io/sarahwfox/pen/pNrYGb
