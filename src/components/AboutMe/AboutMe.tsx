@@ -2,6 +2,7 @@ import { useState } from 'react';
 import CursorTrail from '../CursorTrail';
 import { useWindowStore } from '../../store/store';
 import './AboutMe.scss';
+import GlitchButton from '../GlitchButton';
 
 const PARENT_CLASS = 'AboutMe';
 const WINDOW_ID = 'ABOUT_ME';
@@ -19,7 +20,8 @@ const STATUSES: Status[] = [
   { question: 'make', answer: 'this website' },
 ];
 
-type Section = {
+// TODO move?
+export type Section = {
   title: string;
   id: string;
   isActive: boolean;
@@ -27,9 +29,9 @@ type Section = {
 
 const SECTIONS: Section[] = [
   { title: 'about', id: 'ABOUT', isActive: true },
-  { title: 'interests', id: 'INTERESTS', isActive: false },
-  { title: 'music', id: 'MUSIC', isActive: false },
-  { title: 'art', id: 'ART', isActive: false },
+  { title: 'interests', id: 'INTERESTS', isActive: true },
+  { title: 'music', id: 'MUSIC', isActive: true },
+  { title: 'art', id: 'ART', isActive: true },
   { title: 'updates', id: 'UPDATES', isActive: false },
   { title: 'to-do list', id: 'TODO_LIST', isActive: false },
   { title: 'guestbook', id: 'GUESTBOOK', isActive: false },
@@ -59,18 +61,7 @@ function AboutMe() {
                 <div className={`${PARENT_CLASS}__title`}>menu</div>
                 <div className={`${PARENT_CLASS}__divider`}></div>
                 {SECTIONS.map((section) => (
-                  <button
-                    className={
-                      section.isActive
-                        ? `${PARENT_CLASS}__links-button ${PARENT_CLASS}__links-button--active`
-                        : `${PARENT_CLASS}__links-button ${PARENT_CLASS}__links-button--disabled`
-                    }
-                    disabled={!section.isActive}
-                    key={section.id}
-                    onClick={() => setSectionId(section.id)}
-                  >
-                    {section.title}
-                  </button>
+                  <GlitchButton section={section} setSectionId={setSectionId} />
                 ))}
               </div>
             </div>

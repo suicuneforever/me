@@ -1,0 +1,53 @@
+.GlitchButton {
+  width: 100%;
+  font-family: 'PC98';
+  font-size: 1rem;
+  color: #fff;
+  background-color: #000;
+  border: none;
+  text-align: left;
+  transition: background-color 0.25s;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0.25rem;
+
+  &:before {
+    content: '◈';
+    font-family: 'Courier New', Courier, monospace;
+    padding-right: 0.5rem;
+  }
+
+  &--active {
+    &:before {
+      color: #2b2aff;
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: #03fafa;
+    }
+  }
+
+  &--disabled {
+    color: #63638f;
+
+    &:before {
+      color: #1f1f6a;
+    }
+
+    &:after {
+      content: 'soon';
+      color: #3b3a80;
+      font-size: 1rem;
+      display: flex;
+      align-self: start;
+      font-family: 'VT323';
+    }
+  }
+
+  span {
+    margin: 0;
+    padding: 0;
+  }
+}
