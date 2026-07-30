@@ -15,7 +15,6 @@ function GlitchButton({ section, setSectionId }: GlitchButtonProps) {
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   const shuffleChars = () => {
-    console.log('hi');
     if (buttonRef.current) {
       let chars = Array.from(buttonRef.current.children);
       chars.forEach((char, position) => {
@@ -51,7 +50,7 @@ function GlitchButton({ section, setSectionId }: GlitchButtonProps) {
       ref={buttonRef}
     >
       {section.title.split('').map((char, index) => (
-        <span key={index}>{char}</span>
+        <span key={`${section.id} ${index}`}>{char}</span>
       ))}
     </button>
   );

@@ -29,13 +29,13 @@ export type Section = {
 
 const SECTIONS: Section[] = [
   { title: 'about', id: 'ABOUT', isActive: true },
-  { title: 'interests', id: 'INTERESTS', isActive: true },
-  { title: 'music', id: 'MUSIC', isActive: true },
-  { title: 'art', id: 'ART', isActive: true },
+  { title: 'interests', id: 'INTERESTS', isActive: false },
+  { title: 'music', id: 'MUSIC', isActive: false },
+  { title: 'art', id: 'ART', isActive: false },
   { title: 'updates', id: 'UPDATES', isActive: false },
   { title: 'to-do list', id: 'TODO_LIST', isActive: false },
   { title: 'guestbook', id: 'GUESTBOOK', isActive: false },
-  { title: 'credits', id: 'CREDITS', isActive: false },
+  { title: 'credits', id: 'CREDITS', isActive: true },
 ];
 
 function AboutMe() {
@@ -53,43 +53,43 @@ function AboutMe() {
     >
       {showSparkles ? <CursorTrail /> : null}
       <div className={`${PARENT_CLASS}__container`}>
-        <div className={`${PARENT_CLASS}__header`}></div>
-        <div className={`${PARENT_CLASS}__body`}>
-          <div className={`${PARENT_CLASS}__sidebar`}>
-            <div className={`${PARENT_CLASS}__card`}>
-              <div className={`${PARENT_CLASS}__links`}>
-                <div className={`${PARENT_CLASS}__title`}>menu</div>
-                <div className={`${PARENT_CLASS}__divider`}></div>
-                {SECTIONS.map((section) => (
-                  <GlitchButton section={section} setSectionId={setSectionId} />
-                ))}
-              </div>
-            </div>
-            <div className={`${PARENT_CLASS}__card`}>
-              <div className={`${PARENT_CLASS}__title`}>status</div>
+        <div className={`${PARENT_CLASS}__sidebar`}>
+          <div className={`${PARENT_CLASS}__card`}>
+            <div className={`${PARENT_CLASS}__links`}>
+              <div className={`${PARENT_CLASS}__title`}>menu</div>
               <div className={`${PARENT_CLASS}__divider`}></div>
-              {STATUSES.map((status) => (
-                <div className={`${PARENT_CLASS}__status-text`} key={status.question}>
-                  <span className={`${PARENT_CLASS}__status-text-question`}>{status.question}</span>
-                  <span className={`${PARENT_CLASS}__status-text-answer`}>{status.answer}</span>
-                </div>
+              {SECTIONS.map((section) => (
+                <GlitchButton section={section} setSectionId={setSectionId} />
               ))}
             </div>
-            <div className={`${PARENT_CLASS}__card`}>
-              <div className={`${PARENT_CLASS}__title`}>visitors</div>
-              <div className={`${PARENT_CLASS}__divider`}></div>
-              <div className={`${PARENT_CLASS}__visitor-container`}>
-                <div className={`${PARENT_CLASS}__visitor-counter`}>0001337</div>
-                <div className={`${PARENT_CLASS}__visitor-text`}>
-                  <span className={`${PARENT_CLASS}__visitor-subtext`}>you are visitor</span>
-                  <span>#1,337</span>
-                </div>
-                <div className={`${PARENT_CLASS}__visitor-text`}>
-                  <span className={`${PARENT_CLASS}__visitor-subtext`}>site uptime</span>
-                  <span>870d 13:31:20</span>
-                </div>
+          </div>
+          <div className={`${PARENT_CLASS}__card`}>
+            <div className={`${PARENT_CLASS}__title`}>status</div>
+            <div className={`${PARENT_CLASS}__divider`}></div>
+            {STATUSES.map((status) => (
+              <div className={`${PARENT_CLASS}__status-text`} key={status.question}>
+                <span className={`${PARENT_CLASS}__status-text-question`}>{status.question}</span>
+                <span className={`${PARENT_CLASS}__status-text-answer`}>{status.answer}</span>
+              </div>
+            ))}
+          </div>
+          <div className={`${PARENT_CLASS}__card`}>
+            <div className={`${PARENT_CLASS}__title`}>visitors</div>
+            <div className={`${PARENT_CLASS}__divider`}></div>
+            <div className={`${PARENT_CLASS}__visitor-container`}>
+              <div className={`${PARENT_CLASS}__visitor-counter`}>0001337</div>
+              <div className={`${PARENT_CLASS}__visitor-text`}>
+                <span className={`${PARENT_CLASS}__visitor-subtext`}>you are visitor</span>
+                <span>#1,337</span>
               </div>
             </div>
+          </div>
+        </div>
+        <div className={`${PARENT_CLASS}__body`}>
+          <div className={`${PARENT_CLASS}__card`}>
+            welcome to my site &lt;3 i created this as a means to up my dev skills and to create my own mark on the
+            world wide web. feel free to click the links around in this window as well as the icons on the desktop to
+            learn more about me! thanks for visiting~
           </div>
           <div className={`${PARENT_CLASS}__card`}>
             <div className={`${PARENT_CLASS}__section`}>
@@ -98,12 +98,11 @@ function AboutMe() {
                   <div className={`${PARENT_CLASS}__title`}>about me</div>
                   <div className={`${PARENT_CLASS}__divider`}></div>
                   <div className={`${PARENT_CLASS}__text`}>
-                    hi hi, welcome to my page! my name is dani jaramillo. i am a programmer with a focus in web
-                    development and a passion for frontend. i love the intersection of tech and art! i started drawing
-                    ever since i could pick up a pencil, and my first introduction to computers was when my dad brought
-                    home a compaq desktop machine in the early 2000s. once we got internet access via AOL dail-up, i
-                    fell in love with the internet. i quickly disocvered neopets.com which was my first introduction to
-                    coding, specifically using html + css to personalize my neopets profile :-)
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.
                   </div>
                 </>
               ) : null}
@@ -145,8 +144,7 @@ function AboutMe() {
               ) : null}
               {sectionId === 'CREDITS' ? (
                 <>
-                  <div className={`${PARENT_CLASS}__title`}>credits</div>
-                  <img src="/images/underconstruction.gif" />
+                  <div className={`${PARENT_CLASS}__title`}>credits, inspiration</div>
                 </>
               ) : null}
             </div>
