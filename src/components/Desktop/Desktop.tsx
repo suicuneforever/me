@@ -1,6 +1,6 @@
 import './Desktop.scss';
 import WindowModal from '../WindowModal';
-import { useWindowStore } from '../../store/store';
+import { Position, useWindowStore } from '../../store/store';
 import AboutMe from '../AboutMe';
 import Resume from '../Resume';
 import MySpace from '../MySpace';
@@ -15,16 +15,17 @@ type Icon = {
   title: string;
   id: string;
   path: string;
+  position: Position;
 };
 
 const DESKTOP_ICONS: Icon[] = [
-  { title: 'about me', id: 'ABOUT_ME', path: '/icons/aboutme.png' },
-  { title: 'resume', id: 'RESUME', path: '/icons/resume.png' },
-  { title: 'myspace', id: 'MYSPACE', path: '/icons/myspace.png' },
+  { title: 'about me', id: 'ABOUT_ME', path: '/icons/aboutme.png', position: { top: '5rem', left: '15rem' } },
+  { title: 'resume', id: 'RESUME', path: '/icons/resume.png', position: { top: '4rem', left: '13rem' } },
+  { title: 'myspace', id: 'MYSPACE', path: '/icons/myspace.png', position: { top: '6rem', left: '17rem' } },
   // TODO make icon
-  { title: 'steam', id: 'STEAM', path: '/icons/steam.jpg' },
-  { title: 'contact me', id: 'CONTACT_ME', path: '/icons/contactme.png' },
-  { title: '???', id: 'MYSTERY', path: '/icons/mystery.png' },
+  { title: 'steam', id: 'STEAM', path: '/icons/steam.jpg', position: { top: '7rem', left: '18rem' } },
+  { title: 'contact me', id: 'CONTACT_ME', path: '/icons/contactme.png', position: { top: '5rem', left: '15rem' } },
+  { title: '???', id: 'MYSTERY', path: '/icons/mystery.png', position: { top: '5rem', left: '15rem' } },
 ];
 
 const WINDOW_COMPONENTS: Record<string, React.ReactNode> = {
@@ -59,7 +60,7 @@ function Desktop() {
             <div
               className={`${PARENT_CLASS}__icon`}
               key={desktopIcon.title}
-              onClick={() => openWindow(desktopIcon.id, desktopIcon.title)}
+              onClick={() => openWindow(desktopIcon.id, desktopIcon.title, desktopIcon.position)}
             >
               <img src={desktopIcon.path} />
               <label>{desktopIcon.title}</label>

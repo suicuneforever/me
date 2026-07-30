@@ -93,6 +93,8 @@ function WindowModal({ windowData, children, closeFn }: WindowModalProps) {
           width: WINDOW_SIZE.width,
           height: WINDOW_SIZE.height,
           zIndex: isActive ? 10 : 0,
+          top: windowData.position.top,
+          left: windowData.position.left,
         }}
         onClick={() => setActiveWindow(windowData.id)}
       >

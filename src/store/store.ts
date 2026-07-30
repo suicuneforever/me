@@ -1,25 +1,31 @@
 import { create } from 'zustand';
 
+export interface Position {
+  top: string;
+  left: string;
+}
+
 export interface Window {
   id: string;
   title: string;
+  position: Position;
 }
 
 interface WindowState {
   windows: Window[];
   activeWindowId: string | null;
-  openWindow: (id: string, title: string) => void;
+  openWindow: (id: string, title: string, position: Position) => void;
   setActiveWindow: (id: string) => void;
   closeWindow: (id: string) => void;
   closeAll: () => void;
 }
 
 export const useWindowStore = create<WindowState>()((set, get) => ({
-  windows: [{ id: 'ABOUT_ME', title: 'about me' }],
+  windows: [{ id: 'ABOUT_ME', title: 'about me', position: { top: '5rem', left: '15rem' } }],
   activeWindowId: 'ABOUT_ME',
-  openWindow: (id, title) =>
+  openWindow: (id, title, position) =>
     set((state) => ({
-      windows: state.windows.find((w) => w.id === id) ? state.windows : [...state.windows, { id, title }],
+      windows: state.windows.find((w) => w.id === id) ? state.windows : [...state.windows, { id, title, position }],
       activeWindowId: id,
     })),
   setActiveWindow: (id) => set({ activeWindowId: id }),

@@ -58,6 +58,7 @@ $start: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAC
     display: flex;
     align-items: center;
     gap: 0.625rem;
+    z-index: 15;
   }
 
   &__start-button {
