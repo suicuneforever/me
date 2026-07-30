@@ -3,6 +3,8 @@ import CursorTrail from '../CursorTrail';
 import { useWindowStore } from '../../store/store';
 import './AboutMe.scss';
 import GlitchButton from '../GlitchButton';
+import { Canvas } from '@react-three/fiber';
+import { AsciiRenderer, Image } from '@react-three/drei';
 
 const PARENT_CLASS = 'AboutMe';
 const WINDOW_ID = 'ABOUT_ME';
@@ -97,6 +99,17 @@ function AboutMe() {
                 <>
                   <div className={`${PARENT_CLASS}__title`}>about me</div>
                   <div className={`${PARENT_CLASS}__divider`}></div>
+                  <div className={`${PARENT_CLASS}__canvas`}>
+                    <Canvas
+                      camera={{
+                        fov: 10,
+                        position: [0, 0, 5],
+                      }}
+                    >
+                      <AsciiRenderer invert={true} resolution={0.2} bgColor="#080808" fgColor="#4242ff" />
+                      <Image url="/images/portrait.jpg" />
+                    </Canvas>
+                  </div>
                   <div className={`${PARENT_CLASS}__text`}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
                     et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
