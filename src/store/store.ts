@@ -15,8 +15,8 @@ interface WindowState {
 }
 
 export const useWindowStore = create<WindowState>()((set, get) => ({
-  windows: [],
-  activeWindowId: null,
+  windows: [{ id: 'ABOUT_ME', title: 'about me' }],
+  activeWindowId: 'ABOUT_ME',
   openWindow: (id, title) =>
     set((state) => ({
       windows: state.windows.find((w) => w.id === id) ? state.windows : [...state.windows, { id, title }],

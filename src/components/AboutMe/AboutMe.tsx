@@ -61,7 +61,7 @@ function AboutMe() {
               <div className={`${PARENT_CLASS}__title`}>menu</div>
               <div className={`${PARENT_CLASS}__divider`}></div>
               {SECTIONS.map((section) => (
-                <GlitchButton section={section} setSectionId={setSectionId} />
+                <GlitchButton section={section} setSectionId={setSectionId} key={section.id} />
               ))}
             </div>
           </div>
