@@ -4,7 +4,7 @@ import { useWindowStore, Window } from '../../store/store';
 
 const PARENT_CLASS = 'WindowModal';
 
-const WINDOW_SIZE: { width: number; height: number } = { width: 1000, height: 800 };
+const WINDOW_SIZE: { width: string; height: string } = { width: '65rem', height: '50rem' };
 
 type WindowModalProps = {
   windowData: Window;

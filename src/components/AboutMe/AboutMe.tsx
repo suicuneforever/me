@@ -168,7 +168,6 @@ function AboutMe() {
             </div>
           </div>
         </div>
-
         <div className={`${PARENT_CLASS}__divider`}></div>
       </div>
     </div>

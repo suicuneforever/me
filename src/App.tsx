@@ -1,20 +1,23 @@
-import { Canvas } from '@react-three/fiber';
-import { Computa } from './models/Computa';
-import { Suspense } from 'react';
-import { Link } from '@tanstack/react-router';
+// import { Canvas } from '@react-three/fiber';
+// import { Computa } from './models/Computa';
+// import { Suspense } from 'react';
+// import { Link } from '@tanstack/react-router';
+import Desktop from './components/Desktop';
 
 export default function App() {
   return (
     <>
-      <Link to="/desktop">desktop</Link>
+      <div>NOTE: THIS WEBSITE IS CURRENTLY A WORK IN PROGRESS</div>
+      <Desktop />
+      {/* <Link to="/desktop">desktop</Link>
       <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
         {/* <OrbitControls /> */}
-        <directionalLight position={[10, 10, 5]} intensity={3} />
-        {/* look into */}
-        <Suspense>
+      {/* <directionalLight position={[10, 10, 5]} intensity={3} /> */}
+      {/* look into */}
+      {/* <Suspense>
           <Computa />
         </Suspense>
-      </Canvas>
+      </Canvas> */}
     </>
   );
 }

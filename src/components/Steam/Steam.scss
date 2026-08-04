@@ -1,155 +1,254 @@
+$primary-dark-blue: #14293c;
+$secondary-dark-blue: #0e2230;
+$tertiary-dark-blue: #0c1925;
+$primary-light-blue: #66c0f4;
+$secondary-light-blue: #4d7f9e;
+$tertiary-light-blue: #7f9db5;
+
 .Steam {
-  &__container {
+  background-color: $primary-dark-blue;
+  width: 100%;
+  height: 100%;
+  font-family: 'JetBrainsMono';
+
+  // &:before {
+  //   // /* the CRT scanline overlay */
+  //   content: '';
+  //   position: absolute;
+  //   inset: 0;
+  //   pointer-events: none; /* never blocks clicks */
+  //   opacity: 0.35;
+  //   background-image: repeating-linear-gradient(
+  //     0deg,
+  //     rgba(0, 0, 0, 0.2) 0 2px,
+  //     /* 2px dark band  */ transparent 2px 4px /* 2px clear gap  */
+  //   );
+  // }
+
+  &__navbar {
+    background-color: $tertiary-dark-blue;
+    height: 3rem;
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    background-color: #3a5b87;
-    color: #c5c3c0;
-    font-family: 'PressStart2P';
-    overflow-y: scroll;
+    text-transform: uppercase;
+    gap: 1rem;
+    align-items: center;
   }
 
-  &__header {
+  &__navbar-logo {
+    font-family: 'Silkscreen';
+    font-size: 1.25rem;
+    height: 100%;
+    border-right: 1px solid $secondary-light-blue;
     display: flex;
-    background-color: #171d25;
-    width: 50rem;
-    align-self: center;
     align-items: center;
-    padding: 0.625rem;
+    padding: 0 1rem;
+    color: #fff;
+  }
 
-    .title {
-      font-size: 1.875rem;
-      padding-left: 0.3125rem;
-      margin-bottom: 0.3125rem;
-      letter-spacing: 0.3125rem;
-    }
-
-    img {
-      height: 3.4375rem;
-      image-rendering: pixelated;
-    }
+  &__navbar-links {
+    color: $tertiary-light-blue;
 
     ul {
-      display: flex;
       list-style: none;
-      padding: 0;
       margin: 0;
-      font-size: 0.75rem;
+      padding: 0;
+      display: flex;
+    }
 
-      li {
-        padding: 0 0.625rem;
-        position: relative;
-        cursor: pointer;
+    a {
+      text-decoration: underline;
+      letter-spacing: 0.1rem;
+    }
 
-        &:hover {
-          text-decoration: underline;
-        }
-      }
+    a:hover {
+      cursor: pointer;
+      background-color: $primary-light-blue;
+      color: $tertiary-dark-blue;
+    }
 
-      li:after {
-        content: '';
-        position: absolute;
-        border-left: 1px solid #c5c3c0;
-        right: 0;
-        top: 0.125rem;
-        height: 90%;
-      }
+    li:after {
+      color: #214059;
+      content: '/';
+      padding: 0 1rem;
+    }
 
-      li:last-child:after {
-        border: none;
-      }
+    li:last-child:after {
+      content: '';
     }
   }
 
-  &__body {
+  &__url {
+    background-color: $secondary-dark-blue;
+    height: 2rem;
+    border-top: 1px solid $secondary-light-blue;
+    border-bottom: 1px solid $secondary-light-blue;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+  }
+
+  &__url-title {
+    color: $secondary-light-blue;
+    padding: 0 0.5rem;
+    border-right: 1px solid $secondary-light-blue;
+  }
+
+  &__url-link {
+    color: $tertiary-light-blue;
+    padding: 0 0.5rem;
+  }
+
+  &__content {
     display: flex;
     flex-direction: column;
-    align-self: center;
-    width: 50rem;
-    height: 100%;
-    background-color: #243a57;
-    padding: 0.625rem;
-    gap: 0.625rem;
-    font-size: 0.625rem;
+    font-size: 0.75rem;
+    padding: 1rem 2rem;
+    gap: 1rem;
+  }
 
-    .heading {
-      font-size: 0.75rem;
-      padding: 0.3125rem;
-      background-color: #171d25;
-      margin-bottom: 0.3125rem;
+  &__user-info {
+    border-bottom: 1px solid $secondary-light-blue;
+  }
+
+  &__user-info-heading {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: $secondary-light-blue;
+    width: 100%;
+    border-bottom: 1px solid $secondary-light-blue;
+    padding: 0.5rem 0;
+  }
+
+  &__user-info-content {
+    display: flex;
+    padding: 1rem 0;
+  }
+
+  &__user-info-pic {
+    padding: 6px;
+    background:
+      linear-gradient($primary-light-blue, $primary-light-blue) top left / 9px 1px no-repeat,
+      linear-gradient($primary-light-blue, $primary-light-blue) top left / 1px 9px no-repeat,
+      linear-gradient($primary-light-blue, $primary-light-blue) top right / 9px 1px no-repeat,
+      linear-gradient($primary-light-blue, $primary-light-blue) top right / 1px 9px no-repeat,
+      linear-gradient($primary-light-blue, $primary-light-blue) bottom left / 9px 1px no-repeat,
+      linear-gradient($primary-light-blue, $primary-light-blue) bottom left / 1px 9px no-repeat,
+      linear-gradient($primary-light-blue, $primary-light-blue) bottom right/ 9px 1px no-repeat,
+      linear-gradient($primary-light-blue, $primary-light-blue) bottom right/ 1px 9px no-repeat;
+  }
+
+  &__user-info-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.5rem 0 0 1rem;
+  }
+
+  &__user-info-name {
+    font-family: 'SilkScreen';
+    font-size: 2.5rem;
+    background-color: #66c0f4;
+    color: $primary-dark-blue;
+    align-self: start;
+  }
+
+  &__user-info-text {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+  }
+
+  &__user-info-label {
+    color: $secondary-light-blue;
+    padding: 0.25rem 0;
+    letter-spacing: 0.2rem;
+
+    &:nth-child(1) {
+      padding-top: 0;
+    }
+  }
+
+  &__user-info-input {
+    color: #c9e3f5;
+    padding: 0.25rem 0;
+
+    &:nth-child(1) {
+      padding-top: 0;
     }
 
-    .about {
-      border: 1px solid #171d25;
-      width: 100%;
+    &:nth-child(2) {
+      color: #a4d007;
+    }
+  }
 
-      &__content {
-        padding: 0.625rem;
-        display: flex;
+  &__dashed-border {
+    width: 20rem;
+    border-bottom: 1px dashed $secondary-light-blue;
+  }
 
-        .profile-pic {
-          width: 9.375rem;
-        }
+  &__content-heading {
+    font-family: 'Silkscreen';
+    color: #fff;
+    border-bottom: 1px solid $primary-light-blue;
+    padding-bottom: 0.25rem;
+    margin-bottom: 1rem;
+  }
 
-        ul {
-          list-style: none;
-          padding: 0;
-          margin: 0.625rem 0 0 0.625rem;
+  &__favorites {
+  }
 
-          li:first-child {
-            font-size: 1.25rem;
-            padding-bottom: 0.3125rem;
-          }
-        }
-      }
+  &__favorites-games {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__favorites-games-card {
+    width: 168px;
+
+    img {
+      border: 1px solid $tertiary-light-blue;
+      display: block;
+      max-width: 300px;
+      max-height: 250px;
+      width: auto;
+      height: auto;
     }
 
-    .content {
-      display: flex;
-      gap: 0.625rem;
-
-      .card {
-        .header {
-          font-size: 0.75rem;
-          padding: 0.3125rem;
-          background-color: #171d25;
-          margin-bottom: 0.3125rem;
-        }
-      }
-
-      .left {
-        width: 60%;
-      }
-
-      .right {
-        width: 40%;
-        border: 1px solid #171d25;
-      }
-
-      .game {
-        display: flex;
-        padding: 0.625rem 0.3125rem;
-        align-items: center;
-        gap: 0.625rem;
-        border: 1px solid #171d25;
-        margin: 0 0.3125rem 0.625rem 0;
-        box-shadow: 0.3125rem 0.3125rem #171d25;
-
-        &__text {
-          display: flex;
-          flex-direction: column;
-          width: 1000%;
-          color: #fff;
-
-          span:last-child {
-            display: flex;
-            justify-content: flex-end;
-            color: #c5c3c0;
-            font-size: 0.5625rem;
-          }
-        }
-      }
+    span {
+      text-transform: uppercase;
+      color: #c9e3f5;
+      margin-top: 0.55rem;
+      overflow-wrap: break-word;
     }
   }
 }
+
+/* the page fill */
+// body {
+//   margin: 0;
+//   background: #0b1a26;        /* outer / chrome-dark */
+// }
+
+// .app {
+//   min-height: 100vh;
+//   min-width: 1180px;
+//   background: $primary-dark-blue;        /* main navy field */
+//   position: relative;         /* anchors the overlay */
+// }
+
+// /* the CRT scanline overlay */
+// .app::before {
+//   content: "";
+//   position: absolute;
+//   inset: 0;
+//   pointer-events: none;       /* never blocks clicks */
+//   opacity: 0.35;
+//   background-image: repeating-linear-gradient(
+//     0deg,
+//     rgba(0, 0, 0, 0.2) 0 2px,   /* 2px dark band  */
+//     transparent       2px 4px   /* 2px clear gap  */
+//   );
+// }
+
+// <div style="position:absolute;inset:0;pointer-events:none;opacity:.35;
+//             background-image:repeating-linear-gradient(0deg,rgba(0,0,0,.2) 0 2px,transparent 2px 4px)"></div>

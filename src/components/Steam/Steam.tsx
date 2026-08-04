@@ -3,7 +3,21 @@ import './Steam.scss';
 import { getRecentlyPlayedGames } from '../../api/api';
 import { GameData } from '../../types/types';
 
+type FavoriteGame = {
+  title: string;
+  imagePath: string;
+};
+
+const FAVORITE_GAMES: FavoriteGame[] = [
+  { title: 'Nier Automata', imagePath: 'images/games/na.jpg' },
+  { title: 'Fire Emblem Awakening', imagePath: 'images/games/fea.jpg' },
+  { title: 'Sonic Adventure 2: Battle', imagePath: 'images/games/sa2b.jpg' },
+  { title: 'Sonic Adventure 2: Battle', imagePath: 'images/games/sa2b.jpg' },
+];
+
 const PARENT_CLASS = 'Steam';
+
+const STEAM_URL = 'steamcommunity.com/profiles/76561198341352380/';
 
 function Steam() {
   const { data } = useQuery({
@@ -12,62 +26,61 @@ function Steam() {
   });
 
   return (
-    <div className={`${PARENT_CLASS}__container`}>
-      <div className={`${PARENT_CLASS}__header`}>
-        <img src="/icons/steamgray.png"></img>
-        <div>
-          <div className="title">STEAM</div>
+    <div className={`${PARENT_CLASS}`}>
+      <div className={`${PARENT_CLASS}__navbar`}>
+        <div className={`${PARENT_CLASS}__navbar-logo`}>Steam</div>
+        <div className={`${PARENT_CLASS}__navbar-links`}>
           <ul>
-            <li>Store</li>
-            <li>Community</li>
-            <li>About</li>
-            <li>Support</li>
+            <li>
+              <a>Store</a>
+            </li>
+            <li>
+              <a>Library</a>
+            </li>
+            <li>
+              <a>Community</a>
+            </li>
           </ul>
         </div>
       </div>
-      <div className={`${PARENT_CLASS}__body`}>
-        <div className="about">
-          <div className="heading">About</div>
-          <div className="about__content">
-            <img className="profile-pic" src="/images/steamprofilepic.jpg" />
-            <ul>
-              <li>dani</li>
-              <li>
-                <img src="/images/usflag.gif" /> United States
-              </li>
-              <li>
-                i love video games!!! <img src="/images/steamhappy.png" />
-              </li>
-            </ul>
+      <div className={`${PARENT_CLASS}__url`}>
+        <div className={`${PARENT_CLASS}__url-title`}>URL</div>
+        <div className={`${PARENT_CLASS}__url-link`}>{STEAM_URL}</div>
+      </div>
+      <div className={`${PARENT_CLASS}__content`}>
+        <div className={`${PARENT_CLASS}__user-info`}>
+          <div className={`${PARENT_CLASS}__user-info-heading`}>Profile — Public View </div>
+          <div className={`${PARENT_CLASS}__user-info-content`}>
+            <div className={`${PARENT_CLASS}__user-info-pic`}>
+              <img src="/images/steamprofilepic.jpg" />
+            </div>
+            <div className={`${PARENT_CLASS}__user-info-stats`}>
+              <div className={`${PARENT_CLASS}__user-info-name`}>Dani</div>
+              <div className={`${PARENT_CLASS}__dashed-border`}></div>
+              <div className={`${PARENT_CLASS}__user-info-text`}>
+                <div>
+                  <div className={`${PARENT_CLASS}__user-info-label`}>COUNTRY</div>
+                  <div className={`${PARENT_CLASS}__user-info-label`}>STATUS</div>
+                  <div className={`${PARENT_CLASS}__user-info-label`}>SUMMARY</div>
+                </div>
+                <div>
+                  <div className={`${PARENT_CLASS}__user-info-input`}>UNITED STATES</div>
+                  <div className={`${PARENT_CLASS}__user-info-input`}>ONLINE</div>
+                  <div className={`${PARENT_CLASS}__user-info-input`}>i love video games!!!</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="content">
-          <div className="left">
-            <div className="card">
-              <div className="header">recent activity</div>
-
-              {data
-                ? data.map((game: GameData) => (
-                    <div className="game" key={game.name}>
-                      <img src={game.imgUrl} />
-                      <div className="game__text">
-                        <span>{game.name}</span>
-                        <span>{(game.playtimeForever / 60).toFixed(1)} hrs played</span>
-                      </div>
-                    </div>
-                  ))
-                : null}
-            </div>
-            <div className="card">
-              <div className="header">comments</div>
-              content
-            </div>
-          </div>
-          <div className="right">
-            <div className="card">
-              <div className="header">favorites</div>
-              content
-            </div>
+        <div className={`${PARENT_CLASS}__favorites`}>
+          <div className={`${PARENT_CLASS}__content-heading`}>Favorite Games</div>
+          <div className={`${PARENT_CLASS}__favorites-games`}>
+            {FAVORITE_GAMES.map((game) => (
+              <div className={`${PARENT_CLASS}__favorites-games-card`} key={game.title}>
+                <img src={game.imagePath} />
+                <span>{game.title}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
