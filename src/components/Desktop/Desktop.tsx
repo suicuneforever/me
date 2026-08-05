@@ -21,9 +21,9 @@ type Icon = {
 const DESKTOP_ICONS: Icon[] = [
   { title: 'about me', id: 'ABOUT_ME', path: '/icons/aboutme.png', position: { top: '5rem', left: '15rem' } },
   { title: 'resume', id: 'RESUME', path: '/icons/resume.png', position: { top: '4rem', left: '13rem' } },
-  { title: 'myspace', id: 'MYSPACE', path: '/icons/myspace.png', position: { top: '6rem', left: '17rem' } },
   // TODO make icon
   { title: 'steam', id: 'STEAM', path: '/icons/steam.jpg', position: { top: '7rem', left: '18rem' } },
+  { title: 'myspace', id: 'MYSPACE', path: '/icons/myspace.png', position: { top: '6rem', left: '17rem' } },
   { title: 'contact me', id: 'CONTACT_ME', path: '/icons/contactme.png', position: { top: '5rem', left: '15rem' } },
   { title: '???', id: 'MYSTERY', path: '/icons/mystery.png', position: { top: '5rem', left: '15rem' } },
 ];
@@ -31,8 +31,8 @@ const DESKTOP_ICONS: Icon[] = [
 const WINDOW_COMPONENTS: Record<string, React.ReactNode> = {
   ABOUT_ME: <AboutMe />,
   RESUME: <Resume />,
-  MYSPACE: <MySpace />,
   STEAM: <Steam />,
+  MYSPACE: <MySpace />,
   CONTACT_ME: <ContactMe />,
   MYSTERY: <Mystery />,
 };

@@ -1,0 +1,7 @@
+@use '../../constants/colors' as *;
+@use '../../constants/borders' as *;
+
+.ContactMe {
+  background-color: $gray;
+  width: 100%;
+}

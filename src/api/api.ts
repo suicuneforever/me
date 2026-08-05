@@ -13,3 +13,18 @@ export const getRecentlyPlayedGames = async (): Promise<GameData[]> => {
     } as GameData;
   });
 };
+
+export const sendEmail = async (name: string, email: string, message: string, company?: string) => {
+  const res = await fetch('https://portfolio-server-seven-lemon.vercel.app/api/contact', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      recipient: email,
+      text: `Name: ${name}\nCompany: ${company ?? 'n/a'}\n\n${message}`,
+    }),
+  });
+
+  return await res.json();
+};
