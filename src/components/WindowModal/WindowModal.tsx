@@ -76,6 +76,8 @@ function WindowModal({ windowData, children, closeFn }: WindowModalProps) {
             transform: `translate(${position.x}px, ${position.y}px)`,
             width: WINDOW_SIZE.width,
             height: WINDOW_SIZE.height,
+            top: windowData.position.top,
+            left: windowData.position.left,
           }}
         >
           <div className={`${PARENT_CLASS}__drag-box-horizontal ${PARENT_CLASS}__checkerboard`}></div>

@@ -7,7 +7,6 @@ import Desktop from './components/Desktop';
 export default function App() {
   return (
     <>
-      <div>NOTE: THIS WEBSITE IS CURRENTLY A WORK IN PROGRESS</div>
       <Desktop />
       {/* <Link to="/desktop">desktop</Link>
       <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>

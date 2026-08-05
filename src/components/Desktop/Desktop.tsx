@@ -53,56 +53,59 @@ function Desktop() {
   const formattedTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
   return (
-    <div className={`${PARENT_CLASS}__container`}>
-      <div className={`${PARENT_CLASS}__icons`}>
-        {DESKTOP_ICONS.map((desktopIcon) => {
-          return (
-            <div
-              className={`${PARENT_CLASS}__icon`}
-              key={desktopIcon.title}
-              onClick={() => openWindow(desktopIcon.id, desktopIcon.title, desktopIcon.position)}
-            >
-              <img src={desktopIcon.path} />
-              <label>{desktopIcon.title}</label>
-            </div>
-          );
-        })}
-      </div>
+    <>
+      <div>NOTE: THIS WEBSITE IS CURRENTLY A WORK IN PROGRESS</div>
+      <div className={`${PARENT_CLASS}__container`}>
+        <div className={`${PARENT_CLASS}__icons`}>
+          {DESKTOP_ICONS.map((desktopIcon) => {
+            return (
+              <div
+                className={`${PARENT_CLASS}__icon`}
+                key={desktopIcon.title}
+                onClick={() => openWindow(desktopIcon.id, desktopIcon.title, desktopIcon.position)}
+              >
+                <img src={desktopIcon.path} />
+                <label>{desktopIcon.title}</label>
+              </div>
+            );
+          })}
+        </div>
 
-      {windows.map((window) => (
-        <WindowModal key={window.id} windowData={window} closeFn={() => closeWindow(window.id)}>
-          {WINDOW_COMPONENTS[window.id]}
-        </WindowModal>
-      ))}
+        {windows.map((window) => (
+          <WindowModal key={window.id} windowData={window} closeFn={() => closeWindow(window.id)}>
+            {WINDOW_COMPONENTS[window.id]}
+          </WindowModal>
+        ))}
 
-      <div className={`${PARENT_CLASS}__start-bar`}>
-        <div className={`${PARENT_CLASS}__start-button`}>Start</div>
-        {windows.map((window) =>
-          window.id === activeWindowId ? (
-            <div
-              className={`${PARENT_CLASS}__window-button ${PARENT_CLASS}__window-button--active`}
-              key={window.id}
-              onClick={() => setActiveWindow(window.id)}
-            >
-              <div className={`${PARENT_CLASS}__checkerboard`}>
+        <div className={`${PARENT_CLASS}__start-bar`}>
+          <div className={`${PARENT_CLASS}__start-button`}>Start</div>
+          {windows.map((window) =>
+            window.id === activeWindowId ? (
+              <div
+                className={`${PARENT_CLASS}__window-button ${PARENT_CLASS}__window-button--active`}
+                key={window.id}
+                onClick={() => setActiveWindow(window.id)}
+              >
+                <div className={`${PARENT_CLASS}__checkerboard`}>
+                  <img src={DESKTOP_ICONS.find((w) => w.id === window.id)?.path} />
+                  {window.title}
+                </div>
+              </div>
+            ) : (
+              <div
+                className={`${PARENT_CLASS}__window-button`}
+                key={window.id}
+                onClick={() => setActiveWindow(window.id)}
+              >
                 <img src={DESKTOP_ICONS.find((w) => w.id === window.id)?.path} />
                 {window.title}
               </div>
-            </div>
-          ) : (
-            <div
-              className={`${PARENT_CLASS}__window-button`}
-              key={window.id}
-              onClick={() => setActiveWindow(window.id)}
-            >
-              <img src={DESKTOP_ICONS.find((w) => w.id === window.id)?.path} />
-              {window.title}
-            </div>
-          ),
-        )}
-        <div className={`${PARENT_CLASS}__time`}>{formattedTime}</div>
+            ),
+          )}
+          <div className={`${PARENT_CLASS}__time`}>{formattedTime}</div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
