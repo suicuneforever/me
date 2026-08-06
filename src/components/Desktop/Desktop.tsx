@@ -23,9 +23,9 @@ const DESKTOP_ICONS: Icon[] = [
   { title: 'resume', id: 'RESUME', path: '/icons/resume.png', position: { top: '4rem', left: '13rem' } },
   // TODO make icon
   { title: 'steam', id: 'STEAM', path: '/icons/steam.jpg', position: { top: '7rem', left: '18rem' } },
-  { title: 'myspace', id: 'MYSPACE', path: '/icons/myspace.png', position: { top: '6rem', left: '17rem' } },
+  // { title: 'myspace', id: 'MYSPACE', path: '/icons/myspace.png', position: { top: '6rem', left: '17rem' } },
   { title: 'contact me', id: 'CONTACT_ME', path: '/icons/contactme.png', position: { top: '10rem', left: '12rem' } },
-  { title: '???', id: 'MYSTERY', path: '/icons/mystery.png', position: { top: '5rem', left: '15rem' } },
+  // { title: '???', id: 'MYSTERY', path: '/icons/mystery.png', position: { top: '5rem', left: '15rem' } },
 ];
 
 const WINDOW_COMPONENTS: Record<string, React.ReactNode> = {
