@@ -3,8 +3,10 @@ import { z } from 'zod';
 import './ContactMe.scss';
 import { useMutation } from '@tanstack/react-query';
 import { sendEmail } from '../../api/api';
+import { useState } from 'react';
 
-interface Email {
+// TODO extract type
+export interface Email {
   name: string;
   email: string;
   company?: string;
@@ -21,12 +23,8 @@ const schema = z.object({
 });
 
 function ContactMe() {
-  const mutation = useMutation({
-    mutationFn: async (email: Email) => sendEmail(email.name, email.email, email.message, email.company),
-    onSuccess: (data) => {
-      console.log('data:', data);
-    },
-  });
+  const [currentTab, setCurrentTab] = useState<string>('EMAIL');
+  const [sucessMessage, setSuccessMessage] = useState<string>('');
 
   const form = useForm({
     defaultValues: {
@@ -40,129 +38,196 @@ function ContactMe() {
     },
     onSubmit: async ({ value }) => {
       mutation.mutateAsync({ name: value.name, email: value.email, company: value.company, message: value.message });
-      console.log(value);
+    },
+  });
+
+  const mutation = useMutation({
+    mutationFn: async (email: Email) => sendEmail(email),
+    onSuccess: () => {
+      form.reset();
+      setSuccessMessage('Email sent successfully!');
     },
   });
 
   return (
     <div className={`${PARENT_CLASS}`}>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          form.handleSubmit();
-        }}
-      >
-        <div>
-          <form.Field
-            name="name"
-            children={(field) => {
-              // Avoid hasty abstractions. Render props are great!
-              return (
-                <>
-                  <label htmlFor={field.name}>Name:</label>
-                  <input
-                    id={field.name}
-                    name={field.name}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                  />
-                  {!field.state.meta.isValid && (
-                    <em role="alert">{field.state.meta.errors.map((error: any) => error?.message)}</em>
-                  )}
-                </>
-              );
-            }}
-          />
+      <div className={`${PARENT_CLASS}__tab-list`}>
+        <div
+          className={
+            currentTab === 'EMAIL' ? `${PARENT_CLASS}__tab ${PARENT_CLASS}__tab--active` : `${PARENT_CLASS}__tab`
+          }
+          onClick={() => setCurrentTab('EMAIL')}
+        >
+          Email
         </div>
-        <div>
-          <form.Field
-            name="email"
-            children={(field) => {
-              // Avoid hasty abstractions. Render props are great!
-              return (
-                <>
-                  <label htmlFor={field.name}>Email:</label>
-                  <input
-                    id={field.name}
-                    name={field.name}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                  />
-                  {!field.state.meta.isValid && (
-                    <em role="alert">{field.state.meta.errors.map((error: any) => error?.message)}</em>
-                  )}
-                </>
-              );
-            }}
-          />
+        <div
+          className={
+            currentTab === 'LINKS' ? `${PARENT_CLASS}__tab ${PARENT_CLASS}__tab--active` : `${PARENT_CLASS}__tab`
+          }
+          onClick={() => setCurrentTab('LINKS')}
+        >
+          Links
         </div>
-        <div>
-          <form.Field
-            name="company"
-            children={(field) => {
-              // Avoid hasty abstractions. Render props are great!
-              return (
-                <>
-                  <label htmlFor={field.name}>Company (optional):</label>
-                  <input
-                    id={field.name}
-                    name={field.name}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                  />
-                </>
-              );
-            }}
-          />
-        </div>
-        <div>
-          <form.Field
-            name="message"
-            children={(field) => {
-              // Avoid hasty abstractions. Render props are great!
-              return (
-                <>
-                  <label htmlFor={field.name}>Message:</label>
-                  <textarea
-                    id={field.name}
-                    name={field.name}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                  />
-                  {!field.state.meta.isValid && (
-                    <em role="alert">{field.state.meta.errors.map((error: any) => error?.message)}</em>
-                  )}
-                </>
-              );
-            }}
-          />
-        </div>
-        <form.Subscribe
-          selector={(state) => [state.canSubmit, state.isSubmitting, state.isPristine]}
-          children={([canSubmit, isSubmitting, isPristine]) => (
-            <>
-              <button type="submit" disabled={!canSubmit || isPristine}>
-                {isSubmitting ? '...' : 'Submit'}
-              </button>
-              <button
-                type="reset"
-                onClick={(e) => {
-                  // Avoid unexpected resets of form elements (especially <select> elements)
-                  e.preventDefault();
-                  form.reset();
-                }}
-              >
-                Reset
-              </button>
-            </>
-          )}
-        />
-      </form>
+      </div>
+      <div className={`${PARENT_CLASS}__container`}>
+        {currentTab === 'EMAIL' ? (
+          <>
+            <div className={`${PARENT_CLASS}__heading`}>
+              <img src="icons/email.png" />
+              <div>
+                Contact me here! Reach out for anything, it could be work related, art related, or even just to say hi!
+                I would love to hear from you :-) All emails will be sent to my personal email, danijrmllo@gmail.com.
+              </div>
+            </div>
+            <div className={`${PARENT_CLASS}__divider`}></div>
+            <form
+              className={`${PARENT_CLASS}__form`}
+              onSubmit={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                form.handleSubmit();
+              }}
+            >
+              <div className={`${PARENT_CLASS}__field`}>
+                <form.Field
+                  name="name"
+                  children={(field) => {
+                    // Avoid hasty abstractions. Render props are great!
+                    return (
+                      <>
+                        <label htmlFor={field.name}>
+                          <span className={`${PARENT_CLASS}__underline`}>N</span>ame:
+                          <span className={`${PARENT_CLASS}__required`}>*</span>
+                        </label>
+                        <div className={`${PARENT_CLASS}__input`}>
+                          <input
+                            id={field.name}
+                            name={field.name}
+                            value={field.state.value}
+                            onBlur={field.handleBlur}
+                            onChange={(e) => field.handleChange(e.target.value)}
+                          />
+                          <div className={`${PARENT_CLASS}__error-message`}>
+                            {!field.state.meta.isValid && (
+                              <em role="alert">{field.state.meta.errors.map((error: any) => error?.message)}</em>
+                            )}
+                          </div>
+                        </div>
+                      </>
+                    );
+                  }}
+                />
+              </div>
+              <div className={`${PARENT_CLASS}__field`}>
+                <form.Field
+                  name="email"
+                  children={(field) => {
+                    // Avoid hasty abstractions. Render props are great!
+                    return (
+                      <>
+                        <label htmlFor={field.name}>
+                          <span className={`${PARENT_CLASS}__underline`}>E</span>mail:
+                          <span className={`${PARENT_CLASS}__required`}>*</span>
+                        </label>
+                        <div className={`${PARENT_CLASS}__input`}>
+                          <input
+                            id={field.name}
+                            name={field.name}
+                            value={field.state.value}
+                            onBlur={field.handleBlur}
+                            onChange={(e) => field.handleChange(e.target.value)}
+                          />
+                          <div className={`${PARENT_CLASS}__error-message`}>
+                            {!field.state.meta.isValid && (
+                              <em role="alert">{field.state.meta.errors.map((error: any) => error?.message)}</em>
+                            )}
+                          </div>
+                        </div>
+                      </>
+                    );
+                  }}
+                />
+              </div>
+              <div className={`${PARENT_CLASS}__field`}>
+                <form.Field
+                  name="company"
+                  children={(field) => {
+                    // Avoid hasty abstractions. Render props are great!
+                    return (
+                      <>
+                        <label htmlFor={field.name}>
+                          <span className={`${PARENT_CLASS}__underline`}>C</span>ompany (optional):
+                        </label>
+                        <div className={`${PARENT_CLASS}__input`}>
+                          <input
+                            id={field.name}
+                            name={field.name}
+                            value={field.state.value}
+                            onBlur={field.handleBlur}
+                            onChange={(e) => field.handleChange(e.target.value)}
+                          />
+                        </div>
+                      </>
+                    );
+                  }}
+                />
+              </div>
+              <div className={`${PARENT_CLASS}__divider`}></div>
+              <div className={`${PARENT_CLASS}__field`}>
+                <form.Field
+                  name="message"
+                  children={(field) => {
+                    // Avoid hasty abstractions. Render props are great!
+                    return (
+                      <>
+                        <label htmlFor={field.name}>
+                          <span className={`${PARENT_CLASS}__underline`}>M</span>essage:
+                          <span className={`${PARENT_CLASS}__required`}>*</span>
+                        </label>
+                        <div className={`${PARENT_CLASS}__input`}>
+                          <textarea
+                            id={field.name}
+                            name={field.name}
+                            value={field.state.value}
+                            onBlur={field.handleBlur}
+                            onChange={(e) => field.handleChange(e.target.value)}
+                          />
+                          <div className={`${PARENT_CLASS}__error-message`}>
+                            {!field.state.meta.isValid && (
+                              <em role="alert">{field.state.meta.errors.map((error: any) => error?.message)}</em>
+                            )}
+                          </div>
+                        </div>
+                      </>
+                    );
+                  }}
+                />
+              </div>
+              <form.Subscribe
+                selector={(state) => [state.canSubmit, state.isPristine]}
+                children={([canSubmit, isPristine]) => (
+                  <div className={`${PARENT_CLASS}__footer`}>
+                    <span>{sucessMessage}</span>
+                    <button
+                      className={`${PARENT_CLASS}__button`}
+                      type="submit"
+                      disabled={!canSubmit || isPristine || mutation.isPending}
+                    >
+                      <span className={`${PARENT_CLASS}__underline`}>S</span>ubmit
+                    </button>
+                  </div>
+                )}
+              />
+            </form>
+          </>
+        ) : (
+          <div>
+            <span>WORK IN PROGRESS</span>
+            <a href="https://github.com/suicuneforever">Github</a>
+            <a href="https://www.linkedin.com/in/danijaramillo/">LinkedIn</a>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

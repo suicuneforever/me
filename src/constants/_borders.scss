@@ -50,3 +50,28 @@ $pressedButton:
   // outer corners
   1px -2px $black,
   2px -2px $white;
+$input: 
+  // inner top left
+  -1px -1px $black,
+  -1px 0 $black,
+  0 -1px $black,
+  // outer top left
+  -2px -2px $darkGray,
+  -2px 0 $darkGray,
+  0 -2px $darkGray,
+  // inner bottom right
+  1px 1px $lightGray,
+  0 1px $lightGray,
+  1px 0 $lightGray,
+  // inner corners
+  1px -1px $black,
+  -1px 1px $lightGray,
+  -2px 1px $darkGray,
+  // outer bottom right
+  -2px 2px $white,
+  2px 2px $white,
+  2px 0 $white,
+  0 2px $white,
+  // outer corners
+  1px -2px $darkGray,
+  2px -2px $white;

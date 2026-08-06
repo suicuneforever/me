@@ -1,3 +1,4 @@
+import { Email } from '../components/ContactMe/ContactMe';
 import { GameData } from '../types/types';
 
 export const getRecentlyPlayedGames = async (): Promise<GameData[]> => {
@@ -14,7 +15,7 @@ export const getRecentlyPlayedGames = async (): Promise<GameData[]> => {
   });
 };
 
-export const sendEmail = async (name: string, email: string, message: string, company?: string) => {
+export const sendEmail = async (email: Email) => {
   const res = await fetch('https://portfolio-server-seven-lemon.vercel.app/api/contact', {
     method: 'POST',
     headers: {
@@ -22,7 +23,7 @@ export const sendEmail = async (name: string, email: string, message: string, co
     },
     body: JSON.stringify({
       recipient: email,
-      text: `Name: ${name}\nCompany: ${company ?? 'n/a'}\n\n${message}`,
+      text: `Name: ${email.name}\nEmail: ${email.email}\nCompany: ${email.company ?? 'n/a'}\n\n${email.message}`,
     }),
   });
 

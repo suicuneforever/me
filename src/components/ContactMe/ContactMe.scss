@@ -4,4 +4,143 @@
 .ContactMe {
   background-color: $gray;
   width: 100%;
+  box-sizing: border-box;
+  padding: 1rem;
+  font-size: 0.9rem;
+
+  &__container {
+    box-shadow: $defaultButton;
+    padding: 1rem;
+    min-height: 25rem;
+  }
+
+  &__tab-list {
+    display: flex;
+    gap: 4px;
+    padding-left: 3px;
+    position: relative;
+  }
+
+  &__tab {
+    box-shadow: // inner top left
+      -1px -1px $lightGray,
+      -1px 0 $lightGray,
+      0 -1px $lightGray,
+      // outer top left
+      -2px -2px $white,
+      //   -2px 0 $white,
+      0 -2px $white,
+      // corners
+      1px -2px $darkGray,
+      2px -2px $black;
+    padding: 0.3rem;
+    border-radius: 4px 4px 0 0;
+    background-color: $gray;
+    margin-bottom: 2px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__tab--active {
+    position: relative;
+    margin-bottom: -2px;
+    z-index: 1;
+  }
+
+  &__divider {
+    border-top: 1px solid $darkGray;
+    border-bottom: 1px solid $white;
+    margin: 1rem 0;
+  }
+
+  &__heading {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__underline {
+    text-decoration: underline;
+  }
+
+  &__required {
+    color: #ff0000;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: row;
+    gap: 0.25rem;
+    justify-content: space-between;
+
+    input {
+      font-family: 'MS Sans Serif';
+      box-shadow: $input;
+      border: none;
+      width: 22rem;
+    }
+
+    textarea {
+      font-family: 'MS Sans Serif';
+      font-size: 0.9rem;
+      box-shadow: $input;
+      border: none;
+      width: 22rem;
+      height: 5rem;
+    }
+  }
+
+  &__input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__error-message {
+    height: 17px;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  &__button {
+    box-shadow: $defaultButton;
+    border: none;
+    background-color: $gray;
+    font-family: 'MS Sans Serif';
+    color: $black;
+    font-size: 1rem;
+    padding: 0.25rem 1rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:active {
+      box-shadow: $pressedButton;
+    }
+
+    &:disabled {
+      color: $darkGray;
+
+      &:hover {
+        cursor: default;
+      }
+
+      &:active {
+        box-shadow: $defaultButton;
+      }
+    }
+  }
 }

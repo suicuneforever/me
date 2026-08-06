@@ -28,6 +28,7 @@ function WindowModal({ windowData, children, closeFn }: WindowModalProps) {
   const dragRef = useRef<HTMLDivElement | null>(null);
 
   const isActive = activeWindowId === windowData.id;
+  const isContactMe = windowData.id === 'CONTACT_ME';
 
   const onMouseMove = useCallback(
     (e: MouseEvent) => {
@@ -74,8 +75,8 @@ function WindowModal({ windowData, children, closeFn }: WindowModalProps) {
           onClick={(e) => e.stopPropagation()} // to prevent event delegation to the overlay
           style={{
             transform: `translate(${position.x}px, ${position.y}px)`,
-            width: WINDOW_SIZE.width,
-            height: WINDOW_SIZE.height,
+            width: isContactMe ? '35rem' : WINDOW_SIZE.width,
+            height: isContactMe ? '33rem' : WINDOW_SIZE.height,
             top: windowData.position.top,
             left: windowData.position.left,
           }}
@@ -92,8 +93,8 @@ function WindowModal({ windowData, children, closeFn }: WindowModalProps) {
         className={`${PARENT_CLASS}__wrapper`}
         style={{
           transform: `translate(${windowPosition.x}px, ${windowPosition.y}px)`,
-          width: WINDOW_SIZE.width,
-          height: WINDOW_SIZE.height,
+          width: isContactMe ? '35rem' : WINDOW_SIZE.width,
+          height: isContactMe ? '33rem' : WINDOW_SIZE.height,
           zIndex: isActive ? 10 : 0,
           top: windowData.position.top,
           left: windowData.position.left,
@@ -115,10 +116,16 @@ function WindowModal({ windowData, children, closeFn }: WindowModalProps) {
                 />
               </div>
             </div>
-            <div className={`${PARENT_CLASS}__outer-content`}>
-              <div className={`${PARENT_CLASS}__inner-content`}>{children}</div>
-            </div>
-            <div className={`${PARENT_CLASS}__footer`}>(c) dani jaramillo*~*~</div>
+            {isContactMe ? (
+              <div>{children}</div>
+            ) : (
+              <>
+                <div className={`${PARENT_CLASS}__outer-content`}>
+                  <div className={`${PARENT_CLASS}__inner-content`}>{children}</div>
+                </div>
+                <div className={`${PARENT_CLASS}__footer`}>(c) dani jaramillo*~*~</div>
+              </>
+            )}
           </div>
         </div>
       </div>
