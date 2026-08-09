@@ -12,7 +12,7 @@ const FAVORITE_GAMES: FavoriteGame[] = [
   { title: 'Nier Automata', imagePath: 'images/games/na.jpg' },
   { title: 'Fire Emblem Awakening', imagePath: 'images/games/fea.jpg' },
   { title: 'Sonic Adventure 2: Battle', imagePath: 'images/games/sa2b.jpg' },
-  { title: 'Sonic Adventure 2: Battle', imagePath: 'images/games/sa2b.jpg' },
+  { title: 'Final Fantasy XIII', imagePath: 'images/games/ff13.jpg' },
 ];
 
 const PARENT_CLASS = 'Steam';

@@ -18,6 +18,7 @@ type Icon = {
   position: Position;
 };
 
+// TODO refactor
 const DESKTOP_ICONS: Icon[] = [
   { title: 'about me', id: 'ABOUT_ME', path: '/icons/aboutme.png', position: { top: '5rem', left: '15rem' } },
   { title: 'resume', id: 'RESUME', path: '/icons/resume.png', position: { top: '4rem', left: '13rem' } },

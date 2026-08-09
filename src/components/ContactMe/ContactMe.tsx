@@ -92,7 +92,6 @@ function ContactMe() {
                 <form.Field
                   name="name"
                   children={(field) => {
-                    // Avoid hasty abstractions. Render props are great!
                     return (
                       <>
                         <label htmlFor={field.name}>
@@ -122,7 +121,6 @@ function ContactMe() {
                 <form.Field
                   name="email"
                   children={(field) => {
-                    // Avoid hasty abstractions. Render props are great!
                     return (
                       <>
                         <label htmlFor={field.name}>
@@ -152,7 +150,6 @@ function ContactMe() {
                 <form.Field
                   name="company"
                   children={(field) => {
-                    // Avoid hasty abstractions. Render props are great!
                     return (
                       <>
                         <label htmlFor={field.name}>
@@ -177,7 +174,6 @@ function ContactMe() {
                 <form.Field
                   name="message"
                   children={(field) => {
-                    // Avoid hasty abstractions. Render props are great!
                     return (
                       <>
                         <label htmlFor={field.name}>
@@ -221,10 +217,13 @@ function ContactMe() {
             </form>
           </>
         ) : (
-          <div>
-            <span>WORK IN PROGRESS</span>
-            <a href="https://github.com/suicuneforever">Github</a>
-            <a href="https://www.linkedin.com/in/danijaramillo/">LinkedIn</a>
+          <div className={`${PARENT_CLASS}__links`}>
+            <a href="https://github.com/suicuneforever" target="_blank">
+              <img src="icons/github.png" />
+            </a>
+            <a href="https://www.linkedin.com/in/danijaramillo/" target="_blank">
+              <img src="icons/linkedin.png" />
+            </a>
           </div>
         )}
       </div>

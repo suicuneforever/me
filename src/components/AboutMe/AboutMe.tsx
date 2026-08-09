@@ -115,11 +115,13 @@ function AboutMe() {
                       </Canvas>
                     </div>
                     <div className={`${PARENT_CLASS}__text`}>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                      nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-                      in culpa qui officia deserunt mollit anim id est laborum.
+                      my name is dani and i'm a fullstack software engineer. i have over 7 years of experience and found
+                      myself mostly to be in the web devlopment space. ever since i was young, i have had a passion for
+                      art and technology, so i often like to find ways where i can combine the two in the things i
+                      create. this website is meant to be a culmination of all things i enjoy and what has made me the
+                      person i am today. i have taken a lot of inspiration from artists and developers i admire, as well
+                      as inspiration from the early internet age (neopets, myspace, deviantart...) which is where i got
+                      my start in things like web dev and digital art. thx 4 reading ^_^
                     </div>
                   </>
                 ) : null}
