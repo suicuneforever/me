@@ -3,7 +3,7 @@
 // import { Suspense } from 'react';
 // import { Link } from '@tanstack/react-router';
 
-import Desktop from "./components/os/Desktop/Desktop";
+import Desktop from "./components/os/Desktop";
 
 export default function App() {
   return (
