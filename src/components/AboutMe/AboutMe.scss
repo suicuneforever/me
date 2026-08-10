@@ -26,9 +26,10 @@
   &__header {
     display: flex;
     border: 1px solid #2b2aff;
-    background-color: #2b2aff;
-    height: 150px;
-    width: 100%;
+
+    img {
+      width: 100%;
+    }
   }
 
   &__body {

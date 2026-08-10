@@ -55,7 +55,9 @@ function AboutMe() {
     >
       {showSparkles ? <CursorTrail /> : null}
       <div className={`${PARENT_CLASS}__container`}>
-        <div className={`${PARENT_CLASS}__header`}></div>
+        <div className={`${PARENT_CLASS}__header`}>
+          <img src="images/Flower_v04.png" />
+        </div>
         <div className={`${PARENT_CLASS}__body`}>
           <div className={`${PARENT_CLASS}__sidebar`}>
             <div className={`${PARENT_CLASS}__card`}>
