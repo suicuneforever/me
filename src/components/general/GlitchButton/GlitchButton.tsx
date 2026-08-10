@@ -1,6 +1,7 @@
 import gsap from "gsap";
 import { Dispatch, SetStateAction, useRef } from "react";
 import { lettersAndSymbols } from "../../../utils/utils";
+import { Section } from "../../apps/AboutMe/AboutMe";
 import "./GlitchButton.scss";
 
 type GlitchButtonProps = {
@@ -57,7 +58,7 @@ function GlitchButton({ section, setSectionId }: GlitchButtonProps) {
       onMouseEnter={shuffleChars}
       ref={buttonRef}
     >
-      {section.title.split("").map((char, index) => (
+      {section.title.split("").map((char: string, index: number) => (
         <span key={`${section.id} ${index}`}>{char}</span>
       ))}
     </button>

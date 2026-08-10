@@ -1,0 +1,42 @@
+@use "../../../constants/borders" as *;
+
+.TextField {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  justify-content: space-between;
+
+  &__underline {
+    text-decoration: underline;
+  }
+
+  &__required {
+    color: #ff0000;
+  }
+
+  &__input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__error-message {
+    height: 17px;
+  }
+
+  input {
+    font-family: "MS Sans Serif";
+    box-shadow: $input;
+    border: none;
+    width: 22rem;
+  }
+
+  textarea {
+    font-family: "MS Sans Serif";
+    font-size: 0.9rem;
+    box-shadow: $input;
+    border: none;
+    width: 22rem;
+    height: 5rem;
+  }
+}

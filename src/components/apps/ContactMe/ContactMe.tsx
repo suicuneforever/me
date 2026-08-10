@@ -1,8 +1,10 @@
-import { useForm } from "@tanstack/react-form";
+import { createFormHook } from "@tanstack/react-form";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { z } from "zod";
 import { sendEmail } from "../../../api/api";
+import { fieldContext, formContext } from "../../../hooks/AppFormContext";
+import TextField from "../../general/TextField";
 import "./ContactMe.scss";
 
 // TODO extract type
@@ -15,6 +17,16 @@ export interface Email {
 
 const PARENT_CLASS = "ContactMe";
 
+const { useAppForm } = createFormHook({
+  fieldContext,
+  formContext,
+  // We'll learn more about these options later
+  fieldComponents: {
+    TextField,
+  },
+  formComponents: {},
+});
+
 const schema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.email("Invalid email address.").min(1, "Email is required"),
@@ -26,7 +38,7 @@ function ContactMe() {
   const [currentTab, setCurrentTab] = useState<string>("EMAIL");
   const [sucessMessage, setSuccessMessage] = useState<string>("");
 
-  const form = useForm({
+  const form = useAppForm({
     defaultValues: {
       name: "",
       email: "",
@@ -99,141 +111,29 @@ function ContactMe() {
                 form.handleSubmit();
               }}
             >
-              <div className={`${PARENT_CLASS}__field`}>
-                <form.Field
-                  name="name"
-                  children={(field) => {
-                    return (
-                      <>
-                        <label htmlFor={field.name}>
-                          <span className={`${PARENT_CLASS}__underline`}>
-                            N
-                          </span>
-                          ame:
-                          <span className={`${PARENT_CLASS}__required`}>*</span>
-                        </label>
-                        <div className={`${PARENT_CLASS}__input`}>
-                          <input
-                            id={field.name}
-                            name={field.name}
-                            value={field.state.value}
-                            onBlur={field.handleBlur}
-                            onChange={(e) => field.handleChange(e.target.value)}
-                          />
-                          <div className={`${PARENT_CLASS}__error-message`}>
-                            {!field.state.meta.isValid && (
-                              <em role="alert">
-                                {field.state.meta.errors.map(
-                                  (error: any) => error?.message,
-                                )}
-                              </em>
-                            )}
-                          </div>
-                        </div>
-                      </>
-                    );
-                  }}
-                />
-              </div>
-              <div className={`${PARENT_CLASS}__field`}>
-                <form.Field
-                  name="email"
-                  children={(field) => {
-                    return (
-                      <>
-                        <label htmlFor={field.name}>
-                          <span className={`${PARENT_CLASS}__underline`}>
-                            E
-                          </span>
-                          mail:
-                          <span className={`${PARENT_CLASS}__required`}>*</span>
-                        </label>
-                        <div className={`${PARENT_CLASS}__input`}>
-                          <input
-                            id={field.name}
-                            name={field.name}
-                            value={field.state.value}
-                            onBlur={field.handleBlur}
-                            onChange={(e) => field.handleChange(e.target.value)}
-                          />
-                          <div className={`${PARENT_CLASS}__error-message`}>
-                            {!field.state.meta.isValid && (
-                              <em role="alert">
-                                {field.state.meta.errors.map(
-                                  (error: any) => error?.message,
-                                )}
-                              </em>
-                            )}
-                          </div>
-                        </div>
-                      </>
-                    );
-                  }}
-                />
-              </div>
-              <div className={`${PARENT_CLASS}__field`}>
-                <form.Field
-                  name="company"
-                  children={(field) => {
-                    return (
-                      <>
-                        <label htmlFor={field.name}>
-                          <span className={`${PARENT_CLASS}__underline`}>
-                            C
-                          </span>
-                          ompany (optional):
-                        </label>
-                        <div className={`${PARENT_CLASS}__input`}>
-                          <input
-                            id={field.name}
-                            name={field.name}
-                            value={field.state.value}
-                            onBlur={field.handleBlur}
-                            onChange={(e) => field.handleChange(e.target.value)}
-                          />
-                        </div>
-                      </>
-                    );
-                  }}
-                />
-              </div>
+              <form.AppField
+                name="name"
+                children={(field) => (
+                  <field.TextField label="Name" isRequired />
+                )}
+              />
+              <form.AppField
+                name="email"
+                children={(field) => (
+                  <field.TextField label="Email" isRequired />
+                )}
+              />
+              <form.AppField
+                name="company"
+                children={(field) => <field.TextField label="Company" />}
+              />
               <div className={`${PARENT_CLASS}__divider`}></div>
-              <div className={`${PARENT_CLASS}__field`}>
-                <form.Field
-                  name="message"
-                  children={(field) => {
-                    return (
-                      <>
-                        <label htmlFor={field.name}>
-                          <span className={`${PARENT_CLASS}__underline`}>
-                            M
-                          </span>
-                          essage:
-                          <span className={`${PARENT_CLASS}__required`}>*</span>
-                        </label>
-                        <div className={`${PARENT_CLASS}__input`}>
-                          <textarea
-                            id={field.name}
-                            name={field.name}
-                            value={field.state.value}
-                            onBlur={field.handleBlur}
-                            onChange={(e) => field.handleChange(e.target.value)}
-                          />
-                          <div className={`${PARENT_CLASS}__error-message`}>
-                            {!field.state.meta.isValid && (
-                              <em role="alert">
-                                {field.state.meta.errors.map(
-                                  (error: any) => error?.message,
-                                )}
-                              </em>
-                            )}
-                          </div>
-                        </div>
-                      </>
-                    );
-                  }}
-                />
-              </div>
+              <form.AppField
+                name="message"
+                children={(field) => (
+                  <field.TextField label="Message" isRequired isTextArea />
+                )}
+              />
               <form.Subscribe
                 selector={(state) => [state.canSubmit, state.isPristine]}
                 children={([canSubmit, isPristine]) => (

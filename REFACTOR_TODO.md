@@ -16,7 +16,7 @@ Audit performed 2026-08-10. Organized by priority — tackle Tier 1 first, it's 
 
 ## Tier 2 — Structural / component design
 
-- [ ] Extract a reusable `<FormField>` component in `ContactMe.tsx` — the label+input+error block is copy-pasted 3–4 times (`ContactMe.tsx:91-119, 120-148, 149-171, 173-201`).
+- [x] Extract a reusable `<FormField>` component in `ContactMe.tsx` — the label+input+error block is copy-pasted 3–4 times (`ContactMe.tsx:91-119, 120-148, 149-171, 173-201`).
 - [ ] Extract a shared `<SectionHeader title="..." />` for the repeated title+divider pattern in `AboutMe.tsx`, `Steam.tsx`, `ContactMe.tsx`.
 - [ ] Refactor `AboutMe.tsx:102-170` — 8 near-identical `sectionId === 'X' ? (...) : null` branches, 6 of which render the same placeholder markup. Drive this from a data lookup instead of copy-pasted JSX.
 - [ ] Make `WindowModal.tsx` generic — it special-cases `windowData.id === 'CONTACT_ME'` (`:31,78-79,96-97,119-128`) to control sizing/layout. Pass `size`/`variant` as a prop from `Desktop.tsx`'s config instead.

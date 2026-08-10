@@ -54,7 +54,7 @@
   &__divider {
     border-top: 1px solid $darkGray;
     border-bottom: 1px solid $white;
-    margin: 1rem 0;
+    margin-bottom: 1rem;
   }
 
   &__heading {
@@ -62,51 +62,10 @@
     gap: 1rem;
   }
 
-  &__underline {
-    text-decoration: underline;
-  }
-
-  &__required {
-    color: #ff0000;
-  }
-
   &__form {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-  }
-
-  &__field {
-    display: flex;
-    flex-direction: row;
-    gap: 0.25rem;
-    justify-content: space-between;
-
-    input {
-      font-family: "MS Sans Serif";
-      box-shadow: $input;
-      border: none;
-      width: 22rem;
-    }
-
-    textarea {
-      font-family: "MS Sans Serif";
-      font-size: 0.9rem;
-      box-shadow: $input;
-      border: none;
-      width: 22rem;
-      height: 5rem;
-    }
-  }
-
-  &__input {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  &__error-message {
-    height: 17px;
   }
 
   &__footer {
