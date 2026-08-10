@@ -4,7 +4,7 @@ import { GLTF } from 'three-stdlib';
 import { useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import '../App.css';
-import Desktop from '../components/Desktop';
+import Desktop from '../components/os/Desktop';
 
 type GLTFResult = GLTF & {
   nodes: {

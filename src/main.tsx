@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 import { RouterProvider, createRouter, createRoute, createRootRoute } from '@tanstack/react-router';
-import Desktop from './components/Desktop/Desktop.tsx';
+import Desktop from './components/os/Desktop/Desktop.tsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const rootRoute = createRootRoute();

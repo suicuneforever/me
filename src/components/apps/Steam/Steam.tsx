@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import './Steam.scss';
-import { getRecentlyPlayedGames } from '../../api/api';
+import { getRecentlyPlayedGames } from '../../../api/api';
 
 type FavoriteGame = {
   title: string;

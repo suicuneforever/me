@@ -2,7 +2,8 @@
 // import { Computa } from './models/Computa';
 // import { Suspense } from 'react';
 // import { Link } from '@tanstack/react-router';
-import Desktop from './components/Desktop';
+
+import Desktop from "./components/os/Desktop/Desktop";
 
 export default function App() {
   return (

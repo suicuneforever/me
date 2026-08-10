@@ -1,7 +1,7 @@
 import gsap from 'gsap';
 import { Dispatch, SetStateAction, useRef } from 'react';
 import { lettersAndSymbols } from '../../utils/utils';
-import { Section } from '../AboutMe/AboutMe';
+import { Section } from '../apps/AboutMe/AboutMe';
 import './GlitchButton.scss';
 
 type GlitchButtonProps = {
