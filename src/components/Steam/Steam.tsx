@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import './Steam.scss';
 import { getRecentlyPlayedGames } from '../../api/api';
-// import { GameData } from '../../types/types';
 
 type FavoriteGame = {
   title: string;
@@ -24,8 +23,6 @@ function Steam() {
     queryKey: ['recentlyPlayedGames'],
     queryFn: () => getRecentlyPlayedGames(),
   });
-
-  console.log(data);
 
   return (
     <div className={`${PARENT_CLASS}`}>

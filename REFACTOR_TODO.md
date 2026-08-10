@@ -7,11 +7,12 @@ Audit performed 2026-08-10. Organized by priority — tackle Tier 1 first, it's 
 - [x] Fix broken lint setup: `eslint.config.js` uses the flat-config `eslint/config` import (ESLint v9+ API) but `package.json` pins `eslint@^8.57.1`. Either upgrade to ESLint 9 or rewrite `eslint.config.js` for v8. Also fix the `lint` script in `package.json:9` — `--ext ts,tsx` isn't valid with flat config.
 - [x] Replace `README.md` (still the default Vite template) with a real description: what the site is, tech stack, screenshots, setup/run instructions.
 - [x] Rename `package.json` `name`/`version` (currently `"react-template"` / `"0.0.0"`).
-- [ ] Fix `index.html`: descriptive `<title>` (currently just "me"), add `<meta name="description">`, Open Graph tags (`og:title`, `og:description`, `og:image`, `og:url`), and a favicon (none exists currently).
-- [ ] Remove `console.log(data)` in `src/components/Steam/Steam.tsx:28`.
-- [ ] Remove dead/commented-out code: `App.tsx:1-4,11-19`, `main.tsx:40`, `Steam.tsx:4`, `models/Computa.tsx:26,32-33,80`, `Desktop.tsx:27,29`.
-- [ ] Untrack `.DS_Store` from git (`git rm --cached .DS_Store`) and add `.DS_Store` / `**/.DS_Store` to `.gitignore`.
-- [ ] Fix missing `public/images/underconstruction.gif` — referenced by 6 AboutMe sections (`AboutMe.tsx:133,139,145,151,157,163`) but the file doesn't exist, so those tabs render broken images.
+- [x] Fix `index.html`: descriptive `<title>` (currently just "me"), add `<meta name="description">`, Open Graph tags (`og:title`, `og:description`, `og:image`, `og:url`), and a favicon (none exists currently).
+- [x] Remove `console.log(data)` in `src/components/Steam/Steam.tsx:28`.
+- [x] Remove dead/commented-out code: `App.tsx:1-4,11-19`, `main.tsx:40`, `Steam.tsx:4`, `models/Computa.tsx:26,32-33,80`, `Desktop.tsx:27,29`.
+- [x] Untrack `.DS_Store` from git (`git rm --cached .DS_Store`) and add `.DS_Store` / `**/.DS_Store` to `.gitignore`.
+- [x] Fix missing `public/images/underconstruction.gif` — referenced by 6 AboutMe sections (`AboutMe.tsx:133,139,145,151,157,163`) but the file doesn't exist, so those tabs render broken images.
+- [ ] Add favicon and `og:image`.
 
 ## Tier 2 — Structural / component design
 

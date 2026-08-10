@@ -130,37 +130,31 @@ function AboutMe() {
                 {sectionId === 'INTERESTS' ? (
                   <>
                     <div className={`${PARENT_CLASS}__title`}>interests</div>
-                    <img src="/images/underconstruction.gif" />
                   </>
                 ) : null}
                 {sectionId === 'MUSIC' ? (
                   <>
                     <div className={`${PARENT_CLASS}__title`}>music</div>
-                    <img src="/images/underconstruction.gif" />
                   </>
                 ) : null}
                 {sectionId === 'ART' ? (
                   <>
                     <div className={`${PARENT_CLASS}__title`}>art</div>
-                    <img src="/images/underconstruction.gif" />
                   </>
                 ) : null}
                 {sectionId === 'UPDATES' ? (
                   <>
                     <div className={`${PARENT_CLASS}__title`}>updates</div>
-                    <img src="/images/underconstruction.gif" />
                   </>
                 ) : null}
                 {sectionId === 'TODO_LIST' ? (
                   <>
                     <div className={`${PARENT_CLASS}__title`}>to-do list</div>
-                    <img src="/images/underconstruction.gif" />
                   </>
                 ) : null}
                 {sectionId === 'GUESTBOOK' ? (
                   <>
                     <div className={`${PARENT_CLASS}__title`}>guestbook</div>
-                    <img src="/images/underconstruction.gif" />
                   </>
                 ) : null}
                 {sectionId === 'CREDITS' ? (
