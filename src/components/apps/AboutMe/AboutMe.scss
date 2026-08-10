@@ -1,13 +1,13 @@
-@use '../../constants/colors' as *;
+@use "../../../constants/colors" as *;
 
 .AboutMe {
   color: $white;
   background-color: #000;
-  background-image: url('/images/bluestars.gif');
+  background-image: url("/images/bluestars.gif");
   width: 100%;
   height: 100%;
   overflow-y: scroll;
-  font-family: 'PC98';
+  font-family: "PC98";
   font-size: 1rem;
 
   &__container {
@@ -66,7 +66,7 @@
 
   &__links-button {
     width: 100%;
-    font-family: 'PC98';
+    font-family: "PC98";
     font-size: 1rem;
     color: $white;
     background-color: $black;
@@ -79,8 +79,8 @@
     padding: 0.5rem 0.25rem;
 
     &:before {
-      content: '◈';
-      font-family: 'Courier New', Courier, monospace;
+      content: "◈";
+      font-family: "Courier New", Courier, monospace;
     }
   }
 
@@ -103,12 +103,12 @@
     }
 
     &:after {
-      content: 'soon';
+      content: "soon";
       color: #3b3a80;
       font-size: 1rem;
       display: flex;
       align-self: start;
-      font-family: 'VT323';
+      font-family: "VT323";
     }
   }
 
@@ -119,7 +119,7 @@
   }
 
   &__title {
-    font-family: 'Pixel English';
+    font-family: "Pixel English";
     font-size: 2rem;
     display: flex;
     width: 100%;
@@ -129,7 +129,7 @@
   &__divider {
     margin-bottom: 0.5rem;
     &:before {
-      content: '⊹˚₊‧───────────────‧₊˚⊹';
+      content: "⊹˚₊‧───────────────‧₊˚⊹";
       color: #03fafa;
       display: flex;
       justify-content: center;
@@ -138,7 +138,7 @@
 
   &__status-text {
     display: flex;
-    font-family: 'VT323';
+    font-family: "VT323";
   }
 
   &__status-text-question {
@@ -168,13 +168,13 @@
   &__visitor-counter {
     border: 1px solid #2b2aff;
     color: #03fafa;
-    font-family: 'VT323';
+    font-family: "VT323";
     font-size: 1.5rem;
     display: flex;
   }
 
   &__visitor-text {
-    font-family: 'VT323';
+    font-family: "VT323";
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -1,5 +1,5 @@
-@use '../../constants/colors' as *;
-@use '../../constants/borders' as *;
+@use "../../../constants/colors" as *;
+@use "../../../constants/borders" as *;
 
 .ContactMe {
   background-color: $gray;
@@ -83,14 +83,14 @@
     justify-content: space-between;
 
     input {
-      font-family: 'MS Sans Serif';
+      font-family: "MS Sans Serif";
       box-shadow: $input;
       border: none;
       width: 22rem;
     }
 
     textarea {
-      font-family: 'MS Sans Serif';
+      font-family: "MS Sans Serif";
       font-size: 0.9rem;
       box-shadow: $input;
       border: none;
@@ -120,7 +120,7 @@
     box-shadow: $defaultButton;
     border: none;
     background-color: $gray;
-    font-family: 'MS Sans Serif';
+    font-family: "MS Sans Serif";
     color: $black;
     font-size: 1rem;
     padding: 0.25rem 1rem;

@@ -1,14 +1,14 @@
-import './Desktop.scss';
-import WindowModal from '../../WindowModal';
-import { Position, useWindowStore } from '../../../store/store';
-import AboutMe from '../../apps/AboutMe';
-import Resume from '../../apps/Resume';
-import ContactMe from '../../apps/ContactMe';
-import Mystery from '../../apps/Mystery';
-import { useEffect, useState } from 'react';
-import Steam from '../../apps/Steam';
+import { useEffect, useState } from "react";
+import { Position, useWindowStore } from "../../../store/store";
+import AboutMe from "../../apps/AboutMe";
+import ContactMe from "../../apps/ContactMe";
+import Mystery from "../../apps/Mystery";
+import Resume from "../../apps/Resume";
+import Steam from "../../apps/Steam";
+import WindowModal from "../WindowModal";
+import "./Desktop.scss";
 
-const PARENT_CLASS = 'Desktop';
+const PARENT_CLASS = "Desktop";
 
 type Icon = {
   title: string;
@@ -19,10 +19,30 @@ type Icon = {
 
 // TODO refactor
 const DESKTOP_ICONS: Icon[] = [
-  { title: 'about me', id: 'ABOUT_ME', path: '/icons/aboutme.png', position: { top: '5rem', left: '15rem' } },
-  { title: 'resume', id: 'RESUME', path: '/icons/resume.png', position: { top: '4rem', left: '13rem' } },
-  { title: 'steam', id: 'STEAM', path: '/icons/steam95.png', position: { top: '7rem', left: '18rem' } },
-  { title: 'contact me', id: 'CONTACT_ME', path: '/icons/contactme.png', position: { top: '10rem', left: '12rem' } },
+  {
+    title: "about me",
+    id: "ABOUT_ME",
+    path: "/icons/aboutme.png",
+    position: { top: "5rem", left: "15rem" },
+  },
+  {
+    title: "resume",
+    id: "RESUME",
+    path: "/icons/resume.png",
+    position: { top: "4rem", left: "13rem" },
+  },
+  {
+    title: "steam",
+    id: "STEAM",
+    path: "/icons/steam95.png",
+    position: { top: "7rem", left: "18rem" },
+  },
+  {
+    title: "contact me",
+    id: "CONTACT_ME",
+    path: "/icons/contactme.png",
+    position: { top: "10rem", left: "12rem" },
+  },
   // { title: '???', id: 'MYSTERY', path: '/icons/mystery.png', position: { top: '5rem', left: '15rem' } },
 ];
 
@@ -36,7 +56,8 @@ const WINDOW_COMPONENTS: Record<string, React.ReactNode> = {
 
 function Desktop() {
   const [time, setTime] = useState(new Date());
-  const { windows, activeWindowId, openWindow, setActiveWindow, closeWindow } = useWindowStore();
+  const { windows, activeWindowId, openWindow, setActiveWindow, closeWindow } =
+    useWindowStore();
 
   // TODO refactor?
   useEffect(() => {
@@ -47,7 +68,10 @@ function Desktop() {
     return () => clearInterval(timerId);
   }, []);
 
-  const formattedTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const formattedTime = time.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
   return (
     <>
@@ -59,7 +83,13 @@ function Desktop() {
               <div
                 className={`${PARENT_CLASS}__icon`}
                 key={desktopIcon.title}
-                onClick={() => openWindow(desktopIcon.id, desktopIcon.title, desktopIcon.position)}
+                onClick={() =>
+                  openWindow(
+                    desktopIcon.id,
+                    desktopIcon.title,
+                    desktopIcon.position,
+                  )
+                }
               >
                 <img src={desktopIcon.path} />
                 <label>{desktopIcon.title}</label>
@@ -69,7 +99,11 @@ function Desktop() {
         </div>
 
         {windows.map((window) => (
-          <WindowModal key={window.id} windowData={window} closeFn={() => closeWindow(window.id)}>
+          <WindowModal
+            key={window.id}
+            windowData={window}
+            closeFn={() => closeWindow(window.id)}
+          >
             {WINDOW_COMPONENTS[window.id]}
           </WindowModal>
         ))}
@@ -84,7 +118,9 @@ function Desktop() {
                 onClick={() => setActiveWindow(window.id)}
               >
                 <div className={`${PARENT_CLASS}__checkerboard`}>
-                  <img src={DESKTOP_ICONS.find((w) => w.id === window.id)?.path} />
+                  <img
+                    src={DESKTOP_ICONS.find((w) => w.id === window.id)?.path}
+                  />
                   {window.title}
                 </div>
               </div>
@@ -94,7 +130,9 @@ function Desktop() {
                 key={window.id}
                 onClick={() => setActiveWindow(window.id)}
               >
-                <img src={DESKTOP_ICONS.find((w) => w.id === window.id)?.path} />
+                <img
+                  src={DESKTOP_ICONS.find((w) => w.id === window.id)?.path}
+                />
                 {window.title}
               </div>
             ),

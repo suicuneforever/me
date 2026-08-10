@@ -1,15 +1,14 @@
-import gsap from 'gsap';
-import { Dispatch, SetStateAction, useRef } from 'react';
-import { lettersAndSymbols } from '../../utils/utils';
-import { Section } from '../apps/AboutMe/AboutMe';
-import './GlitchButton.scss';
+import gsap from "gsap";
+import { Dispatch, SetStateAction, useRef } from "react";
+import { lettersAndSymbols } from "../../../utils/utils";
+import "./GlitchButton.scss";
 
 type GlitchButtonProps = {
   section: Section;
   setSectionId: Dispatch<SetStateAction<string>>;
 };
 
-const PARENT_CLASS = 'GlitchButton';
+const PARENT_CLASS = "GlitchButton";
 
 function GlitchButton({ section, setSectionId }: GlitchButtonProps) {
   const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -26,12 +25,19 @@ function GlitchButton({ section, setSectionId }: GlitchButtonProps) {
           },
           {
             duration: 0.03,
-            innerHTML: () => lettersAndSymbols[Math.floor(Math.random() * lettersAndSymbols.length)],
+            innerHTML: () =>
+              lettersAndSymbols[
+                Math.floor(Math.random() * lettersAndSymbols.length)
+              ],
             repeat: 3,
             repeatRefresh: true,
             opacity: 1,
             repeatDelay: 0.05,
-            onComplete: () => gsap.set(char, { innerHTML: section.title[position], delay: 0.03 }),
+            onComplete: () =>
+              gsap.set(char, {
+                innerHTML: section.title[position],
+                delay: 0.03,
+              }),
           },
         );
       });
@@ -41,7 +47,9 @@ function GlitchButton({ section, setSectionId }: GlitchButtonProps) {
   return (
     <button
       className={
-        section.isActive ? `${PARENT_CLASS} ${PARENT_CLASS}--active` : `${PARENT_CLASS} ${PARENT_CLASS}--disabled`
+        section.isActive
+          ? `${PARENT_CLASS} ${PARENT_CLASS}--active`
+          : `${PARENT_CLASS} ${PARENT_CLASS}--disabled`
       }
       disabled={!section.isActive}
       key={section.id}
@@ -49,7 +57,7 @@ function GlitchButton({ section, setSectionId }: GlitchButtonProps) {
       onMouseEnter={shuffleChars}
       ref={buttonRef}
     >
-      {section.title.split('').map((char, index) => (
+      {section.title.split("").map((char, index) => (
         <span key={`${section.id} ${index}`}>{char}</span>
       ))}
     </button>

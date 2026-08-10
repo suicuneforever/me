@@ -1,13 +1,13 @@
-@use '../../constants/colors' as *;
+@use "../../../constants/colors" as *;
 
 // window icons
-$x: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAYAAACALL/6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAATUlEQVQYlZ2RQQ7AIAzD4v3/z+HEVLogwXpC1FZTwLZu6pkHwMDH7vevYJsJVLj2JIkeqU+p8DIhAR2OQoq0FWrmtNMipAXjQ/z+h9MaAucxEWL07JoAAAAASUVORK5CYII=';
-$max: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAYAAACALL/6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAOUlEQVQYld2RMQoAIAzEcuL/vxw3kSKoq5lzbelFJYkcUAPQTmKl1wk71gueN/wQmF+66QIgeuVNBqtLDxPoqi0wAAAAAElFTkSuQmCC';
-$min: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAYAAACALL/6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAKElEQVQYlWP8//8/AymAiSTVI1UDC4zByMiINXz////PSJENjKRGHAAvZgoPiLbuwwAAAABJRU5ErkJggg==';
-$ex: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAUElEQVQokZXPqxUAIAxD0ZSREQgGQCBYOSg4/Fuib8QTkvgY3Q9OucB6YMoFAEyHjmPwoh0mDKVhw6+GI741XPGp4YnXBhWPDSbcGsw4Bi8V/BZRwMk/E5EAAAAASUVORK5CYII=';
+$x: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAYAAACALL/6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAATUlEQVQYlZ2RQQ7AIAzD4v3/z+HEVLogwXpC1FZTwLZu6pkHwMDH7vevYJsJVLj2JIkeqU+p8DIhAR2OQoq0FWrmtNMipAXjQ/z+h9MaAucxEWL07JoAAAAASUVORK5CYII=";
+$max: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAYAAACALL/6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAOUlEQVQYld2RMQoAIAzEcuL/vxw3kSKoq5lzbelFJYkcUAPQTmKl1wk71gueN/wQmF+66QIgeuVNBqtLDxPoqi0wAAAAAElFTkSuQmCC";
+$min: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAYAAACALL/6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAKElEQVQYlWP8//8/AymAiSTVI1UDC4zByMiINXz////PSJENjKRGHAAvZgoPiLbuwwAAAABJRU5ErkJggg==";
+$ex: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAUElEQVQokZXPqxUAIAxD0ZSREQgGQCBYOSg4/Fuib8QTkvgY3Q9OucB6YMoFAEyHjmPwoh0mDKVhw6+GI741XPGp4YnXBhWPDSbcGsw4Bi8V/BZRwMk/E5EAAAAASUVORK5CYII=";
 .WindowModal {
   &__wrapper {
-    font-family: 'MS Sans Serif';
+    font-family: "MS Sans Serif";
     display: flex;
     background-color: $gray;
     position: absolute;
@@ -92,7 +92,7 @@ $ex: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBI
 
     &--min {
       &:after {
-        content: '';
+        content: "";
         background-image: url($min);
         background-repeat: no-repeat;
         position: absolute;
@@ -105,7 +105,7 @@ $ex: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBI
 
     &--max {
       &:after {
-        content: '';
+        content: "";
         background-image: url($max);
         background-repeat: no-repeat;
         position: absolute;
@@ -118,7 +118,7 @@ $ex: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBI
 
     &--close {
       &:after {
-        content: '';
+        content: "";
         background-image: url($x);
         background-repeat: no-repeat;
         position: absolute;
@@ -140,7 +140,7 @@ $ex: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBI
     position: relative;
 
     &:after {
-      content: '';
+      content: "";
       background-image: url($ex);
       background-repeat: no-repeat;
       position: absolute;
@@ -187,7 +187,8 @@ $ex: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBI
 
   &__checkerboard {
     background-image: linear-gradient(45deg, black 25%, transparent 25%),
-      linear-gradient(-45deg, black 25%, transparent 25%), linear-gradient(45deg, transparent 75%, black 75%),
+      linear-gradient(-45deg, black 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, black 75%),
       linear-gradient(-45deg, transparent 75%, black 75%);
     background-size: 4px 4px;
     background-position:

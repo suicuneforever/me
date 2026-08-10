@@ -1,10 +1,13 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import './WindowModal.scss';
-import { useWindowStore, Window } from '../../store/store';
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useWindowStore, Window } from "../../../store/store";
+import "./WindowModal.scss";
 
-const PARENT_CLASS = 'WindowModal';
+const PARENT_CLASS = "WindowModal";
 
-const WINDOW_SIZE: { width: string; height: string } = { width: '65rem', height: '50rem' };
+const WINDOW_SIZE: { width: string; height: string } = {
+  width: "65rem",
+  height: "50rem",
+};
 
 type WindowModalProps = {
   windowData: Window;
@@ -17,8 +20,14 @@ function WindowModal({ windowData, children, closeFn }: WindowModalProps) {
   const { activeWindowId, setActiveWindow } = useWindowStore();
 
   // State to keep track of the popup's position
-  const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
-  const [windowPosition, setWindowPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [position, setPosition] = useState<{ x: number; y: number }>({
+    x: 0,
+    y: 0,
+  });
+  const [windowPosition, setWindowPosition] = useState<{
+    x: number;
+    y: number;
+  }>({ x: 0, y: 0 });
 
   // Ref to store the initial mouse position when dragging starts
   const startPosition = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -28,7 +37,7 @@ function WindowModal({ windowData, children, closeFn }: WindowModalProps) {
   const dragRef = useRef<HTMLDivElement | null>(null);
 
   const isActive = activeWindowId === windowData.id;
-  const isContactMe = windowData.id === 'CONTACT_ME';
+  const isContactMe = windowData.id === "CONTACT_ME";
 
   const onMouseMove = useCallback(
     (e: MouseEvent) => {
@@ -53,16 +62,19 @@ function WindowModal({ windowData, children, closeFn }: WindowModalProps) {
     e.stopPropagation();
     e.preventDefault();
     setIsDragging(true);
-    startPosition.current = { x: e.clientX - position.x, y: e.clientY - position.y };
+    startPosition.current = {
+      x: e.clientX - position.x,
+      y: e.clientY - position.y,
+    };
   };
 
   // Effect to add and clean up event listeners for dragging
   useEffect(() => {
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('mouseup', onMouseUp);
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
     return () => {
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('mouseup', onMouseUp);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
     };
   }, [onMouseMove, onMouseUp]);
 
@@ -75,26 +87,34 @@ function WindowModal({ windowData, children, closeFn }: WindowModalProps) {
           onClick={(e) => e.stopPropagation()} // to prevent event delegation to the overlay
           style={{
             transform: `translate(${position.x}px, ${position.y}px)`,
-            width: isContactMe ? '35rem' : WINDOW_SIZE.width,
-            height: isContactMe ? '33rem' : WINDOW_SIZE.height,
+            width: isContactMe ? "35rem" : WINDOW_SIZE.width,
+            height: isContactMe ? "33rem" : WINDOW_SIZE.height,
             top: windowData.position.top,
             left: windowData.position.left,
           }}
         >
-          <div className={`${PARENT_CLASS}__drag-box-horizontal ${PARENT_CLASS}__checkerboard`}></div>
+          <div
+            className={`${PARENT_CLASS}__drag-box-horizontal ${PARENT_CLASS}__checkerboard`}
+          ></div>
           <div className={`${PARENT_CLASS}__drag-box-vertical-container`}>
-            <div className={`${PARENT_CLASS}__drag-box-vertical ${PARENT_CLASS}__checkerboard`}></div>
-            <div className={`${PARENT_CLASS}__drag-box-vertical ${PARENT_CLASS}__checkerboard`}></div>
+            <div
+              className={`${PARENT_CLASS}__drag-box-vertical ${PARENT_CLASS}__checkerboard`}
+            ></div>
+            <div
+              className={`${PARENT_CLASS}__drag-box-vertical ${PARENT_CLASS}__checkerboard`}
+            ></div>
           </div>
-          <div className={`${PARENT_CLASS}__drag-box-horizontal ${PARENT_CLASS}__checkerboard`}></div>
+          <div
+            className={`${PARENT_CLASS}__drag-box-horizontal ${PARENT_CLASS}__checkerboard`}
+          ></div>
         </div>
       ) : null}
       <div
         className={`${PARENT_CLASS}__wrapper`}
         style={{
           transform: `translate(${windowPosition.x}px, ${windowPosition.y}px)`,
-          width: isContactMe ? '35rem' : WINDOW_SIZE.width,
-          height: isContactMe ? '33rem' : WINDOW_SIZE.height,
+          width: isContactMe ? "35rem" : WINDOW_SIZE.width,
+          height: isContactMe ? "33rem" : WINDOW_SIZE.height,
           zIndex: isActive ? 10 : 0,
           top: windowData.position.top,
           left: windowData.position.left,
@@ -103,13 +123,23 @@ function WindowModal({ windowData, children, closeFn }: WindowModalProps) {
       >
         <div className={`${PARENT_CLASS}__outer-container`}>
           <div className={`${PARENT_CLASS}__inner-container`}>
-            <div className={`${PARENT_CLASS}__header`} style={{ backgroundColor: isActive ? '#0000a3' : '#808080' }}>
-              <div className={`${PARENT_CLASS}__title`} onMouseDown={onMouseDown}>
+            <div
+              className={`${PARENT_CLASS}__header`}
+              style={{ backgroundColor: isActive ? "#0000a3" : "#808080" }}
+            >
+              <div
+                className={`${PARENT_CLASS}__title`}
+                onMouseDown={onMouseDown}
+              >
                 {windowData.title}
               </div>
               <div className={`${PARENT_CLASS}__icons`}>
-                <button className={`${PARENT_CLASS}__icon-button ${PARENT_CLASS}__icon-button--min`} />
-                <button className={`${PARENT_CLASS}__icon-button ${PARENT_CLASS}__icon-button--max`} />
+                <button
+                  className={`${PARENT_CLASS}__icon-button ${PARENT_CLASS}__icon-button--min`}
+                />
+                <button
+                  className={`${PARENT_CLASS}__icon-button ${PARENT_CLASS}__icon-button--max`}
+                />
                 <button
                   className={`${PARENT_CLASS}__icon-button ${PARENT_CLASS}__icon-button--close`}
                   onClick={closeFn}
@@ -121,9 +151,13 @@ function WindowModal({ windowData, children, closeFn }: WindowModalProps) {
             ) : (
               <>
                 <div className={`${PARENT_CLASS}__outer-content`}>
-                  <div className={`${PARENT_CLASS}__inner-content`}>{children}</div>
+                  <div className={`${PARENT_CLASS}__inner-content`}>
+                    {children}
+                  </div>
                 </div>
-                <div className={`${PARENT_CLASS}__footer`}>(c) dani jaramillo*~*~</div>
+                <div className={`${PARENT_CLASS}__footer`}>
+                  (c) dani jaramillo*~*~
+                </div>
               </>
             )}
           </div>
