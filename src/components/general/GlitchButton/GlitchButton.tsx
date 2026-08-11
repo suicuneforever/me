@@ -16,7 +16,7 @@ function GlitchButton({ section, setSectionId }: GlitchButtonProps) {
 
   const shuffleChars = () => {
     if (buttonRef.current) {
-      let chars = Array.from(buttonRef.current.children);
+      const chars = Array.from(buttonRef.current.children);
       chars.forEach((char, position) => {
         gsap.killTweensOf(char);
         gsap.fromTo(

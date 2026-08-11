@@ -1,10 +1,10 @@
-import * as THREE from 'three';
-import { Html, useGLTF } from '@react-three/drei';
-import { GLTF } from 'three-stdlib';
-import { useRef, useState } from 'react';
-import { useFrame } from '@react-three/fiber';
-import '../App.css';
-import Desktop from '../components/os/Desktop';
+import { Html, useGLTF } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { useRef, useState } from "react";
+import * as THREE from "three";
+import { GLTF } from "three-stdlib";
+import "../App.css";
+import Desktop from "../components/os/Desktop";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -19,7 +19,9 @@ type GLTFResult = GLTF & {
 };
 
 export function Computa({ props }: any) {
-  const { nodes, materials } = useGLTF('computawithSCREEN.glb') as unknown as GLTFResult;
+  const { nodes, materials } = useGLTF(
+    "computawithSCREEN.glb",
+  ) as unknown as GLTFResult;
   const [clicked, setClicked] = useState(false);
   const [showScreen, setShowScreen] = useState(false);
   const screenRef = useRef<THREE.Mesh>();
@@ -35,7 +37,13 @@ export function Computa({ props }: any) {
   });
 
   return (
-    <group {...props} dispose={null} rotation={[0, -Math.PI / 2, 0]} position={[2.5, -1, -1.5]} scale={1.5}>
+    <group
+      {...props}
+      dispose={null}
+      rotation={[0, -Math.PI / 2, 0]}
+      position={[2.5, -1, -1.5]}
+      scale={1.5}
+    >
       <mesh
         castShadow
         receiveShadow
@@ -86,4 +94,4 @@ export function Computa({ props }: any) {
   );
 }
 
-useGLTF.preload('computawithSCREEN.glb');
+useGLTF.preload("computawithSCREEN.glb");

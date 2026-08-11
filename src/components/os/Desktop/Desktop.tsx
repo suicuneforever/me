@@ -31,9 +31,11 @@ function Desktop() {
               <div
                 className={`${PARENT_CLASS}__icon`}
                 key={window.title}
+                role="button"
+                tabIndex={0}
                 onClick={() => openWindow(window)}
               >
-                <img src={window.icon} />
+                <img src={window.icon} alt={window.title} />
                 <label>{window.title}</label>
               </div>
             );
@@ -57,11 +59,14 @@ function Desktop() {
               <div
                 className={`${PARENT_CLASS}__window-button ${PARENT_CLASS}__window-button--active`}
                 key={window.id}
+                role="button"
+                tabIndex={0}
                 onClick={() => setActiveWindow(window.id)}
               >
                 <div className={`${PARENT_CLASS}__checkerboard`}>
                   <img
                     src={DESKTOP_WINDOWS.find((w) => w.id === window.id)?.icon}
+                    alt={window.title}
                   />
                   {window.title}
                 </div>
@@ -70,10 +75,13 @@ function Desktop() {
               <div
                 className={`${PARENT_CLASS}__window-button`}
                 key={window.id}
+                role="button"
+                tabIndex={0}
                 onClick={() => setActiveWindow(window.id)}
               >
                 <img
                   src={DESKTOP_WINDOWS.find((w) => w.id === window.id)?.icon}
+                  alt={window.title}
                 />
                 {window.title}
               </div>

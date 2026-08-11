@@ -13,7 +13,6 @@ const WINDOW_ID = "ABOUT_ME";
 
 const SECTIONS: Section[] = [
   { title: "about", id: "ABOUT", isActive: true },
-  { title: "interests", id: "INTERESTS", isActive: false },
   { title: "music", id: "MUSIC", isActive: false },
   { title: "art", id: "ART", isActive: false },
   { title: "updates", id: "UPDATES", isActive: false },
@@ -38,7 +37,7 @@ function AboutMe() {
       {showSparkles ? <CursorTrail /> : null}
       <div className={`${PARENT_CLASS}__container`}>
         <div className={`${PARENT_CLASS}__header`}>
-          <img src="images/Flower_v04.png" />
+          <img src="images/Flower_v04.png" alt="header" />
         </div>
         <div className={`${PARENT_CLASS}__body`}>
           <div className={`${PARENT_CLASS}__sidebar`}>
@@ -135,11 +134,6 @@ function AboutMe() {
                     </div>
                   </>
                 ) : null}
-                {sectionId === "INTERESTS" ? (
-                  <>
-                    <div className={`${PARENT_CLASS}__title`}>interests</div>
-                  </>
-                ) : null}
                 {sectionId === "MUSIC" ? (
                   <>
                     <div className={`${PARENT_CLASS}__title`}>music</div>
@@ -169,6 +163,16 @@ function AboutMe() {
                   <>
                     <div className={`${PARENT_CLASS}__title`}>
                       credits, inspiration
+                    </div>
+                    <div className={`${PARENT_CLASS}__text`}>
+                      about me header by{" "}
+                      <a
+                        href="https://www.instagram.com/downtowntempo/"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        downtown tempo
+                      </a>
                     </div>
                   </>
                 ) : null}

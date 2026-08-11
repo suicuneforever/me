@@ -116,6 +116,15 @@
   }
 
   &__text {
+    a {
+      color: #03fafa;
+      padding-bottom: 2px;
+
+      &:hover {
+        color: $black;
+        background-color: #03fafa;
+      }
+    }
   }
 
   &__title {

@@ -43,7 +43,7 @@ function TextField({ label, isRequired, isTextArea }: TextFieldProps) {
           <div className={`${PARENT_CLASS}__error-message`}>
             {!field.state.meta.isValid && (
               <em role="alert">
-                {field.state.meta.errors.map((error: any) => error?.message)}
+                {field.state.meta.errors.map((error) => error?.message)}
               </em>
             )}
           </div>

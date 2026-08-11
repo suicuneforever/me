@@ -65,6 +65,8 @@ function ContactMe() {
         {CONTACT_TABS.map((tab) => (
           <div
             key={tab.id}
+            role="button"
+            tabIndex={0}
             className={
               currentTab === tab.id
                 ? `${PARENT_CLASS}__tab ${PARENT_CLASS}__tab--active`
@@ -80,7 +82,7 @@ function ContactMe() {
         {currentTab === "EMAIL" ? (
           <>
             <div className={`${PARENT_CLASS}__heading`}>
-              <img src="icons/email.png" />
+              <img src="icons/email.png" alt="email" />
               <div>
                 Contact me here! Reach out for anything, it could be work
                 related, art related, or even just to say hi! I would love to

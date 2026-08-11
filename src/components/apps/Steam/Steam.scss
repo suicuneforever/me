@@ -9,7 +9,7 @@ $tertiary-light-blue: #7f9db5;
   background-color: $primary-dark-blue;
   width: 100%;
   height: 100%;
-  font-family: 'JetBrainsMono';
+  font-family: "JetBrainsMono";
 
   // &:before {
   //   // /* the CRT scanline overlay */
@@ -35,7 +35,7 @@ $tertiary-light-blue: #7f9db5;
   }
 
   &__navbar-logo {
-    font-family: 'Silkscreen';
+    font-family: "Silkscreen";
     font-size: 1.25rem;
     height: 100%;
     border-right: 1px solid $secondary-light-blue;
@@ -55,25 +55,25 @@ $tertiary-light-blue: #7f9db5;
       display: flex;
     }
 
-    a {
+    span {
       text-decoration: underline;
       letter-spacing: 0.1rem;
-    }
 
-    a:hover {
-      cursor: pointer;
-      background-color: $primary-light-blue;
-      color: $tertiary-dark-blue;
+      &:hover {
+        cursor: pointer;
+        background-color: $primary-light-blue;
+        color: $tertiary-dark-blue;
+      }
     }
 
     li:after {
       color: #214059;
-      content: '/';
+      content: "/";
       padding: 0 1rem;
     }
 
     li:last-child:after {
-      content: '';
+      content: "";
     }
   }
 
@@ -127,14 +127,22 @@ $tertiary-light-blue: #7f9db5;
   &__user-info-pic {
     padding: 6px;
     background:
-      linear-gradient($primary-light-blue, $primary-light-blue) top left / 9px 1px no-repeat,
-      linear-gradient($primary-light-blue, $primary-light-blue) top left / 1px 9px no-repeat,
-      linear-gradient($primary-light-blue, $primary-light-blue) top right / 9px 1px no-repeat,
-      linear-gradient($primary-light-blue, $primary-light-blue) top right / 1px 9px no-repeat,
-      linear-gradient($primary-light-blue, $primary-light-blue) bottom left / 9px 1px no-repeat,
-      linear-gradient($primary-light-blue, $primary-light-blue) bottom left / 1px 9px no-repeat,
-      linear-gradient($primary-light-blue, $primary-light-blue) bottom right/ 9px 1px no-repeat,
-      linear-gradient($primary-light-blue, $primary-light-blue) bottom right/ 1px 9px no-repeat;
+      linear-gradient($primary-light-blue, $primary-light-blue) top left / 9px
+        1px no-repeat,
+      linear-gradient($primary-light-blue, $primary-light-blue) top left / 1px
+        9px no-repeat,
+      linear-gradient($primary-light-blue, $primary-light-blue) top right / 9px
+        1px no-repeat,
+      linear-gradient($primary-light-blue, $primary-light-blue) top right / 1px
+        9px no-repeat,
+      linear-gradient($primary-light-blue, $primary-light-blue) bottom left /
+        9px 1px no-repeat,
+      linear-gradient($primary-light-blue, $primary-light-blue) bottom left /
+        1px 9px no-repeat,
+      linear-gradient($primary-light-blue, $primary-light-blue) bottom right/
+        9px 1px no-repeat,
+      linear-gradient($primary-light-blue, $primary-light-blue) bottom right/
+        1px 9px no-repeat;
   }
 
   &__user-info-stats {
@@ -145,7 +153,7 @@ $tertiary-light-blue: #7f9db5;
   }
 
   &__user-info-name {
-    font-family: 'SilkScreen';
+    font-family: "SilkScreen";
     font-size: 2.5rem;
     background-color: #66c0f4;
     color: $primary-dark-blue;
@@ -187,7 +195,7 @@ $tertiary-light-blue: #7f9db5;
   }
 
   &__content-heading {
-    font-family: 'Silkscreen';
+    font-family: "Silkscreen";
     color: #fff;
     border-bottom: 1px solid $primary-light-blue;
     padding-bottom: 0.25rem;

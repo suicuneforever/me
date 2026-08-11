@@ -29,13 +29,13 @@ function Steam() {
         <div className={`${PARENT_CLASS}__navbar-links`}>
           <ul>
             <li>
-              <a>Store</a>
+              <span>Store</span>
             </li>
             <li>
-              <a>Library</a>
+              <span>Library</span>
             </li>
             <li>
-              <a>Community</a>
+              <span>Community</span>
             </li>
           </ul>
         </div>
@@ -51,7 +51,7 @@ function Steam() {
           </div>
           <div className={`${PARENT_CLASS}__user-info-content`}>
             <div className={`${PARENT_CLASS}__user-info-pic`}>
-              <img src="/images/steamprofilepic.jpg" />
+              <img src="/images/steamprofilepic.jpg" alt="profile pic" />
             </div>
             <div className={`${PARENT_CLASS}__user-info-stats`}>
               <div className={`${PARENT_CLASS}__user-info-name`}>Dani</div>
@@ -93,7 +93,7 @@ function Steam() {
                 className={`${PARENT_CLASS}__favorites-games-card`}
                 key={game.title}
               >
-                <img src={game.imagePath} />
+                <img src={game.imagePath} alt={game.title} />
                 <span>{game.title}</span>
               </div>
             ))}

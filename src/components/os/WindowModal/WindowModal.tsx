@@ -46,10 +46,10 @@ function WindowModal({ desktopWindow, children, closeFn }: WindowModalProps) {
   );
 
   // Function to handle the end of a drag event
-  const onMouseUp = () => {
+  const onMouseUp = useCallback(() => {
     setWindowPosition({ x: position.x, y: position.y });
     setIsDragging(false);
-  };
+  }, [position]);
 
   // Function to handle the start of a drag event
   const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
