@@ -21,30 +21,6 @@ $start: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAC
     gap: 1.25rem;
   }
 
-  &__icon {
-    width: 6.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.3125rem;
-
-    img {
-      width: 3.75rem;
-      align-self: center;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-
-    label {
-      align-self: center;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-  }
-
   &__start-bar {
     font-family: "MS Sans Serif";
     position: fixed;

@@ -5,6 +5,7 @@ import ContactMe from "../../apps/ContactMe";
 import Resume from "../../apps/Resume";
 import Steam from "../../apps/Steam";
 import Clock from "../../general/Clock";
+import DesktopIcon from "../DesktopIcon";
 import WindowModal from "../WindowModal";
 import "./Desktop.scss";
 
@@ -26,27 +27,20 @@ function Desktop() {
       <div>NOTE: THIS WEBSITE IS CURRENTLY A WORK IN PROGRESS</div>
       <div className={`${PARENT_CLASS}__container`}>
         <div className={`${PARENT_CLASS}__icons`}>
-          {DESKTOP_WINDOWS.map((window) => {
-            return (
-              <div
-                className={`${PARENT_CLASS}__icon`}
-                key={window.title}
-                role="button"
-                tabIndex={0}
-                onClick={() => openWindow(window)}
-              >
-                <img src={window.icon} alt={window.title} />
-                <label>{window.title}</label>
-              </div>
-            );
-          })}
+          {DESKTOP_WINDOWS.map((window) => (
+            <DesktopIcon
+              key={window.title}
+              window={window}
+              onOpen={openWindow}
+            />
+          ))}
         </div>
 
         {windows.map((window) => (
           <WindowModal
             key={window.id}
             desktopWindow={window}
-            closeFn={() => closeWindow(window.id)}
+            onClose={closeWindow}
           >
             {WINDOW_COMPONENTS[window.id]}
           </WindowModal>

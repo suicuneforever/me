@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { useWindowStore } from "../../../store/store";
 import { DesktopWindow } from "../../../types/types";
 import "./WindowModal.scss";
@@ -8,12 +8,18 @@ const PARENT_CLASS = "WindowModal";
 type WindowModalProps = {
   desktopWindow: DesktopWindow;
   children: React.ReactNode;
-  closeFn: () => void;
+  onClose: (id: string) => void;
 };
 
-function WindowModal({ desktopWindow, children, closeFn }: WindowModalProps) {
+function WindowModal({ desktopWindow, children, onClose }: WindowModalProps) {
   const [isDragging, setIsDragging] = useState(false);
-  const { activeWindowId, setActiveWindow } = useWindowStore();
+  // const { activeWindowId, setActiveWindow } = useWindowStore();
+
+  // use selectors to avoid subscribing to the entire store, prevents uneccessary re-renders
+  const isActive = useWindowStore(
+    (state) => state.activeWindowId === desktopWindow.id,
+  );
+  const setActiveWindow = useWindowStore((state) => state.setActiveWindow);
 
   // State to keep track of the popup's position
   const [position, setPosition] = useState<{ x: number; y: number }>({
@@ -32,7 +38,7 @@ function WindowModal({ desktopWindow, children, closeFn }: WindowModalProps) {
   // This is the element we are moving
   const dragRef = useRef<HTMLDivElement | null>(null);
 
-  const isActive = activeWindowId === desktopWindow.id;
+  // const isActive = activeWindowId === desktopWindow.id;
 
   const onMouseMove = useCallback(
     (e: MouseEvent) => {
@@ -47,9 +53,10 @@ function WindowModal({ desktopWindow, children, closeFn }: WindowModalProps) {
 
   // Function to handle the end of a drag event
   const onMouseUp = useCallback(() => {
+    if (!isDragging) return;
     setWindowPosition({ x: position.x, y: position.y });
     setIsDragging(false);
-  }, [position]);
+  }, [isDragging, position]);
 
   // Function to handle the start of a drag event
   const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -137,7 +144,7 @@ function WindowModal({ desktopWindow, children, closeFn }: WindowModalProps) {
                 />
                 <button
                   className={`${PARENT_CLASS}__icon-button ${PARENT_CLASS}__icon-button--close`}
-                  onClick={closeFn}
+                  onClick={() => onClose(desktopWindow.id)}
                 />
               </div>
             </div>
@@ -162,4 +169,4 @@ function WindowModal({ desktopWindow, children, closeFn }: WindowModalProps) {
   );
 }
 
-export default WindowModal;
+export default memo(WindowModal);
