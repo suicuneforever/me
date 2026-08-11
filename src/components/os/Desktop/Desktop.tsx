@@ -1,98 +1,40 @@
-import { useEffect, useState } from "react";
-import { Position, useWindowStore } from "../../../store/store";
+import { DESKTOP_WINDOWS } from "../../../constants/constants";
+import { useWindowStore } from "../../../store/store";
 import AboutMe from "../../apps/AboutMe";
 import ContactMe from "../../apps/ContactMe";
-import Mystery from "../../apps/Mystery";
 import Resume from "../../apps/Resume";
 import Steam from "../../apps/Steam";
+import Clock from "../../general/Clock";
 import WindowModal from "../WindowModal";
 import "./Desktop.scss";
 
 const PARENT_CLASS = "Desktop";
-
-type Icon = {
-  title: string;
-  id: string;
-  path: string;
-  position: Position;
-};
-
-// TODO refactor
-const DESKTOP_ICONS: Icon[] = [
-  {
-    title: "about me",
-    id: "ABOUT_ME",
-    path: "/icons/aboutme.png",
-    position: { top: "5rem", left: "15rem" },
-  },
-  {
-    title: "resume",
-    id: "RESUME",
-    path: "/icons/resume.png",
-    position: { top: "4rem", left: "13rem" },
-  },
-  {
-    title: "steam",
-    id: "STEAM",
-    path: "/icons/steam95.png",
-    position: { top: "7rem", left: "18rem" },
-  },
-  {
-    title: "contact me",
-    id: "CONTACT_ME",
-    path: "/icons/contactme.png",
-    position: { top: "10rem", left: "12rem" },
-  },
-  // { title: '???', id: 'MYSTERY', path: '/icons/mystery.png', position: { top: '5rem', left: '15rem' } },
-];
 
 const WINDOW_COMPONENTS: Record<string, React.ReactNode> = {
   ABOUT_ME: <AboutMe />,
   RESUME: <Resume />,
   STEAM: <Steam />,
   CONTACT_ME: <ContactMe />,
-  MYSTERY: <Mystery />,
 };
 
 function Desktop() {
-  const [time, setTime] = useState(new Date());
   const { windows, activeWindowId, openWindow, setActiveWindow, closeWindow } =
     useWindowStore();
-
-  // TODO refactor?
-  useEffect(() => {
-    const timerId = setInterval(() => {
-      setTime(new Date());
-    }, 1000);
-
-    return () => clearInterval(timerId);
-  }, []);
-
-  const formattedTime = time.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
 
   return (
     <>
       <div>NOTE: THIS WEBSITE IS CURRENTLY A WORK IN PROGRESS</div>
       <div className={`${PARENT_CLASS}__container`}>
         <div className={`${PARENT_CLASS}__icons`}>
-          {DESKTOP_ICONS.map((desktopIcon) => {
+          {DESKTOP_WINDOWS.map((window) => {
             return (
               <div
                 className={`${PARENT_CLASS}__icon`}
-                key={desktopIcon.title}
-                onClick={() =>
-                  openWindow(
-                    desktopIcon.id,
-                    desktopIcon.title,
-                    desktopIcon.position,
-                  )
-                }
+                key={window.title}
+                onClick={() => openWindow(window)}
               >
-                <img src={desktopIcon.path} />
-                <label>{desktopIcon.title}</label>
+                <img src={window.icon} />
+                <label>{window.title}</label>
               </div>
             );
           })}
@@ -101,7 +43,7 @@ function Desktop() {
         {windows.map((window) => (
           <WindowModal
             key={window.id}
-            windowData={window}
+            desktopWindow={window}
             closeFn={() => closeWindow(window.id)}
           >
             {WINDOW_COMPONENTS[window.id]}
@@ -119,7 +61,7 @@ function Desktop() {
               >
                 <div className={`${PARENT_CLASS}__checkerboard`}>
                   <img
-                    src={DESKTOP_ICONS.find((w) => w.id === window.id)?.path}
+                    src={DESKTOP_WINDOWS.find((w) => w.id === window.id)?.icon}
                   />
                   {window.title}
                 </div>
@@ -131,13 +73,15 @@ function Desktop() {
                 onClick={() => setActiveWindow(window.id)}
               >
                 <img
-                  src={DESKTOP_ICONS.find((w) => w.id === window.id)?.path}
+                  src={DESKTOP_WINDOWS.find((w) => w.id === window.id)?.icon}
                 />
                 {window.title}
               </div>
             ),
           )}
-          <div className={`${PARENT_CLASS}__time`}>{formattedTime}</div>
+          <div className={`${PARENT_CLASS}__time`}>
+            <Clock />
+          </div>
         </div>
       </div>
     </>

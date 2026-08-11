@@ -17,12 +17,11 @@ Audit performed 2026-08-10. Organized by priority — tackle Tier 1 first, it's 
 ## Tier 2 — Structural / component design
 
 - [x] Extract a reusable `<FormField>` component in `ContactMe.tsx` — the label+input+error block is copy-pasted 3–4 times (`ContactMe.tsx:91-119, 120-148, 149-171, 173-201`).
-- [ ] Extract a shared `<SectionHeader title="..." />` for the repeated title+divider pattern in `AboutMe.tsx`, `Steam.tsx`, `ContactMe.tsx`.
 - [ ] Refactor `AboutMe.tsx:102-170` — 8 near-identical `sectionId === 'X' ? (...) : null` branches, 6 of which render the same placeholder markup. Drive this from a data lookup instead of copy-pasted JSX.
-- [ ] Make `WindowModal.tsx` generic — it special-cases `windowData.id === 'CONTACT_ME'` (`:31,78-79,96-97,119-128`) to control sizing/layout. Pass `size`/`variant` as a prop from `Desktop.tsx`'s config instead.
-- [ ] Data-drive the Email/Links tabs in `ContactMe.tsx:55-70` (currently two near-identical hardcoded divs) similar to how `DESKTOP_ICONS` already works.
-- [ ] Extract hardcoded API base URL (`src/api/api.ts:5,19`) into a single constant, ideally `import.meta.env.VITE_API_BASE_URL`. Add a `.env.example`.
-- [ ] Hoist `WINDOW_COMPONENTS` in `Desktop.tsx:32-39` out of the component body (it's recreated every render, and `Desktop` re-renders every second — see Tier 3).
+- [x] Make `WindowModal.tsx` generic — it special-cases `windowData.id === 'CONTACT_ME'` (`:31,78-79,96-97,119-128`) to control sizing/layout. Pass `size`/`variant` as a prop from `Desktop.tsx`'s config instead.
+- [x] Data-drive the Email/Links tabs in `ContactMe.tsx:55-70` (currently two near-identical hardcoded divs) similar to how `DESKTOP_ICONS` already works.
+- [x] Extract hardcoded API base URL (`src/api/api.ts:5,19`) into a single constant, ideally `import.meta.env.VITE_API_BASE_URL`. Add a `.env.example`.
+- [x] Hoist `WINDOW_COMPONENTS` in `Desktop.tsx:32-39` out of the component body (it's recreated every render, and `Desktop` re-renders every second — see Tier 3).
 - [ ] Decide the fate of `src/models/Computa.tsx` (unused 3D computer feature, fully commented out in `App.tsx`) — finish and wire it up, or delete it along with `three`/`@react-three/fiber`/`@react-three/drei` deps and `.glb` assets to cut bundle size.
 - [ ] Resolve/remove `MySpace` and `Mystery` stub components (5-line placeholders, commented out of `DESKTOP_ICONS` but still wired into `WINDOW_COMPONENTS`) — finish or remove.
 
@@ -53,7 +52,7 @@ Audit performed 2026-08-10. Organized by priority — tackle Tier 1 first, it's 
 ## Tier 5 — Hooks / performance
 
 - [ ] Wrap `onMouseUp` in `WindowModal.tsx` (`:45-48`) in `useCallback`, matching `onMouseMove` (`:33-42`) — currently it's redefined every render but is a `useEffect` dependency (`:67`), causing listener re-subscription on every render.
-- [ ] Isolate the 1-second clock interval in `Desktop.tsx:46-52` into its own `<Clock />` component — right now it re-renders the entire desktop tree (all windows, icons, taskbar) every second.
+- [x] Isolate the 1-second clock interval in `Desktop.tsx:46-52` into its own `<Clock />` component — right now it re-renders the entire desktop tree (all windows, icons, taskbar) every second.
 - [ ] Consider `React.memo` for `WindowModal`/icon list items once the clock re-render issue above is fixed.
 - [ ] Add `loading="lazy"` to below-the-fold images (game cards, placeholder gifs).
 

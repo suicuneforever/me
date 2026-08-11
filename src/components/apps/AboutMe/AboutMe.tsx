@@ -1,36 +1,15 @@
 import { AsciiRenderer, Image } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useState } from "react";
+import { STATUSES } from "../../../constants/constants";
 import { useWindowStore } from "../../../store/store";
+import { Section } from "../../../types/types";
 import CursorTrail from "../../general/CursorTrail";
 import GlitchButton from "../../general/GlitchButton";
 import "./AboutMe.scss";
 
 const PARENT_CLASS = "AboutMe";
 const WINDOW_ID = "ABOUT_ME";
-
-type Status = {
-  question: string;
-  answer: string;
-};
-
-const STATUSES: Status[] = [
-  { question: "mood", answer: "motivated" },
-  { question: "hear", answer: "wannacry - ninajirachi & porter robinson" },
-  {
-    question: "read",
-    answer: "i who have never known men - jacqueline harpman",
-  },
-  { question: "play", answer: "monster hunter: wilds" },
-  { question: "make", answer: "this website" },
-];
-
-// TODO move?
-export type Section = {
-  title: string;
-  id: string;
-  isActive: boolean;
-};
 
 const SECTIONS: Section[] = [
   { title: "about", id: "ABOUT", isActive: true },

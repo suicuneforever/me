@@ -1,8 +1,9 @@
-import { Email } from '../components/ContactMe/ContactMe';
-import { GameData } from '../types/types';
+import { Email, GameData } from "../types/types";
+
+const API_URL = "https://portfolio-server-seven-lemon.vercel.app/api";
 
 export const getRecentlyPlayedGames = async (): Promise<GameData[]> => {
-  const res = await fetch('https://portfolio-server-seven-lemon.vercel.app/api/steam/recent');
+  const res = await fetch(`${API_URL}/steam/recent`);
   const data = await res.json();
 
   return data.response.games.map((game: any) => {
@@ -16,14 +17,14 @@ export const getRecentlyPlayedGames = async (): Promise<GameData[]> => {
 };
 
 export const sendEmail = async (email: Email) => {
-  const res = await fetch('https://portfolio-server-seven-lemon.vercel.app/api/contact', {
-    method: 'POST',
+  const res = await fetch(`${API_URL}/contact`, {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       recipient: email,
-      text: `Name: ${email.name}\nEmail: ${email.email}\nCompany: ${email.company ?? 'n/a'}\n\n${email.message}`,
+      text: `Name: ${email.name}\nEmail: ${email.email}\nCompany: ${email.company ?? "n/a"}\n\n${email.message}`,
     }),
   });
 

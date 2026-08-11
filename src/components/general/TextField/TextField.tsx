@@ -39,13 +39,15 @@ function TextField({ label, isRequired, isTextArea }: TextFieldProps) {
             onChange={(e) => field.handleChange(e.target.value)}
           />
         )}
-        <div className={`${PARENT_CLASS}__error-message`}>
-          {!field.state.meta.isValid && (
-            <em role="alert">
-              {field.state.meta.errors.map((error: any) => error?.message)}
-            </em>
-          )}
-        </div>
+        {isRequired ? (
+          <div className={`${PARENT_CLASS}__error-message`}>
+            {!field.state.meta.isValid && (
+              <em role="alert">
+                {field.state.meta.errors.map((error: any) => error?.message)}
+              </em>
+            )}
+          </div>
+        ) : null}
       </div>
     </div>
   );

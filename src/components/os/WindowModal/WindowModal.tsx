@@ -1,21 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useWindowStore, Window } from "../../../store/store";
+import { useWindowStore } from "../../../store/store";
+import { DesktopWindow } from "../../../types/types";
 import "./WindowModal.scss";
 
 const PARENT_CLASS = "WindowModal";
 
-const WINDOW_SIZE: { width: string; height: string } = {
-  width: "65rem",
-  height: "50rem",
-};
-
 type WindowModalProps = {
-  windowData: Window;
+  desktopWindow: DesktopWindow;
   children: React.ReactNode;
   closeFn: () => void;
 };
 
-function WindowModal({ windowData, children, closeFn }: WindowModalProps) {
+function WindowModal({ desktopWindow, children, closeFn }: WindowModalProps) {
   const [isDragging, setIsDragging] = useState(false);
   const { activeWindowId, setActiveWindow } = useWindowStore();
 
@@ -36,8 +32,7 @@ function WindowModal({ windowData, children, closeFn }: WindowModalProps) {
   // This is the element we are moving
   const dragRef = useRef<HTMLDivElement | null>(null);
 
-  const isActive = activeWindowId === windowData.id;
-  const isContactMe = windowData.id === "CONTACT_ME";
+  const isActive = activeWindowId === desktopWindow.id;
 
   const onMouseMove = useCallback(
     (e: MouseEvent) => {
@@ -58,7 +53,7 @@ function WindowModal({ windowData, children, closeFn }: WindowModalProps) {
 
   // Function to handle the start of a drag event
   const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-    setActiveWindow(windowData.id);
+    setActiveWindow(desktopWindow.id);
     e.stopPropagation();
     e.preventDefault();
     setIsDragging(true);
@@ -87,10 +82,10 @@ function WindowModal({ windowData, children, closeFn }: WindowModalProps) {
           onClick={(e) => e.stopPropagation()} // to prevent event delegation to the overlay
           style={{
             transform: `translate(${position.x}px, ${position.y}px)`,
-            width: isContactMe ? "35rem" : WINDOW_SIZE.width,
-            height: isContactMe ? "33rem" : WINDOW_SIZE.height,
-            top: windowData.position.top,
-            left: windowData.position.left,
+            width: desktopWindow.size.width,
+            height: desktopWindow.size.height,
+            top: desktopWindow.position.top,
+            left: desktopWindow.position.left,
           }}
         >
           <div
@@ -113,13 +108,13 @@ function WindowModal({ windowData, children, closeFn }: WindowModalProps) {
         className={`${PARENT_CLASS}__wrapper`}
         style={{
           transform: `translate(${windowPosition.x}px, ${windowPosition.y}px)`,
-          width: isContactMe ? "35rem" : WINDOW_SIZE.width,
-          height: isContactMe ? "33rem" : WINDOW_SIZE.height,
+          width: desktopWindow.size.width,
+          height: desktopWindow.size.height,
           zIndex: isActive ? 10 : 0,
-          top: windowData.position.top,
-          left: windowData.position.left,
+          top: desktopWindow.position.top,
+          left: desktopWindow.position.left,
         }}
-        onClick={() => setActiveWindow(windowData.id)}
+        onClick={() => setActiveWindow(desktopWindow.id)}
       >
         <div className={`${PARENT_CLASS}__outer-container`}>
           <div className={`${PARENT_CLASS}__inner-container`}>
@@ -131,7 +126,7 @@ function WindowModal({ windowData, children, closeFn }: WindowModalProps) {
                 className={`${PARENT_CLASS}__title`}
                 onMouseDown={onMouseDown}
               >
-                {windowData.title}
+                {desktopWindow.title}
               </div>
               <div className={`${PARENT_CLASS}__icons`}>
                 <button
@@ -146,7 +141,7 @@ function WindowModal({ windowData, children, closeFn }: WindowModalProps) {
                 />
               </div>
             </div>
-            {isContactMe ? (
+            {desktopWindow.variant === "compact" ? (
               <div>{children}</div>
             ) : (
               <>

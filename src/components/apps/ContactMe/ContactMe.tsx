@@ -3,24 +3,17 @@ import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { z } from "zod";
 import { sendEmail } from "../../../api/api";
+import { CONTACT_LINKS, CONTACT_TABS } from "../../../constants/constants";
 import { fieldContext, formContext } from "../../../hooks/AppFormContext";
+import { Email } from "../../../types/types";
 import TextField from "../../general/TextField";
 import "./ContactMe.scss";
-
-// TODO extract type
-export interface Email {
-  name: string;
-  email: string;
-  company?: string;
-  message: string;
-}
 
 const PARENT_CLASS = "ContactMe";
 
 const { useAppForm } = createFormHook({
   fieldContext,
   formContext,
-  // We'll learn more about these options later
   fieldComponents: {
     TextField,
   },
@@ -69,26 +62,19 @@ function ContactMe() {
   return (
     <div className={`${PARENT_CLASS}`}>
       <div className={`${PARENT_CLASS}__tab-list`}>
-        <div
-          className={
-            currentTab === "EMAIL"
-              ? `${PARENT_CLASS}__tab ${PARENT_CLASS}__tab--active`
-              : `${PARENT_CLASS}__tab`
-          }
-          onClick={() => setCurrentTab("EMAIL")}
-        >
-          Email
-        </div>
-        <div
-          className={
-            currentTab === "LINKS"
-              ? `${PARENT_CLASS}__tab ${PARENT_CLASS}__tab--active`
-              : `${PARENT_CLASS}__tab`
-          }
-          onClick={() => setCurrentTab("LINKS")}
-        >
-          Links
-        </div>
+        {CONTACT_TABS.map((tab) => (
+          <div
+            key={tab.id}
+            className={
+              currentTab === tab.id
+                ? `${PARENT_CLASS}__tab ${PARENT_CLASS}__tab--active`
+                : `${PARENT_CLASS}__tab`
+            }
+            onClick={() => setCurrentTab(tab.id)}
+          >
+            {tab.label}
+          </div>
+        ))}
       </div>
       <div className={`${PARENT_CLASS}__container`}>
         {currentTab === "EMAIL" ? (
@@ -154,15 +140,11 @@ function ContactMe() {
           </>
         ) : (
           <div className={`${PARENT_CLASS}__links`}>
-            <a href="https://github.com/suicuneforever" target="_blank">
-              <img src="icons/github.png" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/danijaramillo/"
-              target="_blank"
-            >
-              <img src="icons/linkedin.png" />
-            </a>
+            {CONTACT_LINKS.map((link) => (
+              <a key={link.href} href={link.href} target="_blank">
+                <img src={link.icon} alt={link.label} />
+              </a>
+            ))}
           </div>
         )}
       </div>

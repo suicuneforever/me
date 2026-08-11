@@ -1,32 +1,25 @@
-import { create } from 'zustand';
-
-export interface Position {
-  top: string;
-  left: string;
-}
-
-export interface Window {
-  id: string;
-  title: string;
-  position: Position;
-}
+import { create } from "zustand";
+import { DESKTOP_WINDOWS } from "../constants/constants";
+import { DesktopWindow } from "../types/types";
 
 interface WindowState {
-  windows: Window[];
+  windows: DesktopWindow[];
   activeWindowId: string | null;
-  openWindow: (id: string, title: string, position: Position) => void;
+  openWindow: (window: DesktopWindow) => void;
   setActiveWindow: (id: string) => void;
   closeWindow: (id: string) => void;
   closeAll: () => void;
 }
 
 export const useWindowStore = create<WindowState>()((set, get) => ({
-  windows: [{ id: 'ABOUT_ME', title: 'about me', position: { top: '5rem', left: '15rem' } }],
-  activeWindowId: 'ABOUT_ME',
-  openWindow: (id, title, position) =>
+  windows: [DESKTOP_WINDOWS[0]],
+  activeWindowId: "ABOUT_ME",
+  openWindow: (window) =>
     set((state) => ({
-      windows: state.windows.find((w) => w.id === id) ? state.windows : [...state.windows, { id, title, position }],
-      activeWindowId: id,
+      windows: state.windows.find((w) => w.id === window.id)
+        ? state.windows
+        : [...state.windows, window],
+      activeWindowId: window.id,
     })),
   setActiveWindow: (id) => set({ activeWindowId: id }),
   closeWindow: (id) => {
@@ -35,7 +28,10 @@ export const useWindowStore = create<WindowState>()((set, get) => ({
 
     let nextActiveId = activeWindowId;
     if (activeWindowId === id) {
-      nextActiveId = remainingWindows.length > 0 ? remainingWindows[remainingWindows.length - 1].id : null;
+      nextActiveId =
+        remainingWindows.length > 0
+          ? remainingWindows[remainingWindows.length - 1].id
+          : null;
     }
 
     set({ windows: remainingWindows, activeWindowId: nextActiveId });
