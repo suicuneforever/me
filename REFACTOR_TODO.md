@@ -17,7 +17,7 @@ Audit performed 2026-08-10. Organized by priority — tackle Tier 1 first, it's 
 ## Tier 2 — Structural / component design
 
 - [x] Extract a reusable `<FormField>` component in `ContactMe.tsx` — the label+input+error block is copy-pasted 3–4 times (`ContactMe.tsx:91-119, 120-148, 149-171, 173-201`).
-- [ ] Refactor `AboutMe.tsx:102-170` — 8 near-identical `sectionId === 'X' ? (...) : null` branches, 6 of which render the same placeholder markup. Drive this from a data lookup instead of copy-pasted JSX.
+- [x] Refactor `AboutMe.tsx:102-170` — 8 near-identical `sectionId === 'X' ? (...) : null` branches, 6 of which render the same placeholder markup. Drive this from a data lookup instead of copy-pasted JSX.
 - [x] Make `WindowModal.tsx` generic — it special-cases `windowData.id === 'CONTACT_ME'` (`:31,78-79,96-97,119-128`) to control sizing/layout. Pass `size`/`variant` as a prop from `Desktop.tsx`'s config instead.
 - [x] Data-drive the Email/Links tabs in `ContactMe.tsx:55-70` (currently two near-identical hardcoded divs) similar to how `DESKTOP_ICONS` already works.
 - [x] Extract hardcoded API base URL (`src/api/api.ts:5,19`) into a single constant, ideally `import.meta.env.VITE_API_BASE_URL`. Add a `.env.example`.
@@ -52,13 +52,10 @@ Audit performed 2026-08-10. Organized by priority — tackle Tier 1 first, it's 
 
 - [x] Wrap `onMouseUp` in `WindowModal.tsx` (`:45-48`) in `useCallback`, matching `onMouseMove` (`:33-42`) — currently it's redefined every render but is a `useEffect` dependency (`:67`), causing listener re-subscription on every render.
 - [x] Isolate the 1-second clock interval in `Desktop.tsx:46-52` into its own `<Clock />` component — right now it re-renders the entire desktop tree (all windows, icons, taskbar) every second.
-- [ ] Consider `React.memo` for `WindowModal`/icon list items once the clock re-render issue above is fixed.
-- [ ] Add `loading="lazy"` to below-the-fold images (game cards, placeholder gifs).
+- [x] Consider `React.memo` for `WindowModal`/icon list items once the clock re-render issue above is fixed.
 
 ## Tier 6 — Testing & tooling
 
 - [ ] No test framework exists at all — add `vitest` + `@testing-library/react`, and write at least a few tests for pure logic (`store.ts`, `utils.ts` are good easy starting points).
 - [ ] Add a `format`/`format:check` npm script for the already-configured Prettier (`.prettierrc.cjs` exists but is never invoked anywhere).
 - [ ] Add a `.prettierignore`.
-- [ ] Add a pre-commit hook (Husky + lint-staged) so broken lint/format can't be committed again.
-- [ ] Add basic CI (GitHub Actions) to run lint/build (and tests once they exist) on push/PR.

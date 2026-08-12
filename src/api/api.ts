@@ -9,10 +9,10 @@ export const getRecentlyPlayedGames = async (): Promise<GameData[]> => {
   return data.response.games.map((game: any) => {
     return {
       name: game.name,
-      playtimeTwoWeeks: game.playtime_2weeks,
-      playtimeForever: game.playtime_forever,
+      // playtimeTwoWeeks: (game.playtime_2weeks /,
+      playtimeForever: (game.playtime_forever / 60).toFixed(1),
       imgUrl: `https://media.steampowered.com/steamcommunity/public/images/apps/${game.appid}/${game.img_icon_url}.jpg`,
-    } as GameData;
+    } as unknown as GameData;
   });
 };
 

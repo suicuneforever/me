@@ -9,7 +9,95 @@ import GlitchButton from "../../general/GlitchButton";
 import "./AboutMe.scss";
 
 const PARENT_CLASS = "AboutMe";
+
 const WINDOW_ID = "ABOUT_ME";
+
+const SECTION_CONTENT: Record<
+  string,
+  { title: string; content?: React.ReactNode }
+> = {
+  ABOUT: {
+    title: "about me",
+    content: (
+      <>
+        <div className={`${PARENT_CLASS}__canvas`}>
+          <Canvas camera={{ fov: 10, position: [0, 0, 5] }}>
+            <Suspense fallback={null}>
+              <AsciiRenderer
+                invert
+                resolution={0.2}
+                bgColor="#080808"
+                fgColor="#4242ff"
+              />
+              <Image url="/images/portrait.jpg" />
+            </Suspense>
+          </Canvas>
+        </div>
+        <div className={`${PARENT_CLASS}__text`}>
+          my name is dani and i'm a fullstack software engineer. i have over 7
+          years of experience and found myself mostly to be in the web
+          devlopment space. ever since i was young, i have had a passion for art
+          and technology, so i often like to find ways where i can combine the
+          two in the things i create. this website is meant to be a culmination
+          of all things i enjoy and what has made me the person i am today. i
+          have taken a lot of inspiration from artists and developers i admire,
+          as well as inspiration from the early internet age (neopets, myspace,
+          deviantart...) which is where i got my start in things like web dev
+          and digital art. thx 4 reading ^_^
+        </div>
+      </>
+    ),
+  },
+  MUSIC: { title: "music" },
+  ART: { title: "art" },
+  UPDATES: { title: "updates" },
+  TODO_LIST: { title: "to-do list" },
+  GUESTBOOK: { title: "guestbook" },
+  CREDITS: {
+    title: "credits, inspiration",
+    content: (
+      <div className={`${PARENT_CLASS}__credits`}>
+        <span>
+          about me header by{" "}
+          <a
+            href="https://www.instagram.com/downtowntempo/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            downtown tempo
+          </a>
+        </span>
+        <span>
+          background from{" "}
+          <a href="https://www.fillster.com/" target="_blank" rel="noreferrer">
+            fillster.com
+          </a>
+        </span>
+
+        <span>
+          cursor design by{" "}
+          <a
+            href="https://codepen.io/sarahwfox/pen/pNrYGb"
+            target="_blank"
+            rel="noreferrer"
+          >
+            @sarahwfox
+          </a>
+        </span>
+        <span>
+          about me fonts from{" "}
+          <a
+            href="https://int10h.org/oldschool-pc-fonts/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            old school pc font resource
+          </a>
+        </span>
+      </div>
+    ),
+  },
+};
 
 const SECTIONS: Section[] = [
   { title: "about", id: "ABOUT", isActive: true },
@@ -96,86 +184,11 @@ function AboutMe() {
             </div>
             <div className={`${PARENT_CLASS}__card`}>
               <div className={`${PARENT_CLASS}__section`}>
-                {sectionId === "ABOUT" ? (
-                  <>
-                    <div className={`${PARENT_CLASS}__title`}>about me</div>
-                    <div className={`${PARENT_CLASS}__divider`}></div>
-                    <div className={`${PARENT_CLASS}__canvas`}>
-                      <Canvas
-                        camera={{
-                          fov: 10,
-                          position: [0, 0, 5],
-                        }}
-                      >
-                        <Suspense fallback={null}>
-                          <AsciiRenderer
-                            invert={true}
-                            resolution={0.2}
-                            bgColor="#080808"
-                            fgColor="#4242ff"
-                          />
-                          <Image url="/images/portrait.jpg" />
-                        </Suspense>
-                      </Canvas>
-                    </div>
-                    <div className={`${PARENT_CLASS}__text`}>
-                      my name is dani and i'm a fullstack software engineer. i
-                      have over 7 years of experience and found myself mostly to
-                      be in the web devlopment space. ever since i was young, i
-                      have had a passion for art and technology, so i often like
-                      to find ways where i can combine the two in the things i
-                      create. this website is meant to be a culmination of all
-                      things i enjoy and what has made me the person i am today.
-                      i have taken a lot of inspiration from artists and
-                      developers i admire, as well as inspiration from the early
-                      internet age (neopets, myspace, deviantart...) which is
-                      where i got my start in things like web dev and digital
-                      art. thx 4 reading ^_^
-                    </div>
-                  </>
-                ) : null}
-                {sectionId === "MUSIC" ? (
-                  <>
-                    <div className={`${PARENT_CLASS}__title`}>music</div>
-                  </>
-                ) : null}
-                {sectionId === "ART" ? (
-                  <>
-                    <div className={`${PARENT_CLASS}__title`}>art</div>
-                  </>
-                ) : null}
-                {sectionId === "UPDATES" ? (
-                  <>
-                    <div className={`${PARENT_CLASS}__title`}>updates</div>
-                  </>
-                ) : null}
-                {sectionId === "TODO_LIST" ? (
-                  <>
-                    <div className={`${PARENT_CLASS}__title`}>to-do list</div>
-                  </>
-                ) : null}
-                {sectionId === "GUESTBOOK" ? (
-                  <>
-                    <div className={`${PARENT_CLASS}__title`}>guestbook</div>
-                  </>
-                ) : null}
-                {sectionId === "CREDITS" ? (
-                  <>
-                    <div className={`${PARENT_CLASS}__title`}>
-                      credits, inspiration
-                    </div>
-                    <div className={`${PARENT_CLASS}__text`}>
-                      about me header by{" "}
-                      <a
-                        href="https://www.instagram.com/downtowntempo/"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        downtown tempo
-                      </a>
-                    </div>
-                  </>
-                ) : null}
+                <div className={`${PARENT_CLASS}__title`}>
+                  {SECTION_CONTENT[sectionId].title}
+                </div>
+                <div className={`${PARENT_CLASS}__divider`}></div>
+                {SECTION_CONTENT[sectionId].content}
               </div>
             </div>
           </div>
@@ -187,8 +200,3 @@ function AboutMe() {
 }
 
 export default AboutMe;
-
-//https://int10h.org/oldschool-pc-fonts/
-//https://codepen.io/sarahwfox/pen/pNrYGb
-//https://miserabledolly.net/home
-//https://www.fillster.com/

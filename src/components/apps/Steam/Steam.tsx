@@ -1,3 +1,6 @@
+import { useQuery } from "@tanstack/react-query";
+import { getRecentlyPlayedGames } from "../../../api/api";
+import { GameData } from "../../../types/types";
 import "./Steam.scss";
 
 type FavoriteGame = {
@@ -17,10 +20,12 @@ const PARENT_CLASS = "Steam";
 const STEAM_URL = "steamcommunity.com/profiles/76561198341352380/";
 
 function Steam() {
-  // const { data } = useQuery({
-  //   queryKey: ['recentlyPlayedGames'],
-  //   queryFn: () => getRecentlyPlayedGames(),
-  // });
+  const { data } = useQuery({
+    queryKey: ["recentlyPlayedGames"],
+    queryFn: () => getRecentlyPlayedGames(),
+  });
+
+  console.log(data);
 
   return (
     <div className={`${PARENT_CLASS}`}>
@@ -98,6 +103,23 @@ function Steam() {
               </div>
             ))}
           </div>
+        </div>
+        <div className={`${PARENT_CLASS}__content-heading`}>
+          Recent Activity
+        </div>
+        <div className={`${PARENT_CLASS}__recently-played`}>
+          {data?.map((game: GameData) => (
+            <div className={`${PARENT_CLASS}__recently-played-game`}>
+              <img src={game.imgUrl} />
+              <div className={`${PARENT_CLASS}__recently-played-text`}>
+                <span>{game.name}</span>
+                <div className={`${PARENT_CLASS}__recently-played-hours`}>
+                  <span>{game.playtimeForever}</span>
+                  <span>hours played</span>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

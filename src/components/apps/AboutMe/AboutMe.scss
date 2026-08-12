@@ -116,6 +116,11 @@
   }
 
   &__text {
+  }
+
+  &__credits {
+    display: flex;
+    flex-direction: column;
     a {
       color: #03fafa;
       padding-bottom: 2px;
