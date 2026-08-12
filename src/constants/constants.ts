@@ -1,6 +1,6 @@
 import { DesktopWindow, Status, WindowSize } from "../types/types";
 
-const DEFAULT_SIZE: WindowSize = { width: "65rem", height: "50rem" };
+const DEFAULT_SIZE: WindowSize = { width: "60rem", height: "40rem" };
 const COMPACT_SIZE: WindowSize = { width: "35rem", height: "33rem" };
 
 export const DESKTOP_WINDOWS: DesktopWindow[] = [
