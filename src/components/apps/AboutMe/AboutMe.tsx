@@ -38,11 +38,11 @@ const SECTION_CONTENT: Record<
           years of experience and found myself mostly to be in the web
           devlopment space. ever since i was young, i have had a passion for art
           and technology, so i often like to find ways where i can combine the
-          two in the things i create. this website is meant to be a culmination
-          of all things i enjoy and what has made me the person i am today. i
-          have taken a lot of inspiration from artists and developers i admire,
-          as well as inspiration from the early internet age (neopets, myspace,
-          deviantart...) which is where i got my start in things like web dev
+          two in my creations. this website is meant to be a culmination of all
+          things i enjoy and what has made me the person i am today. i have
+          taken a lot of inspiration from artists and developers i admire, as
+          well as inspiration from the early internet age (neopets, myspace,
+          deviantart...) which is where i got my start in interests like web dev
           and digital art. thx 4 reading ^_^
         </div>
       </>
@@ -51,7 +51,25 @@ const SECTION_CONTENT: Record<
   MUSIC: { title: "music" },
   ART: { title: "art" },
   UPDATES: { title: "updates" },
-  TODO_LIST: { title: "to-do list" },
+  TODO_LIST: {
+    title: "to-do list",
+    content: (
+      <div className={`${PARENT_CLASS}__text`}>
+        <ul>
+          <li>
+            <s>create contact me window</s>
+          </li>
+          <li>finish steam page</li>
+          <li>create custom clippy 3d model</li>
+          <li>implement window size manipulation</li>
+          <li>create about me music section</li>
+          <li>create about me art section</li>
+          <li>create about me update section</li>
+          <li>create about me guestbook section</li>
+        </ul>
+      </div>
+    ),
+  },
   GUESTBOOK: { title: "guestbook" },
   CREDITS: {
     title: "credits, inspiration",
@@ -104,7 +122,7 @@ const SECTIONS: Section[] = [
   { title: "music", id: "MUSIC", isActive: false },
   { title: "art", id: "ART", isActive: false },
   { title: "updates", id: "UPDATES", isActive: false },
-  { title: "to-do list", id: "TODO_LIST", isActive: false },
+  { title: "to-do list", id: "TODO_LIST", isActive: true },
   { title: "guestbook", id: "GUESTBOOK", isActive: false },
   { title: "credits", id: "CREDITS", isActive: true },
 ];

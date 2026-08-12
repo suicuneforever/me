@@ -13,6 +13,16 @@ const FAVORITE_GAMES: FavoriteGame[] = [
   { title: "Fire Emblem Awakening", imagePath: "images/games/fea.jpg" },
   { title: "Sonic Adventure 2: Battle", imagePath: "images/games/sa2b.jpg" },
   { title: "Final Fantasy XIII", imagePath: "images/games/ff13.jpg" },
+  { title: "Baldur's Gate 3", imagePath: "images/games/bg3.jpg" },
+  // { title: "Sid Meyer's Civilization VI", imagePath: "images/games/c6.jpg" },
+  // {
+  //   title: "Pokemon Myster Dungeon: Explorers of Darkness",
+  //   imagePath: "images/games/pmd.jpg",
+  // },
+  // { title: "Borderlands 2", imagePath: "images/games/b2.jpg" },
+  // { title: "Pokemon Soul Silver", imagePath: "images/games/pss.jpg" },
+  // { title: "Elden Ring", imagePath: "images/games/er.jpg" },
+  // { title: "Super Smash Brothers", imagePath: "images/games/ssbu.jpg" },
 ];
 
 const PARENT_CLASS = "Steam";

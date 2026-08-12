@@ -109,6 +109,7 @@ $tertiary-light-blue: #7f9db5;
 
   &__user-info {
     border-bottom: 1px solid $secondary-light-blue;
+    margin-bottom: 1rem;
   }
 
   &__user-info-heading {
@@ -205,7 +206,7 @@ $tertiary-light-blue: #7f9db5;
     &:after {
       content: "///////////////////////////////////////////////////////////////////";
       font-family: "JetBrainsMono";
-      color: $secondary-light-blue;
+      color: #2f5878;
       font-size: 0.7rem;
       padding-left: 0.5rem;
     }
@@ -226,7 +227,7 @@ $tertiary-light-blue: #7f9db5;
       border: 1px solid $tertiary-light-blue;
       display: block;
       max-width: 300px;
-      max-height: 250px;
+      max-height: 238px;
       width: auto;
       height: auto;
     }
