@@ -1,6 +1,6 @@
 import { DesktopWindow, Status, WindowSize } from "../types/types";
 
-const DEFAULT_SIZE: WindowSize = { width: "60rem", height: "40rem" };
+const DEFAULT_SIZE: WindowSize = { width: "60rem", height: "50rem" };
 const COMPACT_SIZE: WindowSize = { width: "35rem", height: "33rem" };
 
 export const DESKTOP_WINDOWS: DesktopWindow[] = [
@@ -8,7 +8,7 @@ export const DESKTOP_WINDOWS: DesktopWindow[] = [
     title: "about me",
     id: "ABOUT_ME",
     icon: "/icons/aboutme.png",
-    position: { top: "5rem", left: "15rem" },
+    position: { top: "4rem", left: "10rem" },
     size: DEFAULT_SIZE,
     variant: "default",
   },
@@ -16,7 +16,7 @@ export const DESKTOP_WINDOWS: DesktopWindow[] = [
     title: "resume",
     id: "RESUME",
     icon: "/icons/resume.png",
-    position: { top: "4rem", left: "13rem" },
+    position: { top: "5rem", left: "8rem" },
     size: DEFAULT_SIZE,
     variant: "default",
   },
@@ -24,7 +24,7 @@ export const DESKTOP_WINDOWS: DesktopWindow[] = [
     title: "steam",
     id: "STEAM",
     icon: "/icons/steam95.png",
-    position: { top: "7rem", left: "18rem" },
+    position: { top: "7rem", left: "13rem" },
     size: DEFAULT_SIZE,
     variant: "default",
   },
@@ -32,7 +32,7 @@ export const DESKTOP_WINDOWS: DesktopWindow[] = [
     title: "contact me",
     id: "CONTACT_ME",
     icon: "/icons/contactme.png",
-    position: { top: "10rem", left: "12rem" },
+    position: { top: "10rem", left: "7rem" },
     size: COMPACT_SIZE,
     variant: "compact",
   },

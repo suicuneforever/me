@@ -1,23 +1,20 @@
-// import { Canvas } from '@react-three/fiber';
-// import { Computa } from './models/Computa';
-// import { Suspense } from 'react';
-// import { Link } from '@tanstack/react-router';
-
-import Desktop from "./components/os/Desktop";
+import { Canvas } from "@react-three/fiber";
+import { Link } from "@tanstack/react-router";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { Experience } from "./Experience";
+import { queryClient } from "./queryClient";
 
 export default function App() {
   return (
     <>
-      <Desktop />
-      {/* <Link to="/desktop">desktop</Link>
-      <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
-        {/* <OrbitControls /> */}
-      {/* <directionalLight position={[10, 10, 5]} intensity={3} /> */}
-      {/* look into */}
-      {/* <Suspense>
-          <Computa />
-        </Suspense>
-      </Canvas> */}
+      <Link to="/desktop">desktop</Link>
+      <div style={{ width: "100vw", height: "100vh", background: "#1a1a1a" }}>
+        <Canvas shadows>
+          <QueryClientProvider client={queryClient}>
+            <Experience />
+          </QueryClientProvider>
+        </Canvas>
+      </div>
     </>
   );
 }

@@ -23,70 +23,63 @@ function Desktop() {
     useWindowStore();
 
   return (
-    <>
-      <div>NOTE: THIS WEBSITE IS CURRENTLY A WORK IN PROGRESS</div>
-      <div className={`${PARENT_CLASS}__container`}>
-        <div className={`${PARENT_CLASS}__icons`}>
-          {DESKTOP_WINDOWS.map((window) => (
-            <DesktopIcon
-              key={window.title}
-              window={window}
-              onOpen={openWindow}
-            />
-          ))}
-        </div>
-
-        {windows.map((window) => (
-          <WindowModal
-            key={window.id}
-            desktopWindow={window}
-            onClose={closeWindow}
-          >
-            {WINDOW_COMPONENTS[window.id]}
-          </WindowModal>
+    <div className={`${PARENT_CLASS}__container`}>
+      <div className={`${PARENT_CLASS}__icons`}>
+        {DESKTOP_WINDOWS.map((window) => (
+          <DesktopIcon key={window.title} window={window} onOpen={openWindow} />
         ))}
+      </div>
 
-        <div className={`${PARENT_CLASS}__start-bar`}>
-          <div className={`${PARENT_CLASS}__start-button`}>Start</div>
-          {windows.map((window) =>
-            window.id === activeWindowId ? (
-              <div
-                className={`${PARENT_CLASS}__window-button ${PARENT_CLASS}__window-button--active`}
-                key={window.id}
-                role="button"
-                tabIndex={0}
-                onClick={() => setActiveWindow(window.id)}
-              >
-                <div className={`${PARENT_CLASS}__checkerboard`}>
-                  <img
-                    src={DESKTOP_WINDOWS.find((w) => w.id === window.id)?.icon}
-                    alt={window.title}
-                  />
-                  {window.title}
-                </div>
-              </div>
-            ) : (
-              <div
-                className={`${PARENT_CLASS}__window-button`}
-                key={window.id}
-                role="button"
-                tabIndex={0}
-                onClick={() => setActiveWindow(window.id)}
-              >
+      {windows.map((window) => (
+        <WindowModal
+          key={window.id}
+          desktopWindow={window}
+          onClose={closeWindow}
+        >
+          {WINDOW_COMPONENTS[window.id]}
+        </WindowModal>
+      ))}
+
+      <div className={`${PARENT_CLASS}__start-bar`}>
+        <div className={`${PARENT_CLASS}__start-button`}>Start</div>
+        {windows.map((window) =>
+          window.id === activeWindowId ? (
+            <div
+              className={`${PARENT_CLASS}__window-button ${PARENT_CLASS}__window-button--active`}
+              key={window.id}
+              role="button"
+              tabIndex={0}
+              onClick={() => setActiveWindow(window.id)}
+            >
+              <div className={`${PARENT_CLASS}__checkerboard`}>
                 <img
                   src={DESKTOP_WINDOWS.find((w) => w.id === window.id)?.icon}
                   alt={window.title}
                 />
                 {window.title}
               </div>
-            ),
-          )}
-          <div className={`${PARENT_CLASS}__time`}>
-            <Clock />
-          </div>
+            </div>
+          ) : (
+            <div
+              className={`${PARENT_CLASS}__window-button`}
+              key={window.id}
+              role="button"
+              tabIndex={0}
+              onClick={() => setActiveWindow(window.id)}
+            >
+              <img
+                src={DESKTOP_WINDOWS.find((w) => w.id === window.id)?.icon}
+                alt={window.title}
+              />
+              {window.title}
+            </div>
+          ),
+        )}
+        <div className={`${PARENT_CLASS}__time`}>
+          <Clock />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

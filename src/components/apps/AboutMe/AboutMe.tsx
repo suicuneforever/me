@@ -1,6 +1,4 @@
-import { AsciiRenderer, Image } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
-import { Suspense, useState } from "react";
+import { useState } from "react";
 import { STATUSES } from "../../../constants/constants";
 import { useWindowStore } from "../../../store/store";
 import { Section } from "../../../types/types";
@@ -20,7 +18,7 @@ const SECTION_CONTENT: Record<
     title: "about me",
     content: (
       <>
-        <div className={`${PARENT_CLASS}__canvas`}>
+        {/* <div className={`${PARENT_CLASS}__canvas`}>
           <Canvas camera={{ fov: 10, position: [0, 0, 5] }}>
             <Suspense fallback={null}>
               <AsciiRenderer
@@ -32,7 +30,7 @@ const SECTION_CONTENT: Record<
               <Image url="/images/portrait.jpg" />
             </Suspense>
           </Canvas>
-        </div>
+        </div> */}
         <div className={`${PARENT_CLASS}__text`}>
           my name is dani and i'm a fullstack software engineer. i have over 7
           years of experience and found myself mostly to be in the web

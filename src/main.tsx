@@ -4,7 +4,8 @@ import App from './App.tsx';
 import './index.css';
 import { RouterProvider, createRouter, createRoute, createRootRoute } from '@tanstack/react-router';
 import Desktop from './components/os/Desktop/Desktop.tsx';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from './queryClient.ts';
 
 const rootRoute = createRootRoute();
 
@@ -29,8 +30,6 @@ declare module '@tanstack/react-router' {
     router: typeof router;
   }
 }
-
-const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
