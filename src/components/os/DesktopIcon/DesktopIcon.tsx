@@ -15,7 +15,10 @@ function DesktopIcon({ window, onOpen }: DesktopIconProps) {
       className={`${PARENT_CLASS}`}
       role="button"
       tabIndex={0}
-      onClick={() => onOpen(window)}
+      onClick={(e) => {
+        e.stopPropagation();
+        onOpen(window);
+      }}
     >
       <img src={window.icon} alt={window.title} />
       <label>{window.title}</label>

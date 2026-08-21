@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { DESKTOP_WINDOWS } from "../../../constants/constants";
-import { useWindowStore } from "../../../store/store";
+import { useSceneStore, View } from "../../../store/sceneStore";
+import { useWindowStore } from "../../../store/windowStore";
 import AboutMe from "../../apps/AboutMe";
 import ContactMe from "../../apps/ContactMe";
 import Resume from "../../apps/Resume";
@@ -21,9 +23,18 @@ const WINDOW_COMPONENTS: Record<string, React.ReactNode> = {
 function Desktop() {
   const { windows, activeWindowId, openWindow, setActiveWindow, closeWindow } =
     useWindowStore();
+  const { setView } = useSceneStore();
+  const [showStartMenu, setShowStartMenu] = useState(false);
 
   return (
-    <div className={`${PARENT_CLASS}__container`}>
+    <div
+      className={`${PARENT_CLASS}__container`}
+      onClick={(e) => {
+        e.stopPropagation();
+        //TODO
+        showStartMenu && setShowStartMenu(false);
+      }}
+    >
       <div className={`${PARENT_CLASS}__icons`}>
         {DESKTOP_WINDOWS.map((window) => (
           <DesktopIcon key={window.title} window={window} onOpen={openWindow} />
@@ -41,7 +52,37 @@ function Desktop() {
       ))}
 
       <div className={`${PARENT_CLASS}__start-bar`}>
-        <div className={`${PARENT_CLASS}__start-button`}>Start</div>
+        <div
+          className={`${PARENT_CLASS}__start-button ${showStartMenu ? PARENT_CLASS + "__start-button-pressed" : ""}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowStartMenu(!showStartMenu);
+          }}
+        >
+          Start
+        </div>
+        {showStartMenu && (
+          <div className={`${PARENT_CLASS}__start-menu`}>
+            <div className={`${PARENT_CLASS}__start-menu-banner`}>
+              DaniJaramillo
+            </div>
+            <div className={`${PARENT_CLASS}__start-menu-buttons`}>
+              <div className={`${PARENT_CLASS}__start-menu-divider`}></div>
+              <div
+                className={`${PARENT_CLASS}__start-menu-button`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setView(View.Room);
+                }}
+              >
+                <img src="/icons/shutdown.png" />
+                <span>
+                  <u>S</u>hut Down...
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
         {windows.map((window) =>
           window.id === activeWindowId ? (
             <div
@@ -49,7 +90,10 @@ function Desktop() {
               key={window.id}
               role="button"
               tabIndex={0}
-              onClick={() => setActiveWindow(window.id)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setActiveWindow(window.id);
+              }}
             >
               <div className={`${PARENT_CLASS}__checkerboard`}>
                 <img
@@ -65,7 +109,10 @@ function Desktop() {
               key={window.id}
               role="button"
               tabIndex={0}
-              onClick={() => setActiveWindow(window.id)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setActiveWindow(window.id);
+              }}
             >
               <img
                 src={DESKTOP_WINDOWS.find((w) => w.id === window.id)?.icon}

@@ -15,6 +15,13 @@ $start: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAC
     justify-content: space-between;
     overflow: hidden;
     border-radius: 3px;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
   }
 
   &__icons {
@@ -50,6 +57,14 @@ $start: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAC
     padding-left: 1.875rem;
     box-shadow: $defaultButton;
 
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:active {
+      box-shadow: $pressedButton;
+    }
+
     &:after {
       content: "";
       background-image: url($start);
@@ -60,6 +75,64 @@ $start: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAC
       width: 1.875rem;
       height: 1.875rem;
       background-size: 1.25rem;
+    }
+  }
+
+  &__start-button-pressed {
+    box-shadow: $pressedButton;
+  }
+
+  &__start-menu {
+    background-color: $gray;
+    width: 17rem;
+    height: 23rem;
+    position: absolute;
+    bottom: 2rem;
+    left: 0;
+    box-shadow: $defaultButton;
+    display: flex;
+  }
+
+  &__start-menu-banner {
+    background-color: $darkGray;
+    width: 3rem;
+    line-height: 1.2;
+    color: $gray;
+    font-family: "FranklinGothic";
+    writing-mode: tb-rl;
+    transform: rotate(-180deg);
+    font-size: 3rem;
+    padding-top: 0.5rem;
+  }
+
+  &__start-menu-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    height: 100%;
+    width: 100%;
+  }
+
+  &__start-menu-divider {
+    border-top: 1px solid $darkGray;
+    border-bottom: 1px solid $white;
+    width: 100%;
+  }
+
+  &__start-menu-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0 0.5rem 0.5rem;
+
+    img {
+      width: 50px;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #000080;
+      color: $white;
     }
   }
 

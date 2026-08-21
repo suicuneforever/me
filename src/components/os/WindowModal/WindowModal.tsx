@@ -1,5 +1,5 @@
 import { memo, useCallback, useEffect, useRef, useState } from "react";
-import { useWindowStore } from "../../../store/store";
+import { useWindowStore } from "../../../store/windowStore";
 import { DesktopWindow } from "../../../types/types";
 import "./WindowModal.scss";
 
@@ -121,7 +121,10 @@ function WindowModal({ desktopWindow, children, onClose }: WindowModalProps) {
           top: desktopWindow.position.top,
           left: desktopWindow.position.left,
         }}
-        onClick={() => setActiveWindow(desktopWindow.id)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setActiveWindow(desktopWindow.id);
+        }}
       >
         <div className={`${PARENT_CLASS}__outer-container`}>
           <div className={`${PARENT_CLASS}__inner-container`}>
@@ -144,7 +147,10 @@ function WindowModal({ desktopWindow, children, onClose }: WindowModalProps) {
                 />
                 <button
                   className={`${PARENT_CLASS}__icon-button ${PARENT_CLASS}__icon-button--close`}
-                  onClick={() => onClose(desktopWindow.id)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onClose(desktopWindow.id);
+                  }}
                 />
               </div>
             </div>

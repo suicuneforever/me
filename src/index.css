@@ -10,49 +10,56 @@ body,
 }
 
 @font-face {
-  font-family: 'MS Sans Serif';
-  src: url('./assets/fonts/ms-sans-serif-1.otf.woff2') format('woff2');
+  font-family: "MS Sans Serif";
+  src: url("./assets/fonts/ms-sans-serif-1.otf.woff2") format("woff2");
   font-weight: normal;
 }
 
 @font-face {
-  font-family: 'PressStart2P';
-  src: url('./assets/fonts/PressStart2P.ttf') format('truetype');
+  font-family: "PressStart2P";
+  src: url("./assets/fonts/PressStart2P.ttf") format("truetype");
   font-weight: normal;
 }
 
 @font-face {
-  font-family: 'PC98';
-  src: url('./assets/fonts/Ac437_SperryPC_8x16.ttf') format('truetype');
+  font-family: "PC98";
+  src: url("./assets/fonts/Ac437_SperryPC_8x16.ttf") format("truetype");
   font-weight: normal;
 }
 
 @font-face {
-  font-family: 'Pixel English';
-  src: url('./assets/fonts/PixeledEnglishFont.ttf') format('truetype');
+  font-family: "Pixel English";
+  src: url("./assets/fonts/PixeledEnglishFont.ttf") format("truetype");
   font-weight: normal;
 }
 
 @font-face {
-  font-family: 'VT323';
-  src: url('./assets/fonts/VT323-Regular.ttf') format('truetype');
+  font-family: "VT323";
+  src: url("./assets/fonts/VT323-Regular.ttf") format("truetype");
   font-weight: normal;
 }
 
 @font-face {
-  font-family: 'DotGothic16';
-  src: url('./assets/fonts/DotGothic16-Regular.ttf') format('truetype');
+  font-family: "DotGothic16";
+  src: url("./assets/fonts/DotGothic16-Regular.ttf") format("truetype");
   font-weight: normal;
 }
 
 @font-face {
-  font-family: 'JetBrainsMono';
-  src: url('./assets/fonts/JetBrainsMono-VariableFont_wght.ttf') format('truetype');
+  font-family: "JetBrainsMono";
+  src: url("./assets/fonts/JetBrainsMono-VariableFont_wght.ttf")
+    format("truetype");
   font-weight: normal;
 }
 
 @font-face {
-  font-family: 'Silkscreen';
-  src: url('./assets/fonts/Silkscreen-Regular.ttf') format('truetype');
+  font-family: "Silkscreen";
+  src: url("./assets/fonts/Silkscreen-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "FranklinGothic";
+  src: url("./assets/fonts/FranklinGothic.ttf") format("truetype");
   font-weight: normal;
 }

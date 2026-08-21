@@ -1,4 +1,4 @@
-import { Html, useGLTF } from "@react-three/drei";
+import { Html, useCursor, useGLTF } from "@react-three/drei";
 import { ThreeElements, useFrame } from "@react-three/fiber";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { useControls } from "leva";
@@ -8,18 +8,18 @@ import { GLTF } from "three-stdlib";
 import "../../src/App.css";
 import Desktop from "../components/os/Desktop";
 import { queryClient } from "../queryClient";
+import { useSceneStore, View } from "../store/sceneStore";
 
 type GLTFResult = GLTF & {
   nodes: {
     monitor: THREE.Mesh;
     screen: THREE.Mesh;
+    button: THREE.Mesh;
   };
   materials: {
     ["Material.001"]: THREE.MeshStandardMaterial;
   };
 };
-
-const lookAtPos = new THREE.Vector3();
 
 type ComputerProps = ThreeElements["group"] & {
   showComputerScreen: boolean;
@@ -29,8 +29,11 @@ export function Computer({ showComputerScreen, ...props }: ComputerProps) {
   const { nodes, materials } = useGLTF(
     "/models/computer.glb",
   ) as unknown as GLTFResult;
-  const [clicked, setClicked] = useState(false);
   const screenRef = useRef<THREE.Mesh>(null);
+  const { setView } = useSceneStore();
+  const [buttonHovered, setButtonHovered] = useState(false);
+
+  useCursor(buttonHovered);
 
   useEffect(() => {
     nodes.screen.geometry.computeBoundingBox();
@@ -94,30 +97,45 @@ export function Computer({ showComputerScreen, ...props }: ComputerProps) {
       <mesh
         name="screen"
         ref={screenRef}
-        onClick={() => setClicked(!clicked)}
         castShadow
         receiveShadow
         geometry={nodes.screen.geometry}
         material={materials["Material.001"]}
         scale={0.703}
       >
-        {showComputerScreen && (
-          <Html
-            transform
-            // occlude
-            className="content"
-            position={[htmlPosition.x, htmlPosition.y, htmlPosition.z]}
-            rotation={[htmlRotation.x, htmlRotation.y, htmlRotation.z]}
-            scale={htmlScale}
-          >
-            <div className="wrapper">
-              <QueryClientProvider client={queryClient}>
-                <Desktop />
-              </QueryClientProvider>
-            </div>
-          </Html>
-        )}
+        <Html
+          transform
+          // occlude
+          className="content"
+          position={[htmlPosition.x, htmlPosition.y, htmlPosition.z]}
+          rotation={[htmlRotation.x, htmlRotation.y, htmlRotation.z]}
+          scale={htmlScale}
+          style={{
+            visibility: showComputerScreen ? "visible" : "hidden",
+            pointerEvents: showComputerScreen ? "auto" : "none",
+          }}
+        >
+          <div className="wrapper">
+            <QueryClientProvider client={queryClient}>
+              <Desktop />
+            </QueryClientProvider>
+          </div>
+        </Html>
       </mesh>
+      <mesh
+        name="button"
+        onPointerOver={() => setButtonHovered(true)}
+        onPointerOut={() => setButtonHovered(false)}
+        castShadow
+        receiveShadow
+        geometry={nodes.button.geometry}
+        material={materials["Material.001"]}
+        scale={0.703}
+        onClick={(e) => {
+          e.stopPropagation();
+          setView(View.Room);
+        }}
+      />
     </group>
   );
 }

@@ -72,7 +72,10 @@ function ContactMe() {
                 ? `${PARENT_CLASS}__tab ${PARENT_CLASS}__tab--active`
                 : `${PARENT_CLASS}__tab`
             }
-            onClick={() => setCurrentTab(tab.id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setCurrentTab(tab.id);
+            }}
           >
             {tab.label}
           </div>

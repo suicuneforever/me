@@ -54,7 +54,10 @@ function GlitchButton({ section, setSectionId }: GlitchButtonProps) {
       }
       disabled={!section.isActive}
       key={section.id}
-      onClick={() => setSectionId(section.id)}
+      onClick={(e) => {
+        e.stopPropagation();
+        setSectionId(section.id);
+      }}
       onMouseEnter={shuffleChars}
       ref={buttonRef}
     >

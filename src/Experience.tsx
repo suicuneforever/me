@@ -1,10 +1,11 @@
 import { CameraControls, PerspectiveCamera } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { button, useControls } from "leva";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import * as THREE from "three";
 import { Computer } from "./models/Computer";
 import { Room } from "./models/Room";
+import { useSceneStore, View } from "./store/sceneStore";
 
 function CameraRig({ x, y, z }: { x: number; y: number; z: number }) {
   useFrame((state) => {
@@ -24,7 +25,7 @@ const CAMERA_POSITIONS = {
 
 export function Experience() {
   const controls = useRef<CameraControls>(null!);
-  const [showComputerScreen, setShowComputerScreen] = useState(false);
+  const { view, setView } = useSceneStore();
 
   useControls("helper", {
     getLookAt: button(() => {
@@ -48,51 +49,66 @@ export function Experience() {
     );
   };
 
-  const lookAtComputer = () => {
-    // controls.current.setLookAt(1.4139162087389177, 0.40600224768936544, 0.005726569169989911, 0, 0, 0, true);
+  const lookAtRoom = () => {
     controls.current.setLookAt(
-      1.4139162087389177,
-      0.40600224768936544,
-      0.005726569169989911,
+      9.020214687579216,
+      2.4041598795031955,
+      9.020214687579209,
+      0,
+      0,
+      0,
+      true,
+    );
+  };
+
+  const lookAtComputer = () => {
+    controls.current.setLookAt(
+      1.3706560859927253,
+      0.4042971041650629,
+      0.00553710877840075,
       -0.01347061327284473,
       0.34974028536189455,
       -0.0005247599775067819,
       true,
     );
-
-    // animation
-    setShowComputerScreen(true);
-    console.log(showComputerScreen);
-
-    // controls.current.truck(0, -0.35, true);
   };
 
   useEffect(() => {
-    intro();
-  }, []);
+    if (view === View.Intro) intro();
+    if (view === View.Computer) lookAtComputer();
+    if (view === View.Room) lookAtRoom();
+  }, [view]);
 
   return (
     <>
       <axesHelper args={[5]} />
-      <CameraControls ref={controls} />
+      <CameraControls ref={controls} enabled={false} />
       <PerspectiveCamera />
       {/* Ambient light for general visibility */}
-      <ambientLight intensity={0.6} />
+      <ambientLight intensity={1} />
 
       {/* Directional light positioned to cast shadows into the corner */}
-      <directionalLight
+      {/* <directionalLight
         position={[5, 10, 5]}
         intensity={1.5}
         shadow-mapSize={[2048, 2048]}
-      />
+      /> */}
 
       {/* The structural corner environment */}
       <Suspense>
-        <Room />
+        <Room
+          onClick={(e) => {
+            e.stopPropagation();
+            setView(View.Room);
+          }}
+        />
         <Computer
           castShadow
-          onClick={() => lookAtComputer()}
-          showComputerScreen={showComputerScreen}
+          onClick={(e) => {
+            e.stopPropagation();
+            setView(View.Computer);
+          }}
+          showComputerScreen={view === View.Computer}
         />
       </Suspense>
 

@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { AsciiRenderer, Image } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { Suspense, useState } from "react";
 import { STATUSES } from "../../../constants/constants";
-import { useWindowStore } from "../../../store/store";
+import { useWindowStore } from "../../../store/windowStore";
 import { Section } from "../../../types/types";
 import CursorTrail from "../../general/CursorTrail";
 import GlitchButton from "../../general/GlitchButton";
@@ -18,8 +20,11 @@ const SECTION_CONTENT: Record<
     title: "about me",
     content: (
       <>
-        {/* <div className={`${PARENT_CLASS}__canvas`}>
-          <Canvas camera={{ fov: 10, position: [0, 0, 5] }}>
+        <div className={`${PARENT_CLASS}__canvas`}>
+          <Canvas
+            camera={{ fov: 10, position: [0, 0, 5] }}
+            resize={{ offsetSize: true }}
+          >
             <Suspense fallback={null}>
               <AsciiRenderer
                 invert
@@ -30,7 +35,7 @@ const SECTION_CONTENT: Record<
               <Image url="/images/portrait.jpg" />
             </Suspense>
           </Canvas>
-        </div> */}
+        </div>
         <div className={`${PARENT_CLASS}__text`}>
           my name is dani and i'm a fullstack software engineer. i have over 7
           years of experience and found myself mostly to be in the web
@@ -77,6 +82,7 @@ const SECTION_CONTENT: Record<
           about me header by{" "}
           <a
             href="https://www.instagram.com/downtowntempo/"
+            onClick={(e) => e.stopPropagation()}
             target="_blank"
             rel="noreferrer"
           >
@@ -85,7 +91,12 @@ const SECTION_CONTENT: Record<
         </span>
         <span>
           background from{" "}
-          <a href="https://www.fillster.com/" target="_blank" rel="noreferrer">
+          <a
+            href="https://www.fillster.com/"
+            onClick={(e) => e.stopPropagation()}
+            target="_blank"
+            rel="noreferrer"
+          >
             fillster.com
           </a>
         </span>
@@ -94,6 +105,7 @@ const SECTION_CONTENT: Record<
           cursor design by{" "}
           <a
             href="https://codepen.io/sarahwfox/pen/pNrYGb"
+            onClick={(e) => e.stopPropagation()}
             target="_blank"
             rel="noreferrer"
           >
@@ -104,6 +116,7 @@ const SECTION_CONTENT: Record<
           about me fonts from{" "}
           <a
             href="https://int10h.org/oldschool-pc-fonts/"
+            onClick={(e) => e.stopPropagation()}
             target="_blank"
             rel="noreferrer"
           >
