@@ -63,12 +63,12 @@ export function Experience() {
 
   const lookAtComputer = () => {
     controls.current.setLookAt(
-      1.3706560859927253,
-      0.4042971041650629,
-      0.00553710877840075,
-      -0.01347061327284473,
-      0.34974028536189455,
-      -0.0005247599775067819,
+      -1.7172059072987316,
+      1.0715644277014547,
+      1.1737642971765188,
+      -2.053895279607423,
+      1.0726063051232724,
+      1.1734796520983195,
       true,
     );
   };
@@ -82,7 +82,7 @@ export function Experience() {
   return (
     <>
       <axesHelper args={[5]} />
-      <CameraControls ref={controls} enabled={false} />
+      <CameraControls ref={controls} />
       <PerspectiveCamera />
       {/* Ambient light for general visibility */}
       <ambientLight intensity={1} />
