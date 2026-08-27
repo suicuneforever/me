@@ -1,8 +1,8 @@
 import { Html, useCursor, useGLTF } from "@react-three/drei";
-import { ThreeElements, useFrame } from "@react-three/fiber";
+import { ThreeElements } from "@react-three/fiber";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { useControls } from "leva";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import * as THREE from "three";
 import { GLTF } from "three-stdlib";
 import "../../src/App.css";
@@ -37,9 +37,25 @@ export function Computer({ showComputerScreen, ...props }: ComputerProps) {
   const { nodes, materials } = useGLTF(
     "/models/computer.glb",
   ) as unknown as GLTFResult;
-  const screenRef = useRef<THREE.Mesh>(null);
   const { setView } = useSceneStore();
   const [buttonHovered, setButtonHovered] = useState(false);
+  const { computerPos, htmlPosition, htmlRotation, htmlScale } = useControls(
+    "Computer Position",
+    {
+      computerPos: { x: -3.24, y: -0.26, z: 1.24 },
+      htmlPosition: {
+        x: 0,
+        y: 0,
+        z: 0,
+      },
+      htmlRotation: {
+        x: 0,
+        y: Math.PI / 2,
+        z: 0,
+      },
+      htmlScale: { value: 0.0655 },
+    },
+  );
 
   useCursor(buttonHovered);
 
@@ -52,100 +68,12 @@ export function Computer({ showComputerScreen, ...props }: ComputerProps) {
     box.getSize(size);
   }, [nodes]);
 
-  const {
-    computerPos,
-    positionX,
-    positionY,
-    positionZ,
-    rotationX,
-    rotationY,
-    rotationZ,
-    htmlPosition,
-    htmlRotation,
-    htmlScale,
-  } = useControls("Computer Position", {
-    computerPos: { x: -3.24, y: -0.26, z: 1.24 },
-    positionX: 0,
-    positionY: 0,
-    positionZ: 0,
-    rotationX: 0.07,
-    rotationY: -1.57,
-    rotationZ: 0.8,
-    htmlPosition: {
-      x: 0,
-      y: 0,
-      z: 0,
-    },
-    htmlRotation: {
-      x: 0,
-      y: Math.PI / 2,
-      z: 0,
-    },
-    htmlScale: { value: 0.0655 },
-  });
-
-  useFrame((state, delta) => {});
-
   return (
     <group
       {...props}
       dispose={null}
       position={[computerPos.x, computerPos.y, computerPos.z]}
-      // position={[positionX, positionY, positionZ]}
-      // rotation={[rotationX, rotationY, rotationZ]}
     >
-      {/* <mesh
-        name="monitor"
-        castShadow
-        receiveShadow
-        geometry={nodes.monitor.geometry}
-        material={materials["Material.001"]}
-        scale={0.703}
-      />
-      <mesh
-        name="screen"
-        ref={screenRef}
-        castShadow
-        receiveShadow
-        geometry={nodes.screen.geometry}
-        material={materials["Material.001"]}
-        scale={0.703}
-      >
-        <Html
-          transform
-          // occlude
-          className="content"
-          position={[htmlPosition.x, htmlPosition.y, htmlPosition.z]}
-          rotation={[htmlRotation.x, htmlRotation.y, htmlRotation.z]}
-          scale={htmlScale}
-          style={{
-            visibility: showComputerScreen ? "visible" : "hidden",
-            pointerEvents: showComputerScreen ? "auto" : "none",
-          }}
-        >
-          <div className="wrapper">
-            {showComputerScreen && (
-              <QueryClientProvider client={queryClient}>
-                <Desktop />
-              </QueryClientProvider>
-            )}
-          </div>
-        </Html>
-      </mesh>
-      <mesh
-        name="button"
-        onPointerOver={() => setButtonHovered(true)}
-        onPointerOut={() => setButtonHovered(false)}
-        castShadow
-        receiveShadow
-        geometry={nodes.button.geometry}
-        material={materials["Material.001"]}
-        scale={0.703}
-        onClick={(e) => {
-          e.stopPropagation();
-          setView(View.Room);
-        }}
-      /> */}
       <mesh
         name="monitor"
         castShadow

@@ -1,27 +1,10 @@
 import { CameraControls, PerspectiveCamera } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
 import { button, useControls } from "leva";
 import { Suspense, useEffect, useRef } from "react";
 import * as THREE from "three";
 import { Computer } from "./models/Computer";
 import { Room } from "./models/Room";
 import { useSceneStore, View } from "./store/sceneStore";
-
-function CameraRig({ x, y, z }: { x: number; y: number; z: number }) {
-  useFrame((state) => {
-    state.camera.position.lerp({ x, y, z }, 1);
-    state.camera.updateProjectionMatrix();
-  });
-
-  return null;
-}
-
-// TODO explain
-const CAMERA_POSITIONS = {
-  intro: [0, 0, 3, 0, 0, 0],
-  computer: [1.37, 0.54, 0.006, 0, 0, 0],
-  room: [9.020214687579216, 2.4041598795031955, 9.020214687579209, 0, 0, 0],
-} as const;
 
 export function Experience() {
   const controls = useRef<CameraControls>(null!);
@@ -31,8 +14,6 @@ export function Experience() {
     getLookAt: button(() => {
       const posOut = new THREE.Vector3();
       const targetOut = new THREE.Vector3();
-      const position = controls.current.getPosition(posOut);
-      const target = controls.current.getTarget(targetOut);
       console.log([...posOut, ...targetOut]);
     }),
   });
@@ -63,12 +44,12 @@ export function Experience() {
 
   const lookAtComputer = () => {
     controls.current.setLookAt(
-      -1.7172059072987316,
-      1.0715644277014547,
-      1.1737642971765188,
-      -2.053895279607423,
-      1.0726063051232724,
-      1.1734796520983195,
+      -1.7173470855196493,
+      1.027916556285613,
+      1.1809925087285986,
+      -2.0540364578283405,
+      1.0289584337074307,
+      1.1807078636503994,
       true,
     );
   };
@@ -111,14 +92,6 @@ export function Experience() {
           showComputerScreen={view === View.Computer}
         />
       </Suspense>
-
-      {/* Enables mouse rotation, panning, and zooming */}
-      {/* <OrbitControls
-            enablePan={false}
-            maxPolarAngle={Math.PI / 2 - 0.05} // Limits camera from going below floor
-            minDistance={3}
-            maxDistance={20}
-          /> */}
     </>
   );
 }

@@ -1,61 +1,130 @@
 # Refactor To-Do (Interview Readiness)
 
-Audit performed 2026-08-10. Organized by priority — tackle Tier 1 first, it's the highest-visibility/lowest-effort work.
+Audit refreshed 2026-08-27. The 2026-08-10 pass (Tiers 1-3/5 below, mostly checked)
+covered the desktop/window-manager UI. Since then the 3D scene (`Experience.tsx`,
+`models/Computer.tsx`, `models/Room.tsx`, `store/sceneStore.ts`) was added and is
+still in a rough, debug-instrumented state — that's the highest-priority work now.
 
-## Tier 1 — Quick wins, high visibility
+## Tier 1 — New 3D scene: quick wins
 
-- [x] Fix broken lint setup: `eslint.config.js` uses the flat-config `eslint/config` import (ESLint v9+ API) but `package.json` pins `eslint@^8.57.1`. Either upgrade to ESLint 9 or rewrite `eslint.config.js` for v8. Also fix the `lint` script in `package.json:9` — `--ext ts,tsx` isn't valid with flat config.
-- [x] Replace `README.md` (still the default Vite template) with a real description: what the site is, tech stack, screenshots, setup/run instructions.
-- [x] Rename `package.json` `name`/`version` (currently `"react-template"` / `"0.0.0"`).
-- [x] Fix `index.html`: descriptive `<title>` (currently just "me"), add `<meta name="description">`, Open Graph tags (`og:title`, `og:description`, `og:image`, `og:url`), and a favicon (none exists currently).
-- [x] Remove `console.log(data)` in `src/components/Steam/Steam.tsx:28`.
-- [x] Remove dead/commented-out code: `App.tsx:1-4,11-19`, `main.tsx:40`, `Steam.tsx:4`, `models/Computa.tsx:26,32-33,80`, `Desktop.tsx:27,29`.
-- [x] Untrack `.DS_Store` from git (`git rm --cached .DS_Store`) and add `.DS_Store` / `**/.DS_Store` to `.gitignore`.
-- [x] Fix missing `public/images/underconstruction.gif` — referenced by 6 AboutMe sections (`AboutMe.tsx:133,139,145,151,157,163`) but the file doesn't exist, so those tabs render broken images.
-- [ ] Add favicon and `og:image`.
+- [ ] Remove/guard debug tooling shipped to prod: `leva` `useControls` panels in
+  `Experience.tsx:30-38` and `Computer.tsx:55-85`, plus the `console.log` in
+  `Experience.tsx:36`. Either gate them behind `import.meta.env.DEV` or delete —
+  right now every visitor loads and renders the Leva panel and its state.
+- [ ] Delete the dead commented-out `<mesh>` block in `Computer.tsx:97-148` — it's
+  a stale first draft of the monitor/screen/button meshes, fully superseded by the
+  positioned versions at `:149-202`.
+- [ ] Remove unused controls in `Computer.tsx`: `positionX/Y/Z`, `rotationX/Y/Z`
+  (`:57-62`, destructured from `useControls` but never read — the commented-out
+  `position`/`rotation` props that used them are gone) and the commented-out lines
+  referencing them at `:94-95`.
+- [ ] Remove the unused `screenRef` (`Computer.tsx:40`) — created but never
+  attached to a `<mesh ref={...}>` since the ref'd mesh block was deleted.
+- [ ] Remove the empty `useFrame((state, delta) => {})` in `Computer.tsx:87` — a
+  no-op callback still subscribes to the render loop for nothing.
+- [ ] Delete unused `CameraRig` component in `Experience.tsx:10-17` — defined but
+  never rendered; `intro`/`lookAtRoom`/`lookAtComputer` already handle camera
+  movement via `CameraControls`.
+- [ ] Fix duplicate object key in `Computer.tsx:24-29` — `GLTFResult["materials"]`
+  types `"Material.001"` twice; the model actually has four materials, so this
+  silently drops a real material's type.
+- [ ] Resolve the two `// TODO` placeholders: `Experience.tsx:19` ("explain") on
+  `CAMERA_POSITIONS`, and `sceneStore.ts:3` ("move") on the `View` enum — either
+  act on them or write the real comment/relocate the enum.
+- [ ] Fix malformed tag in `index.html:11` — `<meta name="welcome to my room :3" />`
+  has no `content` attribute (the text ended up as the `name`, so it does nothing);
+  either remove it or turn it into a real `<meta name="description" content="...">`.
+- [ ] Uncomment/add `og:image` in `index.html:8` and add a real favicon — `<title>`
+  and other OG tags exist, but there's still no favicon file in `public/` and the
+  `og:image` line is commented out.
 
-## Tier 2 — Structural / component design
+## Tier 2 — 3D scene: structural
 
-- [x] Extract a reusable `<FormField>` component in `ContactMe.tsx` — the label+input+error block is copy-pasted 3–4 times (`ContactMe.tsx:91-119, 120-148, 149-171, 173-201`).
-- [x] Refactor `AboutMe.tsx:102-170` — 8 near-identical `sectionId === 'X' ? (...) : null` branches, 6 of which render the same placeholder markup. Drive this from a data lookup instead of copy-pasted JSX.
-- [x] Make `WindowModal.tsx` generic — it special-cases `windowData.id === 'CONTACT_ME'` (`:31,78-79,96-97,119-128`) to control sizing/layout. Pass `size`/`variant` as a prop from `Desktop.tsx`'s config instead.
-- [x] Data-drive the Email/Links tabs in `ContactMe.tsx:55-70` (currently two near-identical hardcoded divs) similar to how `DESKTOP_ICONS` already works.
-- [x] Extract hardcoded API base URL (`src/api/api.ts:5,19`) into a single constant, ideally `import.meta.env.VITE_API_BASE_URL`. Add a `.env.example`.
-- [x] Hoist `WINDOW_COMPONENTS` in `Desktop.tsx:32-39` out of the component body (it's recreated every render, and `Desktop` re-renders every second — see Tier 3).
-- [ ] Decide the fate of `src/models/Computa.tsx` (unused 3D computer feature, fully commented out in `App.tsx`) — finish and wire it up, or delete it along with `three`/`@react-three/fiber`/`@react-three/drei` deps and `.glb` assets to cut bundle size.
-- [x] Resolve/remove `MySpace` and `Mystery` stub components (5-line placeholders, commented out of `DESKTOP_ICONS` but still wired into `WINDOW_COMPONENTS`) — finish or remove.
+- [ ] Un-nest `QueryClientProvider` — it's currently mounted three times:
+  `main.tsx:36`, `App.tsx:15`, and again inside `Computer.tsx:128/181` (conditionally,
+  only when `showComputerScreen`). One provider at the root (`main.tsx`) is enough;
+  remove the other two.
+- [ ] Decide the routing story. `main.tsx` hand-writes two routes (`/` → `App`
+  which renders the 3D scene, `/desktop` → `Desktop` directly, bypassing the 3D
+  intro entirely) using `createRoute`/`createRootRoute`. Meanwhile
+  `@tanstack/router-plugin` is a devDependency but never added to `vite.config.ts`
+  — so it buys nothing today. Either wire up file-based routing (`routesDirectory`
+  in `vite.config.ts`) and remove the hand-rolled route tree, or drop the plugin
+  dependency and keep it manual. Also decide if `/desktop` should still exist as a
+  direct link (`App.tsx:12`) once the 3D computer screen is the intended way in.
+- [ ] Extract the hardcoded camera vectors (`Experience.tsx:20-24, 41-74`) into
+  named, documented constants — six raw floats per position with no explanation
+  of what "computer" vs "room" framing represents makes this the hardest file in
+  the repo to walk through in an interview.
+- [ ] Configure ESLint for react-three-fiber files instead of accepting the noise:
+  `react/no-unknown-property` currently fires 60+ times across `Computer.tsx` and
+  `Room.tsx` for legitimate r3f props (`castShadow`, `geometry`, `position`, etc.).
+  Add an override block in `eslint.config.js` scoping `react/no-unknown-property`
+  off (or to its `ignore` list) for `src/models/**` and `src/Experience.tsx`.
+- [ ] Fix `Desktop.tsx:32-36` — `showStartMenu && setShowStartMenu(false)` trips
+  `@typescript-eslint/no-unused-expressions` because a bare `&&` used for its
+  side effect reads as a mistake. Rewrite as `if (showStartMenu) setShowStartMenu(false)`.
 
-## Tier 3 — TypeScript & code quality
+## Tier 3 — Dependency hygiene
 
-- [ ] Remove remaining `any` usages:
-  - `src/models/Computa.tsx:21` — `{ props }: any`
-  - `src/api/api.ts:8` — `.map((game: any) => ...)`
-  - `src/components/ContactMe/ContactMe.tsx:111,140,193` — `(error: any)` repeated 3x
-- [x] Move `Email` type (`ContactMe.tsx:9-14`) and `Section` type (`AboutMe.tsx:26-30`) into `src/types/types.ts` — both are currently defined inside component files and imported cross-component (`GlitchButton.tsx:4` imports `Section` from `AboutMe`), which creates awkward coupling. Both already have `// TODO` comments flagging this.
-- [ ] Rename `Window` interface in `src/store/store.ts:8-12` (e.g. to `DesktopWindow`) — it shadows the global DOM `Window` type, and gets destructured as a loop variable literally named `window` in `Desktop.tsx:75,83`, shadowing `globalThis.window`.
-- [ ] Fix `useRef<THREE.Mesh>()` in `Computa.tsx:25` — missing initial value, inconsistent with the `useRef<T | null>(null)` pattern used elsewhere.
-- [x] Add `manualChunks`/bundle review in `vite.config.ts` once the Computa/3D question is resolved; also remove the unused `tanstackRouter` import in `vite.config.ts:3` (imported but never added to `plugins`).
-- [ ] Fix remaining `npm run lint` errors now that the lint setup works (40 total, grouped by rule):
+- [ ] Remove unused dependencies (none are imported anywhere in `src/`):
+  `body-parser` (a server middleware package with no purpose in a Vite/React
+  frontend), and `react-pdf` (the resume is served as a plain download link in
+  `Resume.tsx:196-197`, not rendered with `react-pdf`).
+- [ ] Either use or remove `@tanstack/router-plugin` (see routing decision above).
+- [ ] Replace remaining `any`: `src/api/api.ts:9` — `(game: any) =>` in
+  `getRecentlyPlayedGames`. Type the raw Steam API shape instead of casting the
+  mapped result `as unknown as GameData` (`api.ts:15`).
 
-  - `react/no-unescaped-entities` — unescaped `'` in `AboutMe.tsx:120` and `Resume.tsx:158`.
-  - `react/no-children-prop` — `ContactMe.tsx:94,123,152,176,204` pass `children` as a prop instead of nesting JSX.
-  - `react/jsx-no-target-blank` — `ContactMe.tsx:221,224` use `target="_blank"` without `rel="noreferrer"`.
-  - `prefer-const` — `GlitchButton.tsx:19` (`chars` is never reassigned).
-  - `react/no-unknown-property` — `Computa.tsx:38,40-44,48-52,55-59,64-69` flags r3f-only props (`castShadow`, `geometry`, `material`, etc.) as unknown DOM attributes; resolves itself once the Computa.tsx fate above is decided (delete, or if kept, exclude it from `react/no-unknown-property` since it's a react-three-fiber file, not DOM JSX).
+## Tier 4 — Previously completed (2026-08-10 pass)
 
-- [x] Add `alt` text to every `<img>` — confirmed 0/16 images have `alt` attributes (`Desktop.tsx`, `AboutMe.tsx`, `ContactMe.tsx`, `Resume.tsx`, `Steam.tsx`).
-- [ ] Add `aria-*` attributes / roles to custom interactive elements — confirmed zero ARIA attributes anywhere in `src`.
-- [x] Make clickable `<div>`s keyboard-accessible (add `role`, `tabIndex`, `onKeyDown`) — desktop icons (`Desktop.tsx:63-71`), taskbar buttons (`Desktop.tsx:85-104`), Email/Links tabs (`ContactMe.tsx:55-70`).
-- [x] Fix `Steam.tsx:36-44` nav links (`Store`/`Library`/`Community`) — no `href`, not reachable via keyboard or screen reader. Use `<button>` if non-navigating, or add real `href`s.
+Everything below was already fixed and verified against the current code — kept
+for history, not action items:
 
-## Tier 5 — Hooks / performance
+- Lint setup (ESLint v9 flat config), README rewrite, `package.json` name/version,
+  `index.html` title/meta/OG tags scaffolding, stray `console.log`/dead code
+  removal, `.DS_Store` untracked, missing image asset fixed.
+- `FormField` extraction in `ContactMe.tsx`, data-driven `AboutMe.tsx` sections,
+  generic `WindowModal` (no more `id === 'CONTACT_ME'` special-casing), data-driven
+  Email/Links tabs, `API_BASE_URL` extraction, hoisted `WINDOW_COMPONENTS`,
+  removed unused `MySpace`/`Mystery` stubs.
+- `Email`/`Section` types moved to `src/types/types.ts`; `Window` interface
+  renamed to `DesktopWindow` (no more shadowing `globalThis.Window` — confirmed
+  in `src/store/windowStore.ts` and `src/types/types.ts`).
+- `alt` text on images, keyboard accessibility (`role`/`tabIndex`) on desktop
+  icons/taskbar/tabs, `WindowModal` `onMouseUp` wrapped in `useCallback`, `Clock`
+  isolated into its own component so the 1s tick no longer re-renders the whole
+  desktop.
 
-- [x] Wrap `onMouseUp` in `WindowModal.tsx` (`:45-48`) in `useCallback`, matching `onMouseMove` (`:33-42`) — currently it's redefined every render but is a `useEffect` dependency (`:67`), causing listener re-subscription on every render.
-- [x] Isolate the 1-second clock interval in `Desktop.tsx:46-52` into its own `<Clock />` component — right now it re-renders the entire desktop tree (all windows, icons, taskbar) every second.
-- [x] Consider `React.memo` for `WindowModal`/icon list items once the clock re-render issue above is fixed.
+Note: the old `src/models/Computa.tsx` this list used to reference no longer
+exists — it's been replaced by the real `Computer.tsx`/`Room.tsx` pair above, so
+those old action items are superseded by Tier 1/2.
+
+## Tier 5 — Accessibility (still open)
+
+- [ ] Add `aria-*` attributes/roles beyond the `role="button"`/`tabIndex` already
+  in place — e.g. the start menu (`Desktop.tsx:64-85`) has no `role="menu"`, and
+  none of the clickable `<div>`s have `onKeyDown` handlers, so they're focusable
+  but not activatable from a keyboard.
 
 ## Tier 6 — Testing & tooling
 
-- [ ] No test framework exists at all — add `vitest` + `@testing-library/react`, and write at least a few tests for pure logic (`store.ts`, `utils.ts` are good easy starting points).
-- [ ] Add a `format`/`format:check` npm script for the already-configured Prettier (`.prettierrc.cjs` exists but is never invoked anywhere).
-- [ ] Add a `.prettierignore`.
+- [ ] No test framework exists — add `vitest` + `@testing-library/react`. Good
+  starting points: `windowStore.ts` (pure state transitions, easy to assert),
+  `utils.ts`, and `api.ts` (mock `fetch`).
+- [ ] Add a `format`/`format:check` npm script for the already-configured
+  Prettier (`.prettierrc.cjs`/`.prettierrc.json` exist but nothing invokes them).
+- [ ] Add a `.prettierignore` (currently missing).
+
+## Suggested order for interview prep
+
+1. Tier 1 (3D quick wins) — highest visual noise-to-effort ratio; a Leva panel
+   and console.log on load are the first thing anyone opening the deployed site
+   or the diff will notice.
+2. Tier 2 (3D structural) — the triple `QueryClientProvider` and the unresolved
+   routing story are the kind of thing an interviewer will poke at directly
+   ("why does `/desktop` skip the 3D scene?").
+3. Tier 3 (dependency hygiene) — cheap, and an unused `body-parser` in a frontend
+   `package.json` is an easy thing to get asked about.
+4. Tier 5/6 (a11y, testing) — good "what would you do with more time" talking
+   points if you don't get to them before an interview.
