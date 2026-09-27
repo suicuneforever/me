@@ -94,14 +94,13 @@ export function Computer({ showComputerScreen, ...props }: ComputerProps) {
       >
         <Html
           transform
-          // occlude
           className="content"
           position={[htmlPosition.x, htmlPosition.y, htmlPosition.z]}
           rotation={[htmlRotation.x, htmlRotation.y, htmlRotation.z]}
           scale={htmlScale}
+          pointerEvents={showComputerScreen ? "auto" : "none"}
           style={{
             visibility: showComputerScreen ? "visible" : "hidden",
-            pointerEvents: showComputerScreen ? "auto" : "none",
           }}
         >
           <div className="wrapper">

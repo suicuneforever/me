@@ -1,3 +1,5 @@
+@use "../../../constants/borders" as *;
+
 .Resume {
   &__background {
     background-color: #dbdbdb;
@@ -22,8 +24,8 @@
 
   &__heading {
     display: flex;
-    border-bottom: 1px solid #000;
-    padding-bottom: 1rem;
+    box-shadow: inset 0 -1px #000;
+    padding-bottom: calc(1rem + 1px);
 
     ul {
       list-style: none;
@@ -70,12 +72,12 @@
 
   &__experience {
     width: 90%;
-    border-right: 1px solid #000;
+    box-shadow: inset -1px 0 #000;
     height: 100%;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding: 0.625rem 0.625rem 0 0;
+    padding: 0.625rem calc(0.625rem + 1px) 0 0;
   }
 
   &__experience-section {
@@ -128,9 +130,9 @@
     background-color: #fcffca;
     width: 9rem;
     height: 6rem;
-    border: 1px solid black;
+    @include inset-border(black);
     border-radius: 15px;
-    padding: 0.375rem;
+    padding: calc(0.375rem + 1px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -143,12 +145,10 @@
       position: absolute;
       bottom: 0;
       left: 25%;
-      width: 0;
-      height: 0;
-      border: 22px solid transparent;
-      border-top-color: #fcffca;
-      border-bottom: 0;
-      border-right: 0;
+      width: 22px;
+      height: 22px;
+      background-color: #fcffca;
+      clip-path: polygon(0 0, 100% 0, 100% 100%);
       margin-left: -11px;
       margin-bottom: -22px;
     }
@@ -158,12 +158,10 @@
       position: absolute;
       bottom: -0.125rem;
       left: 25%;
-      width: 0;
-      height: 0;
-      border: 24px solid transparent;
-      border-top-color: #000;
-      border-bottom: 0;
-      border-right: 0;
+      width: 24px;
+      height: 24px;
+      background-color: #000;
+      clip-path: polygon(0 0, 100% 0, 100% 100%);
       margin-left: -12px;
       margin-bottom: -22px;
     }
@@ -171,9 +169,9 @@
     a {
       text-decoration: none;
       color: #000;
-      border: 1px solid #d8d8ac;
+      @include inset-border(#d8d8ac);
       background-color: #fcffca;
-      padding: 0.3125rem;
+      padding: calc(0.3125rem + 1px);
       border-radius: 5px;
       max-width: 9rem;
 
@@ -185,7 +183,8 @@
   }
 
   &__bubble-text {
-    border-bottom: 1px solid #c6c598;
+    box-shadow: inset 0 -1px #c6c598;
+    padding-bottom: 1px;
     height: 100%;
     margin-bottom: 0.5rem;
     line-height: 1.5;

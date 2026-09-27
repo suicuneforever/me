@@ -15,4 +15,6 @@ export default defineConfig([
   pluginReact.configs.flat.recommended,
   pluginReact.configs.flat['jsx-runtime'],
   { settings: { react: { version: 'detect' } } },
+  // R3F elements (<mesh>, <planeGeometry>, ...) take three.js props that aren't DOM attributes
+  { rules: { 'react/no-unknown-property': 'off' } },
 ]);

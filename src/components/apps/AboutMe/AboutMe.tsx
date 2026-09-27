@@ -37,8 +37,8 @@ const SECTION_CONTENT: Record<
           </Canvas>
         </div>
         <div className={`${PARENT_CLASS}__text`}>
-          my name is dani and i'm a fullstack software engineer. i have over 7
-          years of experience and found myself mostly to be in the web
+          my name is dani and i&apos;m a fullstack software engineer. i have
+          over 7 years of experience and found myself mostly to be in the web
           devlopment space. ever since i was young, i have had a passion for art
           and technology, so i often like to find ways where i can combine the
           two in my creations. this website is meant to be a culmination of all

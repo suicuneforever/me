@@ -1,4 +1,5 @@
 @use "../../../constants/colors" as *;
+@use "../../../constants/borders" as *;
 
 // window icons
 $x: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAYAAACALL/6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAATUlEQVQYlZ2RQQ7AIAzD4v3/z+HEVLogwXpC1FZTwLZu6pkHwMDH7vevYJsJVLj2JIkeqU+p8DIhAR2OQoq0FWrmtNMipAXjQ/z+h9MaAucxEWL07JoAAAAASUVORK5CYII=";
@@ -15,29 +16,25 @@ $ex: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBI
 
   &__outer-container {
     display: flex;
-    border-width: 1px;
-    border-style: solid;
-    border-color: $gray $black $black $gray;
+    @include inset-border($gray, $black, $black, $gray);
+    padding: 1px;
     flex: 1 1;
     overflow: hidden;
   }
 
   &__inner-container {
     display: flex;
-    border-width: 1px;
-    border-style: solid;
-    border-color: $white $darkGray $darkGray $white;
+    @include inset-border($white, $darkGray, $darkGray, $white);
     flex: 1 1;
     flex-direction: column;
-    padding: 0.125rem;
+    padding: calc(0.125rem + 1px);
     overflow: hidden;
   }
 
   &__outer-content {
     display: flex;
-    border-width: 1px;
-    border-style: solid;
-    border-color: $darkGray $white $white $darkGray;
+    @include inset-border($darkGray, $white, $white, $darkGray);
+    padding: 1px;
     flex-grow: 1;
     margin: 0.5rem 0;
     overflow: hidden;
@@ -45,9 +42,8 @@ $ex: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBI
 
   &__inner-content {
     display: flex;
-    border-width: 1px;
-    border-style: solid;
-    border-color: $black $gray $gray $black;
+    @include inset-border($black, $gray, $gray, $black);
+    padding: 1px;
     background-color: $white;
     flex: 1 1;
     font-size: 0.875rem;
@@ -81,9 +77,8 @@ $ex: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBI
     background-color: $gray;
     width: 1rem;
     height: 0.9375rem;
-    border-width: 1px;
-    border-style: solid;
-    border-color: $white $black $black $white;
+    @include inset-border($white, $black, $black, $white);
+    padding: 1px;
     position: relative;
 
     &:hover {
@@ -132,10 +127,8 @@ $ex: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBI
 
   &__footer {
     display: flex;
-    border-width: 1px;
-    border-style: solid;
-    border-color: $darkGray $white $white $darkGray;
-    padding: 0.125rem;
+    @include inset-border($darkGray, $white, $white, $darkGray);
+    padding: calc(0.125rem + 1px);
     font-size: 0.875rem;
     position: relative;
 

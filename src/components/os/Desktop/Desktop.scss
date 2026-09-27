@@ -117,8 +117,7 @@ $start: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAC
   }
 
   &__start-menu-divider {
-    border-top: 1px solid $darkGray;
-    border-bottom: 1px solid $white;
+    @include divider($darkGray, $white);
     width: 100%;
   }
 
@@ -177,14 +176,12 @@ $start: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAC
   }
 
   &__time {
-    border-width: 1px;
-    border-style: solid;
-    border-color: $darkGray $white $white $darkGray;
+    @include inset-border($darkGray, $white, $white, $darkGray);
     height: 1.5625rem;
     display: flex;
     align-items: center;
     font-size: 0.9375rem;
-    padding: 0 0.25rem;
+    padding: 1px calc(0.25rem + 1px);
     margin-left: auto;
     margin-right: 0.625rem;
   }
