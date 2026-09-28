@@ -14,8 +14,8 @@
   overflow: hidden;
 }
 
-.wrapper::before {
-  /* content: " ";
+/* .wrapper::before {
+  content: " ";
   display: block;
   position: absolute;
   top: 0;
@@ -33,5 +33,5 @@
   background-size:
     100% 2px,
     3px 100%;
-  pointer-events: none; */
-}
+  pointer-events: none;
+} */

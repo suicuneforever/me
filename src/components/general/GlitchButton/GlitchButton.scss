@@ -1,7 +1,7 @@
 .GlitchButton {
   width: 100%;
-  font-family: 'PC98';
-  font-size: 1rem;
+  font-family: "PC98";
+  font-size: 1.25rem;
   color: #fff;
   background-color: #000;
   border: none;
@@ -13,8 +13,8 @@
   padding: 0.5rem 0.25rem;
 
   &:before {
-    content: '◈';
-    font-family: 'Courier New', Courier, monospace;
+    content: "◈";
+    font-family: "Courier New", Courier, monospace;
     padding-right: 0.5rem;
   }
 
@@ -37,12 +37,12 @@
     }
 
     &:after {
-      content: 'soon';
+      content: "soon";
       color: #3b3a80;
       font-size: 1rem;
       display: flex;
       align-self: start;
-      font-family: 'VT323';
+      font-family: "VT323";
     }
   }
 

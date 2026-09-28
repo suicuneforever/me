@@ -3,7 +3,7 @@ import { ThreeElements } from "@react-three/fiber";
 // Component representing the room corner boundaries
 export function Room(props: ThreeElements["group"]) {
   return (
-    <group {...props} position={[0, -2, 0]}>
+    <group {...props} position={[5, 0, 5]}>
       {/* Floor */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]} receiveShadow>
         <planeGeometry args={[10, 10]} />

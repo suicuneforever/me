@@ -12,20 +12,16 @@ import { useSceneStore, View } from "../store/sceneStore";
 
 type GLTFResult = GLTF & {
   nodes: {
-    monitor: THREE.Mesh;
-    screen: THREE.Mesh;
     button: THREE.Mesh;
-    computer: THREE.Mesh;
-    keyboard: THREE.Mesh;
-    mousepad: THREE.Mesh;
-    cords: THREE.Mesh;
-    mouse: THREE.Mesh;
+    Cube003: THREE.Mesh;
+    Cube003_1: THREE.Mesh;
+    Cube003_2: THREE.Mesh;
+    screen: THREE.Mesh;
   };
   materials: {
     ["Material.001"]: THREE.MeshStandardMaterial;
     ["Material.004"]: THREE.MeshStandardMaterial;
     ["Material.003"]: THREE.MeshStandardMaterial;
-    ["Material.001"]: THREE.MeshStandardMaterial;
   };
 };
 
@@ -35,14 +31,15 @@ type ComputerProps = ThreeElements["group"] & {
 
 export function Computer({ showComputerScreen, ...props }: ComputerProps) {
   const { nodes, materials } = useGLTF(
-    "/models/computer.glb",
+    "/models/computer2.glb",
   ) as unknown as GLTFResult;
+
   const { setView } = useSceneStore();
   const [buttonHovered, setButtonHovered] = useState(false);
-  const { computerPos, htmlPosition, htmlRotation, htmlScale } = useControls(
-    "Computer Position",
-    {
-      computerPos: { x: -3.24, y: -0.26, z: 1.24 },
+  const { compPos, compRotation, htmlPosition, htmlRotation, htmlScale } =
+    useControls("Computer", {
+      compPos: { x: 3.09, y: 2.82, z: 1.56 },
+      compRotation: { x: 0, y: -1.28, z: 0 },
       htmlPosition: {
         x: 0,
         y: 0,
@@ -54,8 +51,7 @@ export function Computer({ showComputerScreen, ...props }: ComputerProps) {
         z: 0,
       },
       htmlScale: { value: 0.0655 },
-    },
-  );
+    });
 
   useCursor(buttonHovered);
 
@@ -72,24 +68,54 @@ export function Computer({ showComputerScreen, ...props }: ComputerProps) {
     <group
       {...props}
       dispose={null}
-      position={[computerPos.x, computerPos.y, computerPos.z]}
+      position={[compPos.x, compPos.y, compPos.z]}
+      rotation={[compRotation.x, compRotation.y, compRotation.z]}
     >
       <mesh
-        name="monitor"
+        name="button"
+        onPointerOver={() => setButtonHovered(true)}
+        onPointerOut={() => setButtonHovered(false)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setView(View.Room);
+        }}
         castShadow
         receiveShadow
-        geometry={nodes.monitor.geometry}
+        geometry={nodes.button.geometry}
         material={materials["Material.001"]}
-        position={[-0.065, 1.063, -0.01]}
+        position={[0.459, 0.626, -1.892]}
         scale={0.703}
       />
+      <group name="computer" position={[0.779, 0.828, 0.769]}>
+        <mesh
+          name="Cube003"
+          castShadow
+          receiveShadow
+          geometry={nodes.Cube003.geometry}
+          material={materials["Material.001"]}
+        />
+        <mesh
+          name="Cube003_1"
+          castShadow
+          receiveShadow
+          geometry={nodes.Cube003_1.geometry}
+          material={materials["Material.004"]}
+        />
+        <mesh
+          name="Cube003_2"
+          castShadow
+          receiveShadow
+          geometry={nodes.Cube003_2.geometry}
+          material={materials["Material.003"]}
+        />
+      </group>
       <mesh
         name="screen"
         castShadow
         receiveShadow
         geometry={nodes.screen.geometry}
         material={materials["Material.001"]}
-        position={[0.397, 1.372, -0.009]}
+        position={[0.397, 1.372, -1.414]}
         scale={0.703}
       >
         <Html
@@ -112,69 +138,8 @@ export function Computer({ showComputerScreen, ...props }: ComputerProps) {
           </div>
         </Html>
       </mesh>
-      <mesh
-        name="button"
-        onPointerOver={() => setButtonHovered(true)}
-        onPointerOut={() => setButtonHovered(false)}
-        castShadow
-        receiveShadow
-        geometry={nodes.button.geometry}
-        material={materials["Material.001"]}
-        position={[0.459, 0.626, -0.487]}
-        scale={0.703}
-        onClick={(e) => {
-          e.stopPropagation();
-          setView(View.Room);
-        }}
-      />
-      <mesh
-        name="computer"
-        castShadow
-        receiveShadow
-        geometry={nodes.computer.geometry}
-        material={materials["Material.001"]}
-        position={[0.193, 0.828, -2.022]}
-      />
-      <mesh
-        name="keyboard"
-        castShadow
-        receiveShadow
-        geometry={nodes.keyboard.geometry}
-        material={materials["Material.004"]}
-        position={[1.295, 0.221, 0.008]}
-        rotation={[0, Math.PI / 2, 0]}
-      />
-      <mesh
-        name="mousepad"
-        castShadow
-        receiveShadow
-        geometry={nodes.mousepad.geometry}
-        material={materials["Material.003"]}
-        position={[1.379, 0.146, -1.977]}
-        rotation={[Math.PI / 2, 0, -Math.PI / 2]}
-        scale={13.326}
-      />
-      <mesh
-        name="cords"
-        castShadow
-        receiveShadow
-        geometry={nodes.cords.geometry}
-        material={materials["Material.001"]}
-        position={[0.249, 0.147, -0.937]}
-        scale={-0.141}
-      />
-      <mesh
-        name="mouse"
-        castShadow
-        receiveShadow
-        geometry={nodes.mouse.geometry}
-        material={materials["Material.003"]}
-        position={[1.464, 0.228, -1.794]}
-        rotation={[0, 0, -Math.PI]}
-        scale={-0.168}
-      />
     </group>
   );
 }
 
-useGLTF.preload("/models/computer.glb");
+useGLTF.preload("/models/computer2.glb");
