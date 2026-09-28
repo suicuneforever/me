@@ -16,25 +16,29 @@ $ex: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBI
 
   &__outer-container {
     display: flex;
-    @include inset-border($gray, $black, $black, $gray);
-    padding: 1px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $gray $black $black $gray;
     flex: 1 1;
     overflow: hidden;
   }
 
   &__inner-container {
     display: flex;
-    @include inset-border($white, $darkGray, $darkGray, $white);
+    border-width: 1px;
+    border-style: solid;
+    border-color: $white $darkGray $darkGray $white;
     flex: 1 1;
     flex-direction: column;
-    padding: calc(0.125rem + 1px);
+    padding: 0.125rem;
     overflow: hidden;
   }
 
   &__outer-content {
     display: flex;
-    @include inset-border($darkGray, $white, $white, $darkGray);
-    padding: 1px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $darkGray $white $white $darkGray;
     flex-grow: 1;
     margin: 0.5rem 0;
     overflow: hidden;
@@ -42,8 +46,9 @@ $ex: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBI
 
   &__inner-content {
     display: flex;
-    @include inset-border($black, $gray, $gray, $black);
-    padding: 1px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $black $gray $gray $black;
     background-color: $white;
     flex: 1 1;
     font-size: 0.875rem;
@@ -77,8 +82,9 @@ $ex: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBI
     background-color: $gray;
     width: 1rem;
     height: 0.9375rem;
-    @include inset-border($white, $black, $black, $white);
-    padding: 1px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $white $black $black $white;
     position: relative;
 
     &:hover {
@@ -127,8 +133,10 @@ $ex: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBI
 
   &__footer {
     display: flex;
-    @include inset-border($darkGray, $white, $white, $darkGray);
-    padding: calc(0.125rem + 1px);
+    border-width: 1px;
+    border-style: solid;
+    border-color: $darkGray $white $white $darkGray;
+    padding: 0.125rem;
     font-size: 0.875rem;
     position: relative;
 

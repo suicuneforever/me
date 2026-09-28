@@ -19,14 +19,13 @@
 
   &__card {
     background-color: $black;
-    // TODO(firefox): fake border, see note in constants/_borders.scss
-    box-shadow: 0 0 0 1px #2b2aff;
+    border: 1px solid #2b2aff;
     padding: 0.5rem;
   }
 
   &__header {
     display: flex;
-    box-shadow: 0 0 0 1px #2b2aff;
+    border: 1px solid #2b2aff;
 
     img {
       width: 100%;
@@ -195,7 +194,7 @@
   }
 
   &__visitor-counter {
-    box-shadow: 0 0 0 1px #2b2aff;
+    border: 1px solid #2b2aff;
     color: #03fafa;
     font-family: "VT323";
     font-size: 1.5rem;

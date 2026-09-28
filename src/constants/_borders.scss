@@ -1,34 +1,4 @@
-@use './colors' as *;
-
-// TODO(firefox): re-check whether these workarounds are still needed.
-// Firefox (seen in v156, GPU WebRender) renders CSS `border` as a solid fill of the
-// border color when the page is shown inside the 3D <Html transform> in
-// src/models/Computer.tsx. These mixins fake 1px borders with inset box-shadows instead.
-// Inset shadows don't take up space, so callers add 1px of padding on bordered sides.
-// If plain `border` renders correctly in the 3D view in a newer Firefox, swap back.
-@mixin inset-border($top, $right: $top, $bottom: $top, $left: $right) {
-  box-shadow:
-    inset 0 1px $top,
-    inset -1px 0 $right,
-    inset 0 -1px $bottom,
-    inset 1px 0 $left;
-}
-
-// Two-tone 1px divider (top/bottom), replacing border-top + border-bottom.
-@mixin divider($top, $bottom) {
-  height: 2px;
-  box-shadow:
-    inset 0 1px $top,
-    inset 0 -1px $bottom;
-}
-
-// 1px dashed bottom border (3px dash / 3px gap, like Firefox's native dashes).
-@mixin dashed-bottom($color) {
-  background-image: linear-gradient(to right, $color 50%, transparent 50%);
-  background-size: 6px 1px;
-  background-repeat: repeat-x;
-  background-position: bottom left;
-}
+@use "./colors" as *;
 
 // TODO update everywhre
 $defaultButton:  

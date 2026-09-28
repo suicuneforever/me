@@ -42,10 +42,10 @@ $tertiary-light-blue: #7f9db5;
     font-family: "Silkscreen";
     font-size: 1.25rem;
     height: 100%;
-    box-shadow: inset -1px 0 $secondary-light-blue;
+    border-right: 1px solid $secondary-light-blue;
     display: flex;
     align-items: center;
-    padding: 0 calc(1rem + 1px) 0 1rem;
+    padding: 0 1rem;
     color: #fff;
   }
 
@@ -84,10 +84,8 @@ $tertiary-light-blue: #7f9db5;
   &__url {
     background-color: $secondary-dark-blue;
     height: 2rem;
-    box-shadow:
-      inset 0 1px $secondary-light-blue,
-      inset 0 -1px $secondary-light-blue;
-    padding: 1px 0;
+    border-top: 1px solid $secondary-light-blue;
+    border-bottom: 1px solid $secondary-light-blue;
     font-size: 0.75rem;
     display: flex;
     align-items: center;
@@ -95,8 +93,8 @@ $tertiary-light-blue: #7f9db5;
 
   &__url-title {
     color: $secondary-light-blue;
-    padding: 0 calc(0.5rem + 1px) 0 0.5rem;
-    box-shadow: inset -1px 0 $secondary-light-blue;
+    padding: 0 0.5rem;
+    border-right: 1px solid $secondary-light-blue;
   }
 
   &__url-link {
@@ -112,7 +110,7 @@ $tertiary-light-blue: #7f9db5;
   }
 
   &__user-info {
-    box-shadow: inset 0 -1px $secondary-light-blue;
+    border-bottom: 1px solid $secondary-light-blue;
     padding-bottom: 1px;
     margin-bottom: 1rem;
   }
@@ -122,8 +120,8 @@ $tertiary-light-blue: #7f9db5;
     letter-spacing: 0.2em;
     color: $secondary-light-blue;
     width: 100%;
-    box-shadow: inset 0 -1px $secondary-light-blue;
-    padding: 0.5rem 0 calc(0.5rem + 1px);
+    border-bottom: 1px solid $secondary-light-blue;
+    padding: 0.5rem 0;
   }
 
   &__user-info-content {
@@ -198,15 +196,15 @@ $tertiary-light-blue: #7f9db5;
 
   &__dashed-border {
     width: 20rem;
-    @include dashed-bottom($secondary-light-blue);
+    border-bottom: 1px dashed $secondary-light-blue;
     padding-bottom: 1px;
   }
 
   &__content-heading {
     font-family: "Silkscreen";
     color: #fff;
-    box-shadow: inset 0 -1px $primary-light-blue;
-    padding-bottom: calc(0.25rem + 1px);
+    border-bottom: 1px solid $primary-light-blue;
+    padding-bottom: 0.25rem;
     margin-bottom: 1rem;
 
     &:after {
@@ -231,8 +229,7 @@ $tertiary-light-blue: #7f9db5;
     width: 168px;
 
     img {
-      // outer shadow: an inset one would be hidden under the image
-      box-shadow: 0 0 0 1px $tertiary-light-blue;
+      border: 1px solid $tertiary-light-blue;
       margin: 1px;
       display: block;
       max-width: 300px;
@@ -259,10 +256,10 @@ $tertiary-light-blue: #7f9db5;
 
   &__recently-played-game {
     display: flex;
-    padding-bottom: calc(1rem + 1px);
+    padding-bottom: 1rem;
     margin-bottom: 1rem;
     gap: 0.5rem;
-    @include dashed-bottom($secondary-light-blue);
+    border-bottom: 1px dashed $secondary-light-blue;
   }
 
   &__recently-played-text {

@@ -52,7 +52,8 @@
   }
 
   &__divider {
-    @include divider($darkGray, $white);
+    border-top: 1px solid $darkGray;
+    border-bottom: 1px solid $white;
     margin: 1rem 0;
   }
 
